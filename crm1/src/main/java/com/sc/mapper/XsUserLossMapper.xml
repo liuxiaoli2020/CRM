@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sc.mapper.XsUserLossMapper" >
+  <resultMap id="BaseResultMap" type="com.sc.entity.XsUserLoss" >
+    <constructor >
+      <idArg column="CUSTOMER_LOSS_ID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="CUSTOMER_ID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="OPERATOR_ID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="TREATMENT_MODE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TREATMENT_MEASURES" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="IS_LOSS" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="COMPANY" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="LAST_MODIFY_DATA" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    CUSTOMER_LOSS_ID, CUSTOMER_ID, OPERATOR_ID, TREATMENT_MODE, TREATMENT_MEASURES, IS_LOSS, 
+    COMPANY, LAST_MODIFY_DATA
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sc.entity.XsUserLossExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from XS_USER_LOSS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from XS_USER_LOSS
+    where CUSTOMER_LOSS_ID = #{customerLossId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from XS_USER_LOSS
+    where CUSTOMER_LOSS_ID = #{customerLossId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sc.entity.XsUserLossExample" >
+    delete from XS_USER_LOSS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sc.entity.XsUserLoss" >
+    insert into XS_USER_LOSS (CUSTOMER_LOSS_ID, CUSTOMER_ID, OPERATOR_ID, 
+      TREATMENT_MODE, TREATMENT_MEASURES, IS_LOSS, 
+      COMPANY, LAST_MODIFY_DATA)
+    values (#{customerLossId,jdbcType=DECIMAL}, #{customerId,jdbcType=DECIMAL}, #{operatorId,jdbcType=DECIMAL}, 
+      #{treatmentMode,jdbcType=VARCHAR}, #{treatmentMeasures,jdbcType=VARCHAR}, #{isLoss,jdbcType=VARCHAR}, 
+      #{company,jdbcType=DECIMAL}, #{lastModifyData,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sc.entity.XsUserLoss" >
+    insert into XS_USER_LOSS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="customerLossId != null" >
+        CUSTOMER_LOSS_ID,
+      </if>
+      <if test="customerId != null" >
+        CUSTOMER_ID,
+      </if>
+      <if test="operatorId != null" >
+        OPERATOR_ID,
+      </if>
+      <if test="treatmentMode != null" >
+        TREATMENT_MODE,
+      </if>
+      <if test="treatmentMeasures != null" >
+        TREATMENT_MEASURES,
+      </if>
+      <if test="isLoss != null" >
+        IS_LOSS,
+      </if>
+      <if test="company != null" >
+        COMPANY,
+      </if>
+      <if test="lastModifyData != null" >
+        LAST_MODIFY_DATA,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="customerLossId != null" >
+        #{customerLossId,jdbcType=DECIMAL},
+      </if>
+      <if test="customerId != null" >
+        #{customerId,jdbcType=DECIMAL},
+      </if>
+      <if test="operatorId != null" >
+        #{operatorId,jdbcType=DECIMAL},
+      </if>
+      <if test="treatmentMode != null" >
+        #{treatmentMode,jdbcType=VARCHAR},
+      </if>
+      <if test="treatmentMeasures != null" >
+        #{treatmentMeasures,jdbcType=VARCHAR},
+      </if>
+      <if test="isLoss != null" >
+        #{isLoss,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null" >
+        #{company,jdbcType=DECIMAL},
+      </if>
+      <if test="lastModifyData != null" >
+        #{lastModifyData,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sc.entity.XsUserLossExample" resultType="java.lang.Integer" >
+    select count(*) from XS_USER_LOSS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update XS_USER_LOSS
+    <set >
+      <if test="record.customerLossId != null" >
+        CUSTOMER_LOSS_ID = #{record.customerLossId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.customerId != null" >
+        CUSTOMER_ID = #{record.customerId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.operatorId != null" >
+        OPERATOR_ID = #{record.operatorId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.treatmentMode != null" >
+        TREATMENT_MODE = #{record.treatmentMode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.treatmentMeasures != null" >
+        TREATMENT_MEASURES = #{record.treatmentMeasures,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isLoss != null" >
+        IS_LOSS = #{record.isLoss,jdbcType=VARCHAR},
+      </if>
+      <if test="record.company != null" >
+        COMPANY = #{record.company,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lastModifyData != null" >
+        LAST_MODIFY_DATA = #{record.lastModifyData,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update XS_USER_LOSS
+    set CUSTOMER_LOSS_ID = #{record.customerLossId,jdbcType=DECIMAL},
+      CUSTOMER_ID = #{record.customerId,jdbcType=DECIMAL},
+      OPERATOR_ID = #{record.operatorId,jdbcType=DECIMAL},
+      TREATMENT_MODE = #{record.treatmentMode,jdbcType=VARCHAR},
+      TREATMENT_MEASURES = #{record.treatmentMeasures,jdbcType=VARCHAR},
+      IS_LOSS = #{record.isLoss,jdbcType=VARCHAR},
+      COMPANY = #{record.company,jdbcType=DECIMAL},
+      LAST_MODIFY_DATA = #{record.lastModifyData,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sc.entity.XsUserLoss" >
+    update XS_USER_LOSS
+    <set >
+      <if test="customerId != null" >
+        CUSTOMER_ID = #{customerId,jdbcType=DECIMAL},
+      </if>
+      <if test="operatorId != null" >
+        OPERATOR_ID = #{operatorId,jdbcType=DECIMAL},
+      </if>
+      <if test="treatmentMode != null" >
+        TREATMENT_MODE = #{treatmentMode,jdbcType=VARCHAR},
+      </if>
+      <if test="treatmentMeasures != null" >
+        TREATMENT_MEASURES = #{treatmentMeasures,jdbcType=VARCHAR},
+      </if>
+      <if test="isLoss != null" >
+        IS_LOSS = #{isLoss,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null" >
+        COMPANY = #{company,jdbcType=DECIMAL},
+      </if>
+      <if test="lastModifyData != null" >
+        LAST_MODIFY_DATA = #{lastModifyData,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where CUSTOMER_LOSS_ID = #{customerLossId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sc.entity.XsUserLoss" >
+    update XS_USER_LOSS
+    set CUSTOMER_ID = #{customerId,jdbcType=DECIMAL},
+      OPERATOR_ID = #{operatorId,jdbcType=DECIMAL},
+      TREATMENT_MODE = #{treatmentMode,jdbcType=VARCHAR},
+      TREATMENT_MEASURES = #{treatmentMeasures,jdbcType=VARCHAR},
+      IS_LOSS = #{isLoss,jdbcType=VARCHAR},
+      COMPANY = #{company,jdbcType=DECIMAL},
+      LAST_MODIFY_DATA = #{lastModifyData,jdbcType=TIMESTAMP}
+    where CUSTOMER_LOSS_ID = #{customerLossId,jdbcType=DECIMAL}
+  </update>
+</mapper>

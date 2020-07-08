@@ -1,0 +1,563 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sc.mapper.XsCustomerDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.sc.entity.XsCustomerDetail" >
+    <constructor >
+      <idArg column="CUSTOMER_ID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="CUSTOMER_NAME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CUSTOMER_ATTR" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="WEBSITE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="STOCK_CODE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="UNIT_HIGHER" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="OWNER" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="NUMBER_EMPLOYEE" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="INDUSTRY_ID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="CUSTOMER_TYPE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CUSTOMER_STATE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CUSTOMER_SOURCE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="HEAD_ID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="PHONE_FIXED" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PHONE_MOVE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CUSTOMER_FAXs" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="BANK" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="BANK_ACCOUNT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="NEXT_CONTACT_DATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="EMAIL" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SIC_CODE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PAY_WAY" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="IS_EFFECTIVE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ADDRESS_DETAIL" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="NOTE_INFORMATION" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="COMPANY_ID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="LAST_MODIFY_DATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    CUSTOMER_ID, CUSTOMER_NAME, CUSTOMER_ATTR, WEBSITE, STOCK_CODE, UNIT_HIGHER, OWNER, 
+    NUMBER_EMPLOYEE, INDUSTRY_ID, CUSTOMER_TYPE, CUSTOMER_STATE, CUSTOMER_SOURCE, HEAD_ID, 
+    PHONE_FIXED, PHONE_MOVE, CUSTOMER_FAXs, BANK, BANK_ACCOUNT, NEXT_CONTACT_DATE, EMAIL, 
+    SIC_CODE, PAY_WAY, IS_EFFECTIVE, ADDRESS_DETAIL, NOTE_INFORMATION, COMPANY_ID, LAST_MODIFY_DATE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sc.entity.XsCustomerDetailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from XS_CUSTOMER_DETAIL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from XS_CUSTOMER_DETAIL
+    where CUSTOMER_ID = #{customerId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from XS_CUSTOMER_DETAIL
+    where CUSTOMER_ID = #{customerId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sc.entity.XsCustomerDetailExample" >
+    delete from XS_CUSTOMER_DETAIL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sc.entity.XsCustomerDetail" >
+    insert into XS_CUSTOMER_DETAIL (CUSTOMER_ID, CUSTOMER_NAME, CUSTOMER_ATTR, 
+      WEBSITE, STOCK_CODE, UNIT_HIGHER, 
+      OWNER, NUMBER_EMPLOYEE, INDUSTRY_ID, 
+      CUSTOMER_TYPE, CUSTOMER_STATE, CUSTOMER_SOURCE, 
+      HEAD_ID, PHONE_FIXED, PHONE_MOVE, 
+      CUSTOMER_FAXs, BANK, BANK_ACCOUNT, 
+      NEXT_CONTACT_DATE, EMAIL, SIC_CODE, 
+      PAY_WAY, IS_EFFECTIVE, ADDRESS_DETAIL, 
+      NOTE_INFORMATION, COMPANY_ID, LAST_MODIFY_DATE
+      )
+    values (#{customerId,jdbcType=DECIMAL}, #{customerName,jdbcType=VARCHAR}, #{customerAttr,jdbcType=VARCHAR}, 
+      #{website,jdbcType=VARCHAR}, #{stockCode,jdbcType=VARCHAR}, #{unitHigher,jdbcType=VARCHAR}, 
+      #{owner,jdbcType=VARCHAR}, #{numberEmployee,jdbcType=DECIMAL}, #{industryId,jdbcType=DECIMAL}, 
+      #{customerType,jdbcType=VARCHAR}, #{customerState,jdbcType=VARCHAR}, #{customerSource,jdbcType=VARCHAR}, 
+      #{headId,jdbcType=DECIMAL}, #{phoneFixed,jdbcType=VARCHAR}, #{phoneMove,jdbcType=VARCHAR}, 
+      #{customerFaxs,jdbcType=VARCHAR}, #{bank,jdbcType=VARCHAR}, #{bankAccount,jdbcType=VARCHAR}, 
+      #{nextContactDate,jdbcType=TIMESTAMP}, #{email,jdbcType=VARCHAR}, #{sicCode,jdbcType=VARCHAR}, 
+      #{payWay,jdbcType=VARCHAR}, #{isEffective,jdbcType=VARCHAR}, #{addressDetail,jdbcType=VARCHAR}, 
+      #{noteInformation,jdbcType=VARCHAR}, #{companyId,jdbcType=DECIMAL}, #{lastModifyDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sc.entity.XsCustomerDetail" >
+    insert into XS_CUSTOMER_DETAIL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="customerId != null" >
+        CUSTOMER_ID,
+      </if>
+      <if test="customerName != null" >
+        CUSTOMER_NAME,
+      </if>
+      <if test="customerAttr != null" >
+        CUSTOMER_ATTR,
+      </if>
+      <if test="website != null" >
+        WEBSITE,
+      </if>
+      <if test="stockCode != null" >
+        STOCK_CODE,
+      </if>
+      <if test="unitHigher != null" >
+        UNIT_HIGHER,
+      </if>
+      <if test="owner != null" >
+        OWNER,
+      </if>
+      <if test="numberEmployee != null" >
+        NUMBER_EMPLOYEE,
+      </if>
+      <if test="industryId != null" >
+        INDUSTRY_ID,
+      </if>
+      <if test="customerType != null" >
+        CUSTOMER_TYPE,
+      </if>
+      <if test="customerState != null" >
+        CUSTOMER_STATE,
+      </if>
+      <if test="customerSource != null" >
+        CUSTOMER_SOURCE,
+      </if>
+      <if test="headId != null" >
+        HEAD_ID,
+      </if>
+      <if test="phoneFixed != null" >
+        PHONE_FIXED,
+      </if>
+      <if test="phoneMove != null" >
+        PHONE_MOVE,
+      </if>
+      <if test="customerFaxs != null" >
+        CUSTOMER_FAXs,
+      </if>
+      <if test="bank != null" >
+        BANK,
+      </if>
+      <if test="bankAccount != null" >
+        BANK_ACCOUNT,
+      </if>
+      <if test="nextContactDate != null" >
+        NEXT_CONTACT_DATE,
+      </if>
+      <if test="email != null" >
+        EMAIL,
+      </if>
+      <if test="sicCode != null" >
+        SIC_CODE,
+      </if>
+      <if test="payWay != null" >
+        PAY_WAY,
+      </if>
+      <if test="isEffective != null" >
+        IS_EFFECTIVE,
+      </if>
+      <if test="addressDetail != null" >
+        ADDRESS_DETAIL,
+      </if>
+      <if test="noteInformation != null" >
+        NOTE_INFORMATION,
+      </if>
+      <if test="companyId != null" >
+        COMPANY_ID,
+      </if>
+      <if test="lastModifyDate != null" >
+        LAST_MODIFY_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="customerId != null" >
+        #{customerId,jdbcType=DECIMAL},
+      </if>
+      <if test="customerName != null" >
+        #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="customerAttr != null" >
+        #{customerAttr,jdbcType=VARCHAR},
+      </if>
+      <if test="website != null" >
+        #{website,jdbcType=VARCHAR},
+      </if>
+      <if test="stockCode != null" >
+        #{stockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="unitHigher != null" >
+        #{unitHigher,jdbcType=VARCHAR},
+      </if>
+      <if test="owner != null" >
+        #{owner,jdbcType=VARCHAR},
+      </if>
+      <if test="numberEmployee != null" >
+        #{numberEmployee,jdbcType=DECIMAL},
+      </if>
+      <if test="industryId != null" >
+        #{industryId,jdbcType=DECIMAL},
+      </if>
+      <if test="customerType != null" >
+        #{customerType,jdbcType=VARCHAR},
+      </if>
+      <if test="customerState != null" >
+        #{customerState,jdbcType=VARCHAR},
+      </if>
+      <if test="customerSource != null" >
+        #{customerSource,jdbcType=VARCHAR},
+      </if>
+      <if test="headId != null" >
+        #{headId,jdbcType=DECIMAL},
+      </if>
+      <if test="phoneFixed != null" >
+        #{phoneFixed,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneMove != null" >
+        #{phoneMove,jdbcType=VARCHAR},
+      </if>
+      <if test="customerFaxs != null" >
+        #{customerFaxs,jdbcType=VARCHAR},
+      </if>
+      <if test="bank != null" >
+        #{bank,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAccount != null" >
+        #{bankAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="nextContactDate != null" >
+        #{nextContactDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="sicCode != null" >
+        #{sicCode,jdbcType=VARCHAR},
+      </if>
+      <if test="payWay != null" >
+        #{payWay,jdbcType=VARCHAR},
+      </if>
+      <if test="isEffective != null" >
+        #{isEffective,jdbcType=VARCHAR},
+      </if>
+      <if test="addressDetail != null" >
+        #{addressDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="noteInformation != null" >
+        #{noteInformation,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        #{companyId,jdbcType=DECIMAL},
+      </if>
+      <if test="lastModifyDate != null" >
+        #{lastModifyDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sc.entity.XsCustomerDetailExample" resultType="java.lang.Integer" >
+    select count(*) from XS_CUSTOMER_DETAIL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update XS_CUSTOMER_DETAIL
+    <set >
+      <if test="record.customerId != null" >
+        CUSTOMER_ID = #{record.customerId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.customerName != null" >
+        CUSTOMER_NAME = #{record.customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerAttr != null" >
+        CUSTOMER_ATTR = #{record.customerAttr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.website != null" >
+        WEBSITE = #{record.website,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stockCode != null" >
+        STOCK_CODE = #{record.stockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitHigher != null" >
+        UNIT_HIGHER = #{record.unitHigher,jdbcType=VARCHAR},
+      </if>
+      <if test="record.owner != null" >
+        OWNER = #{record.owner,jdbcType=VARCHAR},
+      </if>
+      <if test="record.numberEmployee != null" >
+        NUMBER_EMPLOYEE = #{record.numberEmployee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.industryId != null" >
+        INDUSTRY_ID = #{record.industryId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.customerType != null" >
+        CUSTOMER_TYPE = #{record.customerType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerState != null" >
+        CUSTOMER_STATE = #{record.customerState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerSource != null" >
+        CUSTOMER_SOURCE = #{record.customerSource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.headId != null" >
+        HEAD_ID = #{record.headId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.phoneFixed != null" >
+        PHONE_FIXED = #{record.phoneFixed,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phoneMove != null" >
+        PHONE_MOVE = #{record.phoneMove,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerFaxs != null" >
+        CUSTOMER_FAXs = #{record.customerFaxs,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bank != null" >
+        BANK = #{record.bank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankAccount != null" >
+        BANK_ACCOUNT = #{record.bankAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nextContactDate != null" >
+        NEXT_CONTACT_DATE = #{record.nextContactDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.email != null" >
+        EMAIL = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sicCode != null" >
+        SIC_CODE = #{record.sicCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payWay != null" >
+        PAY_WAY = #{record.payWay,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isEffective != null" >
+        IS_EFFECTIVE = #{record.isEffective,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addressDetail != null" >
+        ADDRESS_DETAIL = #{record.addressDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.noteInformation != null" >
+        NOTE_INFORMATION = #{record.noteInformation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyId != null" >
+        COMPANY_ID = #{record.companyId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lastModifyDate != null" >
+        LAST_MODIFY_DATE = #{record.lastModifyDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update XS_CUSTOMER_DETAIL
+    set CUSTOMER_ID = #{record.customerId,jdbcType=DECIMAL},
+      CUSTOMER_NAME = #{record.customerName,jdbcType=VARCHAR},
+      CUSTOMER_ATTR = #{record.customerAttr,jdbcType=VARCHAR},
+      WEBSITE = #{record.website,jdbcType=VARCHAR},
+      STOCK_CODE = #{record.stockCode,jdbcType=VARCHAR},
+      UNIT_HIGHER = #{record.unitHigher,jdbcType=VARCHAR},
+      OWNER = #{record.owner,jdbcType=VARCHAR},
+      NUMBER_EMPLOYEE = #{record.numberEmployee,jdbcType=DECIMAL},
+      INDUSTRY_ID = #{record.industryId,jdbcType=DECIMAL},
+      CUSTOMER_TYPE = #{record.customerType,jdbcType=VARCHAR},
+      CUSTOMER_STATE = #{record.customerState,jdbcType=VARCHAR},
+      CUSTOMER_SOURCE = #{record.customerSource,jdbcType=VARCHAR},
+      HEAD_ID = #{record.headId,jdbcType=DECIMAL},
+      PHONE_FIXED = #{record.phoneFixed,jdbcType=VARCHAR},
+      PHONE_MOVE = #{record.phoneMove,jdbcType=VARCHAR},
+      CUSTOMER_FAXs = #{record.customerFaxs,jdbcType=VARCHAR},
+      BANK = #{record.bank,jdbcType=VARCHAR},
+      BANK_ACCOUNT = #{record.bankAccount,jdbcType=VARCHAR},
+      NEXT_CONTACT_DATE = #{record.nextContactDate,jdbcType=TIMESTAMP},
+      EMAIL = #{record.email,jdbcType=VARCHAR},
+      SIC_CODE = #{record.sicCode,jdbcType=VARCHAR},
+      PAY_WAY = #{record.payWay,jdbcType=VARCHAR},
+      IS_EFFECTIVE = #{record.isEffective,jdbcType=VARCHAR},
+      ADDRESS_DETAIL = #{record.addressDetail,jdbcType=VARCHAR},
+      NOTE_INFORMATION = #{record.noteInformation,jdbcType=VARCHAR},
+      COMPANY_ID = #{record.companyId,jdbcType=DECIMAL},
+      LAST_MODIFY_DATE = #{record.lastModifyDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sc.entity.XsCustomerDetail" >
+    update XS_CUSTOMER_DETAIL
+    <set >
+      <if test="customerName != null" >
+        CUSTOMER_NAME = #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="customerAttr != null" >
+        CUSTOMER_ATTR = #{customerAttr,jdbcType=VARCHAR},
+      </if>
+      <if test="website != null" >
+        WEBSITE = #{website,jdbcType=VARCHAR},
+      </if>
+      <if test="stockCode != null" >
+        STOCK_CODE = #{stockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="unitHigher != null" >
+        UNIT_HIGHER = #{unitHigher,jdbcType=VARCHAR},
+      </if>
+      <if test="owner != null" >
+        OWNER = #{owner,jdbcType=VARCHAR},
+      </if>
+      <if test="numberEmployee != null" >
+        NUMBER_EMPLOYEE = #{numberEmployee,jdbcType=DECIMAL},
+      </if>
+      <if test="industryId != null" >
+        INDUSTRY_ID = #{industryId,jdbcType=DECIMAL},
+      </if>
+      <if test="customerType != null" >
+        CUSTOMER_TYPE = #{customerType,jdbcType=VARCHAR},
+      </if>
+      <if test="customerState != null" >
+        CUSTOMER_STATE = #{customerState,jdbcType=VARCHAR},
+      </if>
+      <if test="customerSource != null" >
+        CUSTOMER_SOURCE = #{customerSource,jdbcType=VARCHAR},
+      </if>
+      <if test="headId != null" >
+        HEAD_ID = #{headId,jdbcType=DECIMAL},
+      </if>
+      <if test="phoneFixed != null" >
+        PHONE_FIXED = #{phoneFixed,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneMove != null" >
+        PHONE_MOVE = #{phoneMove,jdbcType=VARCHAR},
+      </if>
+      <if test="customerFaxs != null" >
+        CUSTOMER_FAXs = #{customerFaxs,jdbcType=VARCHAR},
+      </if>
+      <if test="bank != null" >
+        BANK = #{bank,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAccount != null" >
+        BANK_ACCOUNT = #{bankAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="nextContactDate != null" >
+        NEXT_CONTACT_DATE = #{nextContactDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="email != null" >
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="sicCode != null" >
+        SIC_CODE = #{sicCode,jdbcType=VARCHAR},
+      </if>
+      <if test="payWay != null" >
+        PAY_WAY = #{payWay,jdbcType=VARCHAR},
+      </if>
+      <if test="isEffective != null" >
+        IS_EFFECTIVE = #{isEffective,jdbcType=VARCHAR},
+      </if>
+      <if test="addressDetail != null" >
+        ADDRESS_DETAIL = #{addressDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="noteInformation != null" >
+        NOTE_INFORMATION = #{noteInformation,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        COMPANY_ID = #{companyId,jdbcType=DECIMAL},
+      </if>
+      <if test="lastModifyDate != null" >
+        LAST_MODIFY_DATE = #{lastModifyDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where CUSTOMER_ID = #{customerId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sc.entity.XsCustomerDetail" >
+    update XS_CUSTOMER_DETAIL
+    set CUSTOMER_NAME = #{customerName,jdbcType=VARCHAR},
+      CUSTOMER_ATTR = #{customerAttr,jdbcType=VARCHAR},
+      WEBSITE = #{website,jdbcType=VARCHAR},
+      STOCK_CODE = #{stockCode,jdbcType=VARCHAR},
+      UNIT_HIGHER = #{unitHigher,jdbcType=VARCHAR},
+      OWNER = #{owner,jdbcType=VARCHAR},
+      NUMBER_EMPLOYEE = #{numberEmployee,jdbcType=DECIMAL},
+      INDUSTRY_ID = #{industryId,jdbcType=DECIMAL},
+      CUSTOMER_TYPE = #{customerType,jdbcType=VARCHAR},
+      CUSTOMER_STATE = #{customerState,jdbcType=VARCHAR},
+      CUSTOMER_SOURCE = #{customerSource,jdbcType=VARCHAR},
+      HEAD_ID = #{headId,jdbcType=DECIMAL},
+      PHONE_FIXED = #{phoneFixed,jdbcType=VARCHAR},
+      PHONE_MOVE = #{phoneMove,jdbcType=VARCHAR},
+      CUSTOMER_FAXs = #{customerFaxs,jdbcType=VARCHAR},
+      BANK = #{bank,jdbcType=VARCHAR},
+      BANK_ACCOUNT = #{bankAccount,jdbcType=VARCHAR},
+      NEXT_CONTACT_DATE = #{nextContactDate,jdbcType=TIMESTAMP},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      SIC_CODE = #{sicCode,jdbcType=VARCHAR},
+      PAY_WAY = #{payWay,jdbcType=VARCHAR},
+      IS_EFFECTIVE = #{isEffective,jdbcType=VARCHAR},
+      ADDRESS_DETAIL = #{addressDetail,jdbcType=VARCHAR},
+      NOTE_INFORMATION = #{noteInformation,jdbcType=VARCHAR},
+      COMPANY_ID = #{companyId,jdbcType=DECIMAL},
+      LAST_MODIFY_DATE = #{lastModifyDate,jdbcType=TIMESTAMP}
+    where CUSTOMER_ID = #{customerId,jdbcType=DECIMAL}
+  </update>
+</mapper>

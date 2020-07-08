@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sc.mapper.CgSupplierMapper" >
+  <resultMap id="BaseResultMap" type="com.sc.entity.CgSupplier" >
+    <constructor >
+      <idArg column="SUPPLIER_ID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="SUPPLIER_NAME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SUPPLIER_FNAME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SUPPLIER_CONTACTS" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SUPPLIER_FIXED" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SUPPLIER_MOBILE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SUPPLIER_FAX" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SUPPLIER_ADDRESS" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SUPPLIER_POSTCODE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SUPPLIER_EMAIL" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SUPPLIER_BANK" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SUPPLIER_BANK_NUM" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SUPPLIER_COMPANY_HOMEPAGE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SUPPLIER_EFFECTIVE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="STAFF_ID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="SUPPLIER_REMARK" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="COMPANY_ID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="LAST_MODIFY_DATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    SUPPLIER_ID, SUPPLIER_NAME, SUPPLIER_FNAME, SUPPLIER_CONTACTS, SUPPLIER_FIXED, SUPPLIER_MOBILE, 
+    SUPPLIER_FAX, SUPPLIER_ADDRESS, SUPPLIER_POSTCODE, SUPPLIER_EMAIL, SUPPLIER_BANK, 
+    SUPPLIER_BANK_NUM, SUPPLIER_COMPANY_HOMEPAGE, SUPPLIER_EFFECTIVE, STAFF_ID, SUPPLIER_REMARK, 
+    COMPANY_ID, LAST_MODIFY_DATE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sc.entity.CgSupplierExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from CG_SUPPLIER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from CG_SUPPLIER
+    where SUPPLIER_ID = #{supplierId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from CG_SUPPLIER
+    where SUPPLIER_ID = #{supplierId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sc.entity.CgSupplierExample" >
+    delete from CG_SUPPLIER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sc.entity.CgSupplier" >
+    insert into CG_SUPPLIER (SUPPLIER_ID, SUPPLIER_NAME, SUPPLIER_FNAME, 
+      SUPPLIER_CONTACTS, SUPPLIER_FIXED, SUPPLIER_MOBILE, 
+      SUPPLIER_FAX, SUPPLIER_ADDRESS, SUPPLIER_POSTCODE, 
+      SUPPLIER_EMAIL, SUPPLIER_BANK, SUPPLIER_BANK_NUM, 
+      SUPPLIER_COMPANY_HOMEPAGE, SUPPLIER_EFFECTIVE, 
+      STAFF_ID, SUPPLIER_REMARK, COMPANY_ID, 
+      LAST_MODIFY_DATE)
+    values (#{supplierId,jdbcType=DECIMAL}, #{supplierName,jdbcType=VARCHAR}, #{supplierFname,jdbcType=VARCHAR}, 
+      #{supplierContacts,jdbcType=VARCHAR}, #{supplierFixed,jdbcType=VARCHAR}, #{supplierMobile,jdbcType=VARCHAR}, 
+      #{supplierFax,jdbcType=VARCHAR}, #{supplierAddress,jdbcType=VARCHAR}, #{supplierPostcode,jdbcType=VARCHAR}, 
+      #{supplierEmail,jdbcType=VARCHAR}, #{supplierBank,jdbcType=VARCHAR}, #{supplierBankNum,jdbcType=VARCHAR}, 
+      #{supplierCompanyHomepage,jdbcType=VARCHAR}, #{supplierEffective,jdbcType=VARCHAR}, 
+      #{staffId,jdbcType=DECIMAL}, #{supplierRemark,jdbcType=VARCHAR}, #{companyId,jdbcType=DECIMAL}, 
+      #{lastModifyDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sc.entity.CgSupplier" >
+    insert into CG_SUPPLIER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="supplierId != null" >
+        SUPPLIER_ID,
+      </if>
+      <if test="supplierName != null" >
+        SUPPLIER_NAME,
+      </if>
+      <if test="supplierFname != null" >
+        SUPPLIER_FNAME,
+      </if>
+      <if test="supplierContacts != null" >
+        SUPPLIER_CONTACTS,
+      </if>
+      <if test="supplierFixed != null" >
+        SUPPLIER_FIXED,
+      </if>
+      <if test="supplierMobile != null" >
+        SUPPLIER_MOBILE,
+      </if>
+      <if test="supplierFax != null" >
+        SUPPLIER_FAX,
+      </if>
+      <if test="supplierAddress != null" >
+        SUPPLIER_ADDRESS,
+      </if>
+      <if test="supplierPostcode != null" >
+        SUPPLIER_POSTCODE,
+      </if>
+      <if test="supplierEmail != null" >
+        SUPPLIER_EMAIL,
+      </if>
+      <if test="supplierBank != null" >
+        SUPPLIER_BANK,
+      </if>
+      <if test="supplierBankNum != null" >
+        SUPPLIER_BANK_NUM,
+      </if>
+      <if test="supplierCompanyHomepage != null" >
+        SUPPLIER_COMPANY_HOMEPAGE,
+      </if>
+      <if test="supplierEffective != null" >
+        SUPPLIER_EFFECTIVE,
+      </if>
+      <if test="staffId != null" >
+        STAFF_ID,
+      </if>
+      <if test="supplierRemark != null" >
+        SUPPLIER_REMARK,
+      </if>
+      <if test="companyId != null" >
+        COMPANY_ID,
+      </if>
+      <if test="lastModifyDate != null" >
+        LAST_MODIFY_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="supplierId != null" >
+        #{supplierId,jdbcType=DECIMAL},
+      </if>
+      <if test="supplierName != null" >
+        #{supplierName,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierFname != null" >
+        #{supplierFname,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierContacts != null" >
+        #{supplierContacts,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierFixed != null" >
+        #{supplierFixed,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierMobile != null" >
+        #{supplierMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierFax != null" >
+        #{supplierFax,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierAddress != null" >
+        #{supplierAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierPostcode != null" >
+        #{supplierPostcode,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierEmail != null" >
+        #{supplierEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierBank != null" >
+        #{supplierBank,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierBankNum != null" >
+        #{supplierBankNum,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierCompanyHomepage != null" >
+        #{supplierCompanyHomepage,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierEffective != null" >
+        #{supplierEffective,jdbcType=VARCHAR},
+      </if>
+      <if test="staffId != null" >
+        #{staffId,jdbcType=DECIMAL},
+      </if>
+      <if test="supplierRemark != null" >
+        #{supplierRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        #{companyId,jdbcType=DECIMAL},
+      </if>
+      <if test="lastModifyDate != null" >
+        #{lastModifyDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sc.entity.CgSupplierExample" resultType="java.lang.Integer" >
+    select count(*) from CG_SUPPLIER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update CG_SUPPLIER
+    <set >
+      <if test="record.supplierId != null" >
+        SUPPLIER_ID = #{record.supplierId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.supplierName != null" >
+        SUPPLIER_NAME = #{record.supplierName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supplierFname != null" >
+        SUPPLIER_FNAME = #{record.supplierFname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supplierContacts != null" >
+        SUPPLIER_CONTACTS = #{record.supplierContacts,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supplierFixed != null" >
+        SUPPLIER_FIXED = #{record.supplierFixed,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supplierMobile != null" >
+        SUPPLIER_MOBILE = #{record.supplierMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supplierFax != null" >
+        SUPPLIER_FAX = #{record.supplierFax,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supplierAddress != null" >
+        SUPPLIER_ADDRESS = #{record.supplierAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supplierPostcode != null" >
+        SUPPLIER_POSTCODE = #{record.supplierPostcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supplierEmail != null" >
+        SUPPLIER_EMAIL = #{record.supplierEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supplierBank != null" >
+        SUPPLIER_BANK = #{record.supplierBank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supplierBankNum != null" >
+        SUPPLIER_BANK_NUM = #{record.supplierBankNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supplierCompanyHomepage != null" >
+        SUPPLIER_COMPANY_HOMEPAGE = #{record.supplierCompanyHomepage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supplierEffective != null" >
+        SUPPLIER_EFFECTIVE = #{record.supplierEffective,jdbcType=VARCHAR},
+      </if>
+      <if test="record.staffId != null" >
+        STAFF_ID = #{record.staffId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.supplierRemark != null" >
+        SUPPLIER_REMARK = #{record.supplierRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyId != null" >
+        COMPANY_ID = #{record.companyId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lastModifyDate != null" >
+        LAST_MODIFY_DATE = #{record.lastModifyDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update CG_SUPPLIER
+    set SUPPLIER_ID = #{record.supplierId,jdbcType=DECIMAL},
+      SUPPLIER_NAME = #{record.supplierName,jdbcType=VARCHAR},
+      SUPPLIER_FNAME = #{record.supplierFname,jdbcType=VARCHAR},
+      SUPPLIER_CONTACTS = #{record.supplierContacts,jdbcType=VARCHAR},
+      SUPPLIER_FIXED = #{record.supplierFixed,jdbcType=VARCHAR},
+      SUPPLIER_MOBILE = #{record.supplierMobile,jdbcType=VARCHAR},
+      SUPPLIER_FAX = #{record.supplierFax,jdbcType=VARCHAR},
+      SUPPLIER_ADDRESS = #{record.supplierAddress,jdbcType=VARCHAR},
+      SUPPLIER_POSTCODE = #{record.supplierPostcode,jdbcType=VARCHAR},
+      SUPPLIER_EMAIL = #{record.supplierEmail,jdbcType=VARCHAR},
+      SUPPLIER_BANK = #{record.supplierBank,jdbcType=VARCHAR},
+      SUPPLIER_BANK_NUM = #{record.supplierBankNum,jdbcType=VARCHAR},
+      SUPPLIER_COMPANY_HOMEPAGE = #{record.supplierCompanyHomepage,jdbcType=VARCHAR},
+      SUPPLIER_EFFECTIVE = #{record.supplierEffective,jdbcType=VARCHAR},
+      STAFF_ID = #{record.staffId,jdbcType=DECIMAL},
+      SUPPLIER_REMARK = #{record.supplierRemark,jdbcType=VARCHAR},
+      COMPANY_ID = #{record.companyId,jdbcType=DECIMAL},
+      LAST_MODIFY_DATE = #{record.lastModifyDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sc.entity.CgSupplier" >
+    update CG_SUPPLIER
+    <set >
+      <if test="supplierName != null" >
+        SUPPLIER_NAME = #{supplierName,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierFname != null" >
+        SUPPLIER_FNAME = #{supplierFname,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierContacts != null" >
+        SUPPLIER_CONTACTS = #{supplierContacts,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierFixed != null" >
+        SUPPLIER_FIXED = #{supplierFixed,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierMobile != null" >
+        SUPPLIER_MOBILE = #{supplierMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierFax != null" >
+        SUPPLIER_FAX = #{supplierFax,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierAddress != null" >
+        SUPPLIER_ADDRESS = #{supplierAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierPostcode != null" >
+        SUPPLIER_POSTCODE = #{supplierPostcode,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierEmail != null" >
+        SUPPLIER_EMAIL = #{supplierEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierBank != null" >
+        SUPPLIER_BANK = #{supplierBank,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierBankNum != null" >
+        SUPPLIER_BANK_NUM = #{supplierBankNum,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierCompanyHomepage != null" >
+        SUPPLIER_COMPANY_HOMEPAGE = #{supplierCompanyHomepage,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierEffective != null" >
+        SUPPLIER_EFFECTIVE = #{supplierEffective,jdbcType=VARCHAR},
+      </if>
+      <if test="staffId != null" >
+        STAFF_ID = #{staffId,jdbcType=DECIMAL},
+      </if>
+      <if test="supplierRemark != null" >
+        SUPPLIER_REMARK = #{supplierRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        COMPANY_ID = #{companyId,jdbcType=DECIMAL},
+      </if>
+      <if test="lastModifyDate != null" >
+        LAST_MODIFY_DATE = #{lastModifyDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where SUPPLIER_ID = #{supplierId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sc.entity.CgSupplier" >
+    update CG_SUPPLIER
+    set SUPPLIER_NAME = #{supplierName,jdbcType=VARCHAR},
+      SUPPLIER_FNAME = #{supplierFname,jdbcType=VARCHAR},
+      SUPPLIER_CONTACTS = #{supplierContacts,jdbcType=VARCHAR},
+      SUPPLIER_FIXED = #{supplierFixed,jdbcType=VARCHAR},
+      SUPPLIER_MOBILE = #{supplierMobile,jdbcType=VARCHAR},
+      SUPPLIER_FAX = #{supplierFax,jdbcType=VARCHAR},
+      SUPPLIER_ADDRESS = #{supplierAddress,jdbcType=VARCHAR},
+      SUPPLIER_POSTCODE = #{supplierPostcode,jdbcType=VARCHAR},
+      SUPPLIER_EMAIL = #{supplierEmail,jdbcType=VARCHAR},
+      SUPPLIER_BANK = #{supplierBank,jdbcType=VARCHAR},
+      SUPPLIER_BANK_NUM = #{supplierBankNum,jdbcType=VARCHAR},
+      SUPPLIER_COMPANY_HOMEPAGE = #{supplierCompanyHomepage,jdbcType=VARCHAR},
+      SUPPLIER_EFFECTIVE = #{supplierEffective,jdbcType=VARCHAR},
+      STAFF_ID = #{staffId,jdbcType=DECIMAL},
+      SUPPLIER_REMARK = #{supplierRemark,jdbcType=VARCHAR},
+      COMPANY_ID = #{companyId,jdbcType=DECIMAL},
+      LAST_MODIFY_DATE = #{lastModifyDate,jdbcType=TIMESTAMP}
+    where SUPPLIER_ID = #{supplierId,jdbcType=DECIMAL}
+  </update>
+</mapper>

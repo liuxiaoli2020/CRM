@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sc.mapper.RsUserDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.sc.entity.RsUserDetail" >
+    <constructor >
+      <idArg column="STAFF_ID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="STAFF_NAME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="STAFF_SEX" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="STAFF_PHOTO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ID_NUMBER" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="HOME_ADDRESS" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="NOW_ADDRESS" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="STAFF_EDUCATION" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="POLITICAL_OUTLOOK" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="GRADUATE_SCHOOL" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TELEPHONE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ONLINE_CONTACT_WAY" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ONLINE_CONTACT_DETAIL" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="AUDIT_STATUS" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="JOB_ID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="STAFF_STATE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="NOTES" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="COMPANY_ID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="LAST_MODIFY_DATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    STAFF_ID, STAFF_NAME, STAFF_SEX, STAFF_PHOTO, ID_NUMBER, HOME_ADDRESS, NOW_ADDRESS, 
+    STAFF_EDUCATION, POLITICAL_OUTLOOK, GRADUATE_SCHOOL, TELEPHONE, ONLINE_CONTACT_WAY, 
+    ONLINE_CONTACT_DETAIL, AUDIT_STATUS, JOB_ID, STAFF_STATE, NOTES, COMPANY_ID, LAST_MODIFY_DATE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sc.entity.RsUserDetailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from RS_USER_DETAIL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from RS_USER_DETAIL
+    where STAFF_ID = #{staffId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from RS_USER_DETAIL
+    where STAFF_ID = #{staffId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sc.entity.RsUserDetailExample" >
+    delete from RS_USER_DETAIL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sc.entity.RsUserDetail" >
+    insert into RS_USER_DETAIL (STAFF_ID, STAFF_NAME, STAFF_SEX, 
+      STAFF_PHOTO, ID_NUMBER, HOME_ADDRESS, 
+      NOW_ADDRESS, STAFF_EDUCATION, POLITICAL_OUTLOOK, 
+      GRADUATE_SCHOOL, TELEPHONE, ONLINE_CONTACT_WAY, 
+      ONLINE_CONTACT_DETAIL, AUDIT_STATUS, JOB_ID, 
+      STAFF_STATE, NOTES, COMPANY_ID, 
+      LAST_MODIFY_DATE)
+    values (#{staffId,jdbcType=DECIMAL}, #{staffName,jdbcType=VARCHAR}, #{staffSex,jdbcType=VARCHAR}, 
+      #{staffPhoto,jdbcType=VARCHAR}, #{idNumber,jdbcType=VARCHAR}, #{homeAddress,jdbcType=VARCHAR}, 
+      #{nowAddress,jdbcType=VARCHAR}, #{staffEducation,jdbcType=VARCHAR}, #{politicalOutlook,jdbcType=VARCHAR}, 
+      #{graduateSchool,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, #{onlineContactWay,jdbcType=VARCHAR}, 
+      #{onlineContactDetail,jdbcType=VARCHAR}, #{auditStatus,jdbcType=VARCHAR}, #{jobId,jdbcType=DECIMAL}, 
+      #{staffState,jdbcType=VARCHAR}, #{notes,jdbcType=VARCHAR}, #{companyId,jdbcType=DECIMAL}, 
+      #{lastModifyDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sc.entity.RsUserDetail" >
+    insert into RS_USER_DETAIL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="staffId != null" >
+        STAFF_ID,
+      </if>
+      <if test="staffName != null" >
+        STAFF_NAME,
+      </if>
+      <if test="staffSex != null" >
+        STAFF_SEX,
+      </if>
+      <if test="staffPhoto != null" >
+        STAFF_PHOTO,
+      </if>
+      <if test="idNumber != null" >
+        ID_NUMBER,
+      </if>
+      <if test="homeAddress != null" >
+        HOME_ADDRESS,
+      </if>
+      <if test="nowAddress != null" >
+        NOW_ADDRESS,
+      </if>
+      <if test="staffEducation != null" >
+        STAFF_EDUCATION,
+      </if>
+      <if test="politicalOutlook != null" >
+        POLITICAL_OUTLOOK,
+      </if>
+      <if test="graduateSchool != null" >
+        GRADUATE_SCHOOL,
+      </if>
+      <if test="telephone != null" >
+        TELEPHONE,
+      </if>
+      <if test="onlineContactWay != null" >
+        ONLINE_CONTACT_WAY,
+      </if>
+      <if test="onlineContactDetail != null" >
+        ONLINE_CONTACT_DETAIL,
+      </if>
+      <if test="auditStatus != null" >
+        AUDIT_STATUS,
+      </if>
+      <if test="jobId != null" >
+        JOB_ID,
+      </if>
+      <if test="staffState != null" >
+        STAFF_STATE,
+      </if>
+      <if test="notes != null" >
+        NOTES,
+      </if>
+      <if test="companyId != null" >
+        COMPANY_ID,
+      </if>
+      <if test="lastModifyDate != null" >
+        LAST_MODIFY_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="staffId != null" >
+        #{staffId,jdbcType=DECIMAL},
+      </if>
+      <if test="staffName != null" >
+        #{staffName,jdbcType=VARCHAR},
+      </if>
+      <if test="staffSex != null" >
+        #{staffSex,jdbcType=VARCHAR},
+      </if>
+      <if test="staffPhoto != null" >
+        #{staffPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="idNumber != null" >
+        #{idNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="homeAddress != null" >
+        #{homeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="nowAddress != null" >
+        #{nowAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="staffEducation != null" >
+        #{staffEducation,jdbcType=VARCHAR},
+      </if>
+      <if test="politicalOutlook != null" >
+        #{politicalOutlook,jdbcType=VARCHAR},
+      </if>
+      <if test="graduateSchool != null" >
+        #{graduateSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="onlineContactWay != null" >
+        #{onlineContactWay,jdbcType=VARCHAR},
+      </if>
+      <if test="onlineContactDetail != null" >
+        #{onlineContactDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="auditStatus != null" >
+        #{auditStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="jobId != null" >
+        #{jobId,jdbcType=DECIMAL},
+      </if>
+      <if test="staffState != null" >
+        #{staffState,jdbcType=VARCHAR},
+      </if>
+      <if test="notes != null" >
+        #{notes,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        #{companyId,jdbcType=DECIMAL},
+      </if>
+      <if test="lastModifyDate != null" >
+        #{lastModifyDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sc.entity.RsUserDetailExample" resultType="java.lang.Integer" >
+    select count(*) from RS_USER_DETAIL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update RS_USER_DETAIL
+    <set >
+      <if test="record.staffId != null" >
+        STAFF_ID = #{record.staffId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.staffName != null" >
+        STAFF_NAME = #{record.staffName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.staffSex != null" >
+        STAFF_SEX = #{record.staffSex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.staffPhoto != null" >
+        STAFF_PHOTO = #{record.staffPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idNumber != null" >
+        ID_NUMBER = #{record.idNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.homeAddress != null" >
+        HOME_ADDRESS = #{record.homeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nowAddress != null" >
+        NOW_ADDRESS = #{record.nowAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.staffEducation != null" >
+        STAFF_EDUCATION = #{record.staffEducation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.politicalOutlook != null" >
+        POLITICAL_OUTLOOK = #{record.politicalOutlook,jdbcType=VARCHAR},
+      </if>
+      <if test="record.graduateSchool != null" >
+        GRADUATE_SCHOOL = #{record.graduateSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telephone != null" >
+        TELEPHONE = #{record.telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.onlineContactWay != null" >
+        ONLINE_CONTACT_WAY = #{record.onlineContactWay,jdbcType=VARCHAR},
+      </if>
+      <if test="record.onlineContactDetail != null" >
+        ONLINE_CONTACT_DETAIL = #{record.onlineContactDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditStatus != null" >
+        AUDIT_STATUS = #{record.auditStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jobId != null" >
+        JOB_ID = #{record.jobId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.staffState != null" >
+        STAFF_STATE = #{record.staffState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.notes != null" >
+        NOTES = #{record.notes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyId != null" >
+        COMPANY_ID = #{record.companyId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lastModifyDate != null" >
+        LAST_MODIFY_DATE = #{record.lastModifyDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update RS_USER_DETAIL
+    set STAFF_ID = #{record.staffId,jdbcType=DECIMAL},
+      STAFF_NAME = #{record.staffName,jdbcType=VARCHAR},
+      STAFF_SEX = #{record.staffSex,jdbcType=VARCHAR},
+      STAFF_PHOTO = #{record.staffPhoto,jdbcType=VARCHAR},
+      ID_NUMBER = #{record.idNumber,jdbcType=VARCHAR},
+      HOME_ADDRESS = #{record.homeAddress,jdbcType=VARCHAR},
+      NOW_ADDRESS = #{record.nowAddress,jdbcType=VARCHAR},
+      STAFF_EDUCATION = #{record.staffEducation,jdbcType=VARCHAR},
+      POLITICAL_OUTLOOK = #{record.politicalOutlook,jdbcType=VARCHAR},
+      GRADUATE_SCHOOL = #{record.graduateSchool,jdbcType=VARCHAR},
+      TELEPHONE = #{record.telephone,jdbcType=VARCHAR},
+      ONLINE_CONTACT_WAY = #{record.onlineContactWay,jdbcType=VARCHAR},
+      ONLINE_CONTACT_DETAIL = #{record.onlineContactDetail,jdbcType=VARCHAR},
+      AUDIT_STATUS = #{record.auditStatus,jdbcType=VARCHAR},
+      JOB_ID = #{record.jobId,jdbcType=DECIMAL},
+      STAFF_STATE = #{record.staffState,jdbcType=VARCHAR},
+      NOTES = #{record.notes,jdbcType=VARCHAR},
+      COMPANY_ID = #{record.companyId,jdbcType=DECIMAL},
+      LAST_MODIFY_DATE = #{record.lastModifyDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sc.entity.RsUserDetail" >
+    update RS_USER_DETAIL
+    <set >
+      <if test="staffName != null" >
+        STAFF_NAME = #{staffName,jdbcType=VARCHAR},
+      </if>
+      <if test="staffSex != null" >
+        STAFF_SEX = #{staffSex,jdbcType=VARCHAR},
+      </if>
+      <if test="staffPhoto != null" >
+        STAFF_PHOTO = #{staffPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="idNumber != null" >
+        ID_NUMBER = #{idNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="homeAddress != null" >
+        HOME_ADDRESS = #{homeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="nowAddress != null" >
+        NOW_ADDRESS = #{nowAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="staffEducation != null" >
+        STAFF_EDUCATION = #{staffEducation,jdbcType=VARCHAR},
+      </if>
+      <if test="politicalOutlook != null" >
+        POLITICAL_OUTLOOK = #{politicalOutlook,jdbcType=VARCHAR},
+      </if>
+      <if test="graduateSchool != null" >
+        GRADUATE_SCHOOL = #{graduateSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        TELEPHONE = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="onlineContactWay != null" >
+        ONLINE_CONTACT_WAY = #{onlineContactWay,jdbcType=VARCHAR},
+      </if>
+      <if test="onlineContactDetail != null" >
+        ONLINE_CONTACT_DETAIL = #{onlineContactDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="auditStatus != null" >
+        AUDIT_STATUS = #{auditStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="jobId != null" >
+        JOB_ID = #{jobId,jdbcType=DECIMAL},
+      </if>
+      <if test="staffState != null" >
+        STAFF_STATE = #{staffState,jdbcType=VARCHAR},
+      </if>
+      <if test="notes != null" >
+        NOTES = #{notes,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        COMPANY_ID = #{companyId,jdbcType=DECIMAL},
+      </if>
+      <if test="lastModifyDate != null" >
+        LAST_MODIFY_DATE = #{lastModifyDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where STAFF_ID = #{staffId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sc.entity.RsUserDetail" >
+    update RS_USER_DETAIL
+    set STAFF_NAME = #{staffName,jdbcType=VARCHAR},
+      STAFF_SEX = #{staffSex,jdbcType=VARCHAR},
+      STAFF_PHOTO = #{staffPhoto,jdbcType=VARCHAR},
+      ID_NUMBER = #{idNumber,jdbcType=VARCHAR},
+      HOME_ADDRESS = #{homeAddress,jdbcType=VARCHAR},
+      NOW_ADDRESS = #{nowAddress,jdbcType=VARCHAR},
+      STAFF_EDUCATION = #{staffEducation,jdbcType=VARCHAR},
+      POLITICAL_OUTLOOK = #{politicalOutlook,jdbcType=VARCHAR},
+      GRADUATE_SCHOOL = #{graduateSchool,jdbcType=VARCHAR},
+      TELEPHONE = #{telephone,jdbcType=VARCHAR},
+      ONLINE_CONTACT_WAY = #{onlineContactWay,jdbcType=VARCHAR},
+      ONLINE_CONTACT_DETAIL = #{onlineContactDetail,jdbcType=VARCHAR},
+      AUDIT_STATUS = #{auditStatus,jdbcType=VARCHAR},
+      JOB_ID = #{jobId,jdbcType=DECIMAL},
+      STAFF_STATE = #{staffState,jdbcType=VARCHAR},
+      NOTES = #{notes,jdbcType=VARCHAR},
+      COMPANY_ID = #{companyId,jdbcType=DECIMAL},
+      LAST_MODIFY_DATE = #{lastModifyDate,jdbcType=TIMESTAMP}
+    where STAFF_ID = #{staffId,jdbcType=DECIMAL}
+  </update>
+</mapper>

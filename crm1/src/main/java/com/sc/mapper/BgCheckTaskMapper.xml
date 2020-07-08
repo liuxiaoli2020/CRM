@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sc.mapper.BgCheckTaskMapper" >
+  <resultMap id="BaseResultMap" type="com.sc.entity.BgCheckTask" >
+    <constructor >
+      <idArg column="TASK_ID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="TASK_TITLE" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="TASK_DETAIL" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TASK_PUBLISHER" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TASK_TARGET" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TASK_STATR" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TASK_FINISH" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="COMPANY_ID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="LAST_MODIFY_DATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    TASK_ID, TASK_TITLE, TASK_DETAIL, TASK_PUBLISHER, TASK_TARGET, TASK_STATR, TASK_FINISH, 
+    COMPANY_ID, LAST_MODIFY_DATE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sc.entity.BgCheckTaskExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from BG_CHECK_TASK
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from BG_CHECK_TASK
+    where TASK_ID = #{taskId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from BG_CHECK_TASK
+    where TASK_ID = #{taskId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sc.entity.BgCheckTaskExample" >
+    delete from BG_CHECK_TASK
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sc.entity.BgCheckTask" >
+    insert into BG_CHECK_TASK (TASK_ID, TASK_TITLE, TASK_DETAIL, 
+      TASK_PUBLISHER, TASK_TARGET, TASK_STATR, 
+      TASK_FINISH, COMPANY_ID, LAST_MODIFY_DATE
+      )
+    values (#{taskId,jdbcType=DECIMAL}, #{taskTitle,jdbcType=DECIMAL}, #{taskDetail,jdbcType=VARCHAR}, 
+      #{taskPublisher,jdbcType=VARCHAR}, #{taskTarget,jdbcType=VARCHAR}, #{taskStatr,jdbcType=VARCHAR}, 
+      #{taskFinish,jdbcType=VARCHAR}, #{companyId,jdbcType=DECIMAL}, #{lastModifyDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sc.entity.BgCheckTask" >
+    insert into BG_CHECK_TASK
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="taskId != null" >
+        TASK_ID,
+      </if>
+      <if test="taskTitle != null" >
+        TASK_TITLE,
+      </if>
+      <if test="taskDetail != null" >
+        TASK_DETAIL,
+      </if>
+      <if test="taskPublisher != null" >
+        TASK_PUBLISHER,
+      </if>
+      <if test="taskTarget != null" >
+        TASK_TARGET,
+      </if>
+      <if test="taskStatr != null" >
+        TASK_STATR,
+      </if>
+      <if test="taskFinish != null" >
+        TASK_FINISH,
+      </if>
+      <if test="companyId != null" >
+        COMPANY_ID,
+      </if>
+      <if test="lastModifyDate != null" >
+        LAST_MODIFY_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="taskId != null" >
+        #{taskId,jdbcType=DECIMAL},
+      </if>
+      <if test="taskTitle != null" >
+        #{taskTitle,jdbcType=DECIMAL},
+      </if>
+      <if test="taskDetail != null" >
+        #{taskDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="taskPublisher != null" >
+        #{taskPublisher,jdbcType=VARCHAR},
+      </if>
+      <if test="taskTarget != null" >
+        #{taskTarget,jdbcType=VARCHAR},
+      </if>
+      <if test="taskStatr != null" >
+        #{taskStatr,jdbcType=VARCHAR},
+      </if>
+      <if test="taskFinish != null" >
+        #{taskFinish,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        #{companyId,jdbcType=DECIMAL},
+      </if>
+      <if test="lastModifyDate != null" >
+        #{lastModifyDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sc.entity.BgCheckTaskExample" resultType="java.lang.Integer" >
+    select count(*) from BG_CHECK_TASK
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update BG_CHECK_TASK
+    <set >
+      <if test="record.taskId != null" >
+        TASK_ID = #{record.taskId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.taskTitle != null" >
+        TASK_TITLE = #{record.taskTitle,jdbcType=DECIMAL},
+      </if>
+      <if test="record.taskDetail != null" >
+        TASK_DETAIL = #{record.taskDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taskPublisher != null" >
+        TASK_PUBLISHER = #{record.taskPublisher,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taskTarget != null" >
+        TASK_TARGET = #{record.taskTarget,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taskStatr != null" >
+        TASK_STATR = #{record.taskStatr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taskFinish != null" >
+        TASK_FINISH = #{record.taskFinish,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyId != null" >
+        COMPANY_ID = #{record.companyId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lastModifyDate != null" >
+        LAST_MODIFY_DATE = #{record.lastModifyDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update BG_CHECK_TASK
+    set TASK_ID = #{record.taskId,jdbcType=DECIMAL},
+      TASK_TITLE = #{record.taskTitle,jdbcType=DECIMAL},
+      TASK_DETAIL = #{record.taskDetail,jdbcType=VARCHAR},
+      TASK_PUBLISHER = #{record.taskPublisher,jdbcType=VARCHAR},
+      TASK_TARGET = #{record.taskTarget,jdbcType=VARCHAR},
+      TASK_STATR = #{record.taskStatr,jdbcType=VARCHAR},
+      TASK_FINISH = #{record.taskFinish,jdbcType=VARCHAR},
+      COMPANY_ID = #{record.companyId,jdbcType=DECIMAL},
+      LAST_MODIFY_DATE = #{record.lastModifyDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sc.entity.BgCheckTask" >
+    update BG_CHECK_TASK
+    <set >
+      <if test="taskTitle != null" >
+        TASK_TITLE = #{taskTitle,jdbcType=DECIMAL},
+      </if>
+      <if test="taskDetail != null" >
+        TASK_DETAIL = #{taskDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="taskPublisher != null" >
+        TASK_PUBLISHER = #{taskPublisher,jdbcType=VARCHAR},
+      </if>
+      <if test="taskTarget != null" >
+        TASK_TARGET = #{taskTarget,jdbcType=VARCHAR},
+      </if>
+      <if test="taskStatr != null" >
+        TASK_STATR = #{taskStatr,jdbcType=VARCHAR},
+      </if>
+      <if test="taskFinish != null" >
+        TASK_FINISH = #{taskFinish,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        COMPANY_ID = #{companyId,jdbcType=DECIMAL},
+      </if>
+      <if test="lastModifyDate != null" >
+        LAST_MODIFY_DATE = #{lastModifyDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where TASK_ID = #{taskId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sc.entity.BgCheckTask" >
+    update BG_CHECK_TASK
+    set TASK_TITLE = #{taskTitle,jdbcType=DECIMAL},
+      TASK_DETAIL = #{taskDetail,jdbcType=VARCHAR},
+      TASK_PUBLISHER = #{taskPublisher,jdbcType=VARCHAR},
+      TASK_TARGET = #{taskTarget,jdbcType=VARCHAR},
+      TASK_STATR = #{taskStatr,jdbcType=VARCHAR},
+      TASK_FINISH = #{taskFinish,jdbcType=VARCHAR},
+      COMPANY_ID = #{companyId,jdbcType=DECIMAL},
+      LAST_MODIFY_DATE = #{lastModifyDate,jdbcType=TIMESTAMP}
+    where TASK_ID = #{taskId,jdbcType=DECIMAL}
+  </update>
+</mapper>

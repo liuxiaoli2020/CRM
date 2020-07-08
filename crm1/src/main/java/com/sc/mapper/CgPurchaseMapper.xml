@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sc.mapper.CgPurchaseMapper" >
+  <resultMap id="BaseResultMap" type="com.sc.entity.CgPurchase" >
+    <constructor >
+      <idArg column="PURCHASE_ID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="PRODUCT_ID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="ORDER_DELIVERY_DATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="PURCHASE_STATE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="STAFF_ID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="PURCHASE_REMARK" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="COMPANY_ID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="LAST_MODIFY_DATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    PURCHASE_ID, PRODUCT_ID, ORDER_DELIVERY_DATE, PURCHASE_STATE, STAFF_ID, PURCHASE_REMARK, 
+    COMPANY_ID, LAST_MODIFY_DATE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sc.entity.CgPurchaseExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from CG_PURCHASE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from CG_PURCHASE
+    where PURCHASE_ID = #{purchaseId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from CG_PURCHASE
+    where PURCHASE_ID = #{purchaseId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sc.entity.CgPurchaseExample" >
+    delete from CG_PURCHASE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sc.entity.CgPurchase" >
+    insert into CG_PURCHASE (PURCHASE_ID, PRODUCT_ID, ORDER_DELIVERY_DATE, 
+      PURCHASE_STATE, STAFF_ID, PURCHASE_REMARK, 
+      COMPANY_ID, LAST_MODIFY_DATE)
+    values (#{purchaseId,jdbcType=DECIMAL}, #{productId,jdbcType=DECIMAL}, #{orderDeliveryDate,jdbcType=TIMESTAMP}, 
+      #{purchaseState,jdbcType=VARCHAR}, #{staffId,jdbcType=DECIMAL}, #{purchaseRemark,jdbcType=VARCHAR}, 
+      #{companyId,jdbcType=DECIMAL}, #{lastModifyDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sc.entity.CgPurchase" >
+    insert into CG_PURCHASE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="purchaseId != null" >
+        PURCHASE_ID,
+      </if>
+      <if test="productId != null" >
+        PRODUCT_ID,
+      </if>
+      <if test="orderDeliveryDate != null" >
+        ORDER_DELIVERY_DATE,
+      </if>
+      <if test="purchaseState != null" >
+        PURCHASE_STATE,
+      </if>
+      <if test="staffId != null" >
+        STAFF_ID,
+      </if>
+      <if test="purchaseRemark != null" >
+        PURCHASE_REMARK,
+      </if>
+      <if test="companyId != null" >
+        COMPANY_ID,
+      </if>
+      <if test="lastModifyDate != null" >
+        LAST_MODIFY_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="purchaseId != null" >
+        #{purchaseId,jdbcType=DECIMAL},
+      </if>
+      <if test="productId != null" >
+        #{productId,jdbcType=DECIMAL},
+      </if>
+      <if test="orderDeliveryDate != null" >
+        #{orderDeliveryDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="purchaseState != null" >
+        #{purchaseState,jdbcType=VARCHAR},
+      </if>
+      <if test="staffId != null" >
+        #{staffId,jdbcType=DECIMAL},
+      </if>
+      <if test="purchaseRemark != null" >
+        #{purchaseRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        #{companyId,jdbcType=DECIMAL},
+      </if>
+      <if test="lastModifyDate != null" >
+        #{lastModifyDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sc.entity.CgPurchaseExample" resultType="java.lang.Integer" >
+    select count(*) from CG_PURCHASE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update CG_PURCHASE
+    <set >
+      <if test="record.purchaseId != null" >
+        PURCHASE_ID = #{record.purchaseId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.productId != null" >
+        PRODUCT_ID = #{record.productId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.orderDeliveryDate != null" >
+        ORDER_DELIVERY_DATE = #{record.orderDeliveryDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.purchaseState != null" >
+        PURCHASE_STATE = #{record.purchaseState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.staffId != null" >
+        STAFF_ID = #{record.staffId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.purchaseRemark != null" >
+        PURCHASE_REMARK = #{record.purchaseRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyId != null" >
+        COMPANY_ID = #{record.companyId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lastModifyDate != null" >
+        LAST_MODIFY_DATE = #{record.lastModifyDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update CG_PURCHASE
+    set PURCHASE_ID = #{record.purchaseId,jdbcType=DECIMAL},
+      PRODUCT_ID = #{record.productId,jdbcType=DECIMAL},
+      ORDER_DELIVERY_DATE = #{record.orderDeliveryDate,jdbcType=TIMESTAMP},
+      PURCHASE_STATE = #{record.purchaseState,jdbcType=VARCHAR},
+      STAFF_ID = #{record.staffId,jdbcType=DECIMAL},
+      PURCHASE_REMARK = #{record.purchaseRemark,jdbcType=VARCHAR},
+      COMPANY_ID = #{record.companyId,jdbcType=DECIMAL},
+      LAST_MODIFY_DATE = #{record.lastModifyDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sc.entity.CgPurchase" >
+    update CG_PURCHASE
+    <set >
+      <if test="productId != null" >
+        PRODUCT_ID = #{productId,jdbcType=DECIMAL},
+      </if>
+      <if test="orderDeliveryDate != null" >
+        ORDER_DELIVERY_DATE = #{orderDeliveryDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="purchaseState != null" >
+        PURCHASE_STATE = #{purchaseState,jdbcType=VARCHAR},
+      </if>
+      <if test="staffId != null" >
+        STAFF_ID = #{staffId,jdbcType=DECIMAL},
+      </if>
+      <if test="purchaseRemark != null" >
+        PURCHASE_REMARK = #{purchaseRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        COMPANY_ID = #{companyId,jdbcType=DECIMAL},
+      </if>
+      <if test="lastModifyDate != null" >
+        LAST_MODIFY_DATE = #{lastModifyDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where PURCHASE_ID = #{purchaseId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sc.entity.CgPurchase" >
+    update CG_PURCHASE
+    set PRODUCT_ID = #{productId,jdbcType=DECIMAL},
+      ORDER_DELIVERY_DATE = #{orderDeliveryDate,jdbcType=TIMESTAMP},
+      PURCHASE_STATE = #{purchaseState,jdbcType=VARCHAR},
+      STAFF_ID = #{staffId,jdbcType=DECIMAL},
+      PURCHASE_REMARK = #{purchaseRemark,jdbcType=VARCHAR},
+      COMPANY_ID = #{companyId,jdbcType=DECIMAL},
+      LAST_MODIFY_DATE = #{lastModifyDate,jdbcType=TIMESTAMP}
+    where PURCHASE_ID = #{purchaseId,jdbcType=DECIMAL}
+  </update>
+</mapper>

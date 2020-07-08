@@ -1,0 +1,30 @@
+#tomcat配置 http://localhost:8080/ssmssb
+server:
+  address: localhost
+  port: 8080
+
+#http字符编码的设置
+  servlet:
+    encoding:
+      charset: utf-8
+      enabled: true
+      force: true
+    context-path: /crm1
+      
+#配置视图解析器的前缀和后缀
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/
+      suffix: .jsp
+      
+#数据源oracle数据库
+  datasource:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@42.51.78.5:1521:orcl
+    username: CRM1
+    password: scit_190506_crm1
+    
+#加载mybatis配置文件
+mybatis:
+  config-location: classpath:conf.xml

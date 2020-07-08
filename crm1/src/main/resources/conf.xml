@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!-- 设置驼峰命名法则 -->
+    <settings>
+      <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+    
+    <plugins>
+      <plugin interceptor="com.github.pagehelper.PageInterceptor">
+         <property name="reason" value=""/>
+      </plugin>
+    </plugins>
+</configuration>

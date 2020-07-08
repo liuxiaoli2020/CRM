@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sc.mapper.XsCustomerFeedbackMapper" >
+  <resultMap id="BaseResultMap" type="com.sc.entity.XsCustomerFeedback" >
+    <constructor >
+      <idArg column="FEEDBACK_RECORD_ID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="RECORD_PRIORITY" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CUSTOMER_ID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="STATE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="FEEDBACK_TYPE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="FEEDBACK_DATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="FEEDBACK_REASON" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="HEAD" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="FEEDBACK_RESOURCE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="FEEDBACK_THEME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="FEEDBACK_DESCRIBE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ANALYSIS" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="COMPANY_ID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="LAST_MODIFY_DATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    FEEDBACK_RECORD_ID, RECORD_PRIORITY, CUSTOMER_ID, STATE, FEEDBACK_TYPE, FEEDBACK_DATE, 
+    FEEDBACK_REASON, HEAD, FEEDBACK_RESOURCE, FEEDBACK_THEME, FEEDBACK_DESCRIBE, ANALYSIS, 
+    COMPANY_ID, LAST_MODIFY_DATE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sc.entity.XsCustomerFeedbackExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from XS_CUSTOMER_FEEDBACK
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from XS_CUSTOMER_FEEDBACK
+    where FEEDBACK_RECORD_ID = #{feedbackRecordId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from XS_CUSTOMER_FEEDBACK
+    where FEEDBACK_RECORD_ID = #{feedbackRecordId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sc.entity.XsCustomerFeedbackExample" >
+    delete from XS_CUSTOMER_FEEDBACK
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sc.entity.XsCustomerFeedback" >
+    insert into XS_CUSTOMER_FEEDBACK (FEEDBACK_RECORD_ID, RECORD_PRIORITY, 
+      CUSTOMER_ID, STATE, FEEDBACK_TYPE, 
+      FEEDBACK_DATE, FEEDBACK_REASON, HEAD, 
+      FEEDBACK_RESOURCE, FEEDBACK_THEME, FEEDBACK_DESCRIBE, 
+      ANALYSIS, COMPANY_ID, LAST_MODIFY_DATE
+      )
+    values (#{feedbackRecordId,jdbcType=DECIMAL}, #{recordPriority,jdbcType=VARCHAR}, 
+      #{customerId,jdbcType=DECIMAL}, #{state,jdbcType=VARCHAR}, #{feedbackType,jdbcType=VARCHAR}, 
+      #{feedbackDate,jdbcType=TIMESTAMP}, #{feedbackReason,jdbcType=VARCHAR}, #{head,jdbcType=VARCHAR}, 
+      #{feedbackResource,jdbcType=VARCHAR}, #{feedbackTheme,jdbcType=VARCHAR}, #{feedbackDescribe,jdbcType=VARCHAR}, 
+      #{analysis,jdbcType=VARCHAR}, #{companyId,jdbcType=DECIMAL}, #{lastModifyDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sc.entity.XsCustomerFeedback" >
+    insert into XS_CUSTOMER_FEEDBACK
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="feedbackRecordId != null" >
+        FEEDBACK_RECORD_ID,
+      </if>
+      <if test="recordPriority != null" >
+        RECORD_PRIORITY,
+      </if>
+      <if test="customerId != null" >
+        CUSTOMER_ID,
+      </if>
+      <if test="state != null" >
+        STATE,
+      </if>
+      <if test="feedbackType != null" >
+        FEEDBACK_TYPE,
+      </if>
+      <if test="feedbackDate != null" >
+        FEEDBACK_DATE,
+      </if>
+      <if test="feedbackReason != null" >
+        FEEDBACK_REASON,
+      </if>
+      <if test="head != null" >
+        HEAD,
+      </if>
+      <if test="feedbackResource != null" >
+        FEEDBACK_RESOURCE,
+      </if>
+      <if test="feedbackTheme != null" >
+        FEEDBACK_THEME,
+      </if>
+      <if test="feedbackDescribe != null" >
+        FEEDBACK_DESCRIBE,
+      </if>
+      <if test="analysis != null" >
+        ANALYSIS,
+      </if>
+      <if test="companyId != null" >
+        COMPANY_ID,
+      </if>
+      <if test="lastModifyDate != null" >
+        LAST_MODIFY_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="feedbackRecordId != null" >
+        #{feedbackRecordId,jdbcType=DECIMAL},
+      </if>
+      <if test="recordPriority != null" >
+        #{recordPriority,jdbcType=VARCHAR},
+      </if>
+      <if test="customerId != null" >
+        #{customerId,jdbcType=DECIMAL},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="feedbackType != null" >
+        #{feedbackType,jdbcType=VARCHAR},
+      </if>
+      <if test="feedbackDate != null" >
+        #{feedbackDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="feedbackReason != null" >
+        #{feedbackReason,jdbcType=VARCHAR},
+      </if>
+      <if test="head != null" >
+        #{head,jdbcType=VARCHAR},
+      </if>
+      <if test="feedbackResource != null" >
+        #{feedbackResource,jdbcType=VARCHAR},
+      </if>
+      <if test="feedbackTheme != null" >
+        #{feedbackTheme,jdbcType=VARCHAR},
+      </if>
+      <if test="feedbackDescribe != null" >
+        #{feedbackDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="analysis != null" >
+        #{analysis,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        #{companyId,jdbcType=DECIMAL},
+      </if>
+      <if test="lastModifyDate != null" >
+        #{lastModifyDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sc.entity.XsCustomerFeedbackExample" resultType="java.lang.Integer" >
+    select count(*) from XS_CUSTOMER_FEEDBACK
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update XS_CUSTOMER_FEEDBACK
+    <set >
+      <if test="record.feedbackRecordId != null" >
+        FEEDBACK_RECORD_ID = #{record.feedbackRecordId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.recordPriority != null" >
+        RECORD_PRIORITY = #{record.recordPriority,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerId != null" >
+        CUSTOMER_ID = #{record.customerId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.state != null" >
+        STATE = #{record.state,jdbcType=VARCHAR},
+      </if>
+      <if test="record.feedbackType != null" >
+        FEEDBACK_TYPE = #{record.feedbackType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.feedbackDate != null" >
+        FEEDBACK_DATE = #{record.feedbackDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.feedbackReason != null" >
+        FEEDBACK_REASON = #{record.feedbackReason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.head != null" >
+        HEAD = #{record.head,jdbcType=VARCHAR},
+      </if>
+      <if test="record.feedbackResource != null" >
+        FEEDBACK_RESOURCE = #{record.feedbackResource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.feedbackTheme != null" >
+        FEEDBACK_THEME = #{record.feedbackTheme,jdbcType=VARCHAR},
+      </if>
+      <if test="record.feedbackDescribe != null" >
+        FEEDBACK_DESCRIBE = #{record.feedbackDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="record.analysis != null" >
+        ANALYSIS = #{record.analysis,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyId != null" >
+        COMPANY_ID = #{record.companyId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lastModifyDate != null" >
+        LAST_MODIFY_DATE = #{record.lastModifyDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update XS_CUSTOMER_FEEDBACK
+    set FEEDBACK_RECORD_ID = #{record.feedbackRecordId,jdbcType=DECIMAL},
+      RECORD_PRIORITY = #{record.recordPriority,jdbcType=VARCHAR},
+      CUSTOMER_ID = #{record.customerId,jdbcType=DECIMAL},
+      STATE = #{record.state,jdbcType=VARCHAR},
+      FEEDBACK_TYPE = #{record.feedbackType,jdbcType=VARCHAR},
+      FEEDBACK_DATE = #{record.feedbackDate,jdbcType=TIMESTAMP},
+      FEEDBACK_REASON = #{record.feedbackReason,jdbcType=VARCHAR},
+      HEAD = #{record.head,jdbcType=VARCHAR},
+      FEEDBACK_RESOURCE = #{record.feedbackResource,jdbcType=VARCHAR},
+      FEEDBACK_THEME = #{record.feedbackTheme,jdbcType=VARCHAR},
+      FEEDBACK_DESCRIBE = #{record.feedbackDescribe,jdbcType=VARCHAR},
+      ANALYSIS = #{record.analysis,jdbcType=VARCHAR},
+      COMPANY_ID = #{record.companyId,jdbcType=DECIMAL},
+      LAST_MODIFY_DATE = #{record.lastModifyDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sc.entity.XsCustomerFeedback" >
+    update XS_CUSTOMER_FEEDBACK
+    <set >
+      <if test="recordPriority != null" >
+        RECORD_PRIORITY = #{recordPriority,jdbcType=VARCHAR},
+      </if>
+      <if test="customerId != null" >
+        CUSTOMER_ID = #{customerId,jdbcType=DECIMAL},
+      </if>
+      <if test="state != null" >
+        STATE = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="feedbackType != null" >
+        FEEDBACK_TYPE = #{feedbackType,jdbcType=VARCHAR},
+      </if>
+      <if test="feedbackDate != null" >
+        FEEDBACK_DATE = #{feedbackDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="feedbackReason != null" >
+        FEEDBACK_REASON = #{feedbackReason,jdbcType=VARCHAR},
+      </if>
+      <if test="head != null" >
+        HEAD = #{head,jdbcType=VARCHAR},
+      </if>
+      <if test="feedbackResource != null" >
+        FEEDBACK_RESOURCE = #{feedbackResource,jdbcType=VARCHAR},
+      </if>
+      <if test="feedbackTheme != null" >
+        FEEDBACK_THEME = #{feedbackTheme,jdbcType=VARCHAR},
+      </if>
+      <if test="feedbackDescribe != null" >
+        FEEDBACK_DESCRIBE = #{feedbackDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="analysis != null" >
+        ANALYSIS = #{analysis,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        COMPANY_ID = #{companyId,jdbcType=DECIMAL},
+      </if>
+      <if test="lastModifyDate != null" >
+        LAST_MODIFY_DATE = #{lastModifyDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where FEEDBACK_RECORD_ID = #{feedbackRecordId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sc.entity.XsCustomerFeedback" >
+    update XS_CUSTOMER_FEEDBACK
+    set RECORD_PRIORITY = #{recordPriority,jdbcType=VARCHAR},
+      CUSTOMER_ID = #{customerId,jdbcType=DECIMAL},
+      STATE = #{state,jdbcType=VARCHAR},
+      FEEDBACK_TYPE = #{feedbackType,jdbcType=VARCHAR},
+      FEEDBACK_DATE = #{feedbackDate,jdbcType=TIMESTAMP},
+      FEEDBACK_REASON = #{feedbackReason,jdbcType=VARCHAR},
+      HEAD = #{head,jdbcType=VARCHAR},
+      FEEDBACK_RESOURCE = #{feedbackResource,jdbcType=VARCHAR},
+      FEEDBACK_THEME = #{feedbackTheme,jdbcType=VARCHAR},
+      FEEDBACK_DESCRIBE = #{feedbackDescribe,jdbcType=VARCHAR},
+      ANALYSIS = #{analysis,jdbcType=VARCHAR},
+      COMPANY_ID = #{companyId,jdbcType=DECIMAL},
+      LAST_MODIFY_DATE = #{lastModifyDate,jdbcType=TIMESTAMP}
+    where FEEDBACK_RECORD_ID = #{feedbackRecordId,jdbcType=DECIMAL}
+  </update>
+</mapper>

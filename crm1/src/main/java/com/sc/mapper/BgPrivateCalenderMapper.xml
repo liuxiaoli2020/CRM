@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sc.mapper.BgPrivateCalenderMapper" >
+  <resultMap id="BaseResultMap" type="com.sc.entity.BgPrivateCalender" >
+    <constructor >
+      <idArg column="CALENDAR_ID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="CALENDAR_CATEGORY" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CALENDAR_TITLE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CALENDAR_START" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="CALENDAR_TIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="PERSON_NUMBER" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CALENDAR_DETAIL" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="COMPANY_ID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="LAST_MODIFY_DATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    CALENDAR_ID, CALENDAR_CATEGORY, CALENDAR_TITLE, CALENDAR_START, CALENDAR_TIME, PERSON_NUMBER, 
+    CALENDAR_DETAIL, COMPANY_ID, LAST_MODIFY_DATE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sc.entity.BgPrivateCalenderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from BG_PRIVATE_CALENDER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from BG_PRIVATE_CALENDER
+    where CALENDAR_ID = #{calendarId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from BG_PRIVATE_CALENDER
+    where CALENDAR_ID = #{calendarId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sc.entity.BgPrivateCalenderExample" >
+    delete from BG_PRIVATE_CALENDER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sc.entity.BgPrivateCalender" >
+    insert into BG_PRIVATE_CALENDER (CALENDAR_ID, CALENDAR_CATEGORY, CALENDAR_TITLE, 
+      CALENDAR_START, CALENDAR_TIME, PERSON_NUMBER, 
+      CALENDAR_DETAIL, COMPANY_ID, LAST_MODIFY_DATE
+      )
+    values (#{calendarId,jdbcType=DECIMAL}, #{calendarCategory,jdbcType=VARCHAR}, #{calendarTitle,jdbcType=VARCHAR}, 
+      #{calendarStart,jdbcType=TIMESTAMP}, #{calendarTime,jdbcType=TIMESTAMP}, #{personNumber,jdbcType=VARCHAR}, 
+      #{calendarDetail,jdbcType=VARCHAR}, #{companyId,jdbcType=DECIMAL}, #{lastModifyDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sc.entity.BgPrivateCalender" >
+    insert into BG_PRIVATE_CALENDER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="calendarId != null" >
+        CALENDAR_ID,
+      </if>
+      <if test="calendarCategory != null" >
+        CALENDAR_CATEGORY,
+      </if>
+      <if test="calendarTitle != null" >
+        CALENDAR_TITLE,
+      </if>
+      <if test="calendarStart != null" >
+        CALENDAR_START,
+      </if>
+      <if test="calendarTime != null" >
+        CALENDAR_TIME,
+      </if>
+      <if test="personNumber != null" >
+        PERSON_NUMBER,
+      </if>
+      <if test="calendarDetail != null" >
+        CALENDAR_DETAIL,
+      </if>
+      <if test="companyId != null" >
+        COMPANY_ID,
+      </if>
+      <if test="lastModifyDate != null" >
+        LAST_MODIFY_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="calendarId != null" >
+        #{calendarId,jdbcType=DECIMAL},
+      </if>
+      <if test="calendarCategory != null" >
+        #{calendarCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="calendarTitle != null" >
+        #{calendarTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="calendarStart != null" >
+        #{calendarStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="calendarTime != null" >
+        #{calendarTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="personNumber != null" >
+        #{personNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="calendarDetail != null" >
+        #{calendarDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        #{companyId,jdbcType=DECIMAL},
+      </if>
+      <if test="lastModifyDate != null" >
+        #{lastModifyDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sc.entity.BgPrivateCalenderExample" resultType="java.lang.Integer" >
+    select count(*) from BG_PRIVATE_CALENDER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update BG_PRIVATE_CALENDER
+    <set >
+      <if test="record.calendarId != null" >
+        CALENDAR_ID = #{record.calendarId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.calendarCategory != null" >
+        CALENDAR_CATEGORY = #{record.calendarCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.calendarTitle != null" >
+        CALENDAR_TITLE = #{record.calendarTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.calendarStart != null" >
+        CALENDAR_START = #{record.calendarStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.calendarTime != null" >
+        CALENDAR_TIME = #{record.calendarTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.personNumber != null" >
+        PERSON_NUMBER = #{record.personNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.calendarDetail != null" >
+        CALENDAR_DETAIL = #{record.calendarDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyId != null" >
+        COMPANY_ID = #{record.companyId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lastModifyDate != null" >
+        LAST_MODIFY_DATE = #{record.lastModifyDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update BG_PRIVATE_CALENDER
+    set CALENDAR_ID = #{record.calendarId,jdbcType=DECIMAL},
+      CALENDAR_CATEGORY = #{record.calendarCategory,jdbcType=VARCHAR},
+      CALENDAR_TITLE = #{record.calendarTitle,jdbcType=VARCHAR},
+      CALENDAR_START = #{record.calendarStart,jdbcType=TIMESTAMP},
+      CALENDAR_TIME = #{record.calendarTime,jdbcType=TIMESTAMP},
+      PERSON_NUMBER = #{record.personNumber,jdbcType=VARCHAR},
+      CALENDAR_DETAIL = #{record.calendarDetail,jdbcType=VARCHAR},
+      COMPANY_ID = #{record.companyId,jdbcType=DECIMAL},
+      LAST_MODIFY_DATE = #{record.lastModifyDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sc.entity.BgPrivateCalender" >
+    update BG_PRIVATE_CALENDER
+    <set >
+      <if test="calendarCategory != null" >
+        CALENDAR_CATEGORY = #{calendarCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="calendarTitle != null" >
+        CALENDAR_TITLE = #{calendarTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="calendarStart != null" >
+        CALENDAR_START = #{calendarStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="calendarTime != null" >
+        CALENDAR_TIME = #{calendarTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="personNumber != null" >
+        PERSON_NUMBER = #{personNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="calendarDetail != null" >
+        CALENDAR_DETAIL = #{calendarDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        COMPANY_ID = #{companyId,jdbcType=DECIMAL},
+      </if>
+      <if test="lastModifyDate != null" >
+        LAST_MODIFY_DATE = #{lastModifyDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where CALENDAR_ID = #{calendarId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sc.entity.BgPrivateCalender" >
+    update BG_PRIVATE_CALENDER
+    set CALENDAR_CATEGORY = #{calendarCategory,jdbcType=VARCHAR},
+      CALENDAR_TITLE = #{calendarTitle,jdbcType=VARCHAR},
+      CALENDAR_START = #{calendarStart,jdbcType=TIMESTAMP},
+      CALENDAR_TIME = #{calendarTime,jdbcType=TIMESTAMP},
+      PERSON_NUMBER = #{personNumber,jdbcType=VARCHAR},
+      CALENDAR_DETAIL = #{calendarDetail,jdbcType=VARCHAR},
+      COMPANY_ID = #{companyId,jdbcType=DECIMAL},
+      LAST_MODIFY_DATE = #{lastModifyDate,jdbcType=TIMESTAMP}
+    where CALENDAR_ID = #{calendarId,jdbcType=DECIMAL}
+  </update>
+</mapper>
