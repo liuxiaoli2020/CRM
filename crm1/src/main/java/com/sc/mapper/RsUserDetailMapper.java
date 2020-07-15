@@ -20,6 +20,9 @@ public interface RsUserDetailMapper {
 
     RsUserDetail selectByPrimaryKey(Long staffId);
 
+    //根据姓名查询
+    List<RsUserDetail> selectByName(String staffName);
+    
     int updateByExampleSelective(@Param("record") RsUserDetail record, @Param("example") RsUserDetailExample example);
 
     int updateByExample(@Param("record") RsUserDetail record, @Param("example") RsUserDetailExample example);

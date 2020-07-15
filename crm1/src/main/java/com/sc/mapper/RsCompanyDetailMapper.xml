@@ -102,6 +102,28 @@
     from RS_COMPANY_DETAIL
     where COMPANY_ID = #{companyId,jdbcType=DECIMAL}
   </select>
+  
+  <!-- <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from RS_COMPANY_DETAIL where 1=1
+    <if test="companyName != null">
+     and COMPANY_NAME like '%${companyName}%'
+    </if>
+    <if test="companyCode !=null">and COMPANY_CODE like '%${companyCode}%'</if>
+    
+  </select> -->
+  <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from RS_COMPANY_DETAIL
+    <if test="COMPANY_NAME != null">
+    where COMPANY_NAME like '%${companyName}%'
+    </if>
+   <!--  and COMPANY_CODE like '%${companyCode}%' -->
+    
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
     delete from RS_COMPANY_DETAIL
     where COMPANY_ID = #{companyId,jdbcType=DECIMAL}
