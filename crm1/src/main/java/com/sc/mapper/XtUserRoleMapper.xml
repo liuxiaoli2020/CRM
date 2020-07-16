@@ -211,4 +211,15 @@
       LAST_MODIFY_DATE = #{lastModifyDate,jdbcType=TIMESTAMP}
     where USER_ROLE_ID = #{userRoleId,jdbcType=DECIMAL}
   </update>
+  
+ 	<!-- 通过角色id查用户姓名 -->
+ <!-- <select id="selectroleidbyuserid" resultMap="com.sc.entity.XtUserAccount">
+  	SELECT UA.USER_NAME FROM XT_USER_ACCOUNT UA
+	LEFT JOIN XT_USER_ROLE UR
+	ON UR.USER_ID=UA.USER_ID
+  	WHERE USER_ID=#{roleId}
+  </select> --> 
+  
+  
+  
 </mapper>

@@ -15,12 +15,12 @@ import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sc.entity.XtUserAccount;
-import com.sc.service.XtUserAccountService;
+import com.sc.service.XtUserAccountLoginService;
 
 public class CustomRealmMD5 extends AuthorizingRealm {
 
 	@Autowired
-	XtUserAccountService xtUserAccountService;
+	XtUserAccountLoginService xtUserAccountService;
 	
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection arg0) {
