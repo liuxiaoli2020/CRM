@@ -124,17 +124,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</ul>
 			</dd>
 		</dl>
-			<dl id="menu-tongji">
-				<dt><i class="Hui-iconfont">&#xe620;</i> 销售管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-				<dd>
-					<ul>
-						<li><a data-href="charts-1.html" data-title="折线图" href="javascript:void(0)">折线图</a></li>
-						<li><a data-href="charts-2.html" data-title="时间轴折线图" href="javascript:void(0)">时间轴折线图</a></li>
-						<li><a data-href="charts-3.html" data-title="区域图" href="javascript:void(0)">区域图</a></li>
-						<li><a data-href="charts-4.html" data-title="柱状图" href="javascript:void(0)">柱状图</a></li>
-						<li><a data-href="charts-5.html" data-title="饼状图" href="javascript:void(0)">饼状图</a></li>
-						<li><a data-href="charts-6.html" data-title="3D柱状图" href="javascript:void(0)">3D柱状图</a></li>
-						<li><a data-href="charts-7.html" data-title="3D饼状图" href="javascript:void(0)">3D饼状图</a></li>
+		    <dl id="menu-product">
+			<dt><i class="Hui-iconfont">&#xe620;</i> 销售管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li><a data-href="customerdetailctrl/selectcustomerdetail.do" data-title="用户信息管理" href="javascript:void(0)">用户管理</a></li>
+					<li><a data-href="product-category.html" data-title="分类管理" href="javascript:void(0)">分类管理</a></li>
+					<li><a data-href="product-list.html" data-title="产品管理" href="javascript:void(0)">产品管理</a></li>
 				</ul>
 			</dd>
 		</dl>
@@ -147,6 +143,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			      </ul>
 			    </dd>
 			  </dl>
+			  
+			  <dl id="menu-tongji">
+				<dt><i class="Hui-iconfont">&#xe620;</i> 系统管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+				<dd>
+					<ul>
+						<li><a data-href="logctrl/findall.do" data-title="日志管理" href="javascript:void(0)">日志管理</a></li>
+						
+				</ul>
+			</dd>
+		</dl>
 	</div>
 	</aside>
 	<div class="dislpayArrow hidden-xs"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a></div>
