@@ -7,17 +7,50 @@ import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class CpDepot implements Serializable {
-    private BigDecimal depotId;
+	
+	@Override
+	public String toString() {
+		return "CpDepot [depotId=" + depotId + ", depotName=" + depotName + ", remarkMessage=" + remarkMessage
+				+ ", companyId=" + companyId + ", lastModifiedTime=" + lastModifiedTime + ", datemin=" + datemin
+				+ ", datemax=" + datemax + "]";
+	}
+
+	private BigDecimal depotId;
 
     private String depotName;
 
     private String remarkMessage;
 
     private String companyId;
+
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date lastModifiedTime;
+    
+    //扩展属性，用于查询
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date datemin;    
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date datemax;
+    
+    //扩展属性，用于查询	start
+    public Date getDatemin() {
+		return datemin;
+	}
 
-    private static final long serialVersionUID = 1L;
+	public void setDatemin(Date datemin) {
+		this.datemin = datemin;
+	}
+
+	public Date getDatemax() {
+		return datemax;
+	}
+
+	public void setDatemax(Date datemax) {
+		this.datemax = datemax;
+	}
+	//扩展属性，用于查询	end
+
+	private static final long serialVersionUID = 1L;
 
     public CpDepot(BigDecimal depotId, String depotName, String remarkMessage, String companyId, Date lastModifiedTime) {
         this.depotId = depotId;
@@ -70,11 +103,4 @@ public class CpDepot implements Serializable {
     public void setLastModifiedTime(Date lastModifiedTime) {
         this.lastModifiedTime = lastModifiedTime;
     }
-
-	@Override
-	public String toString() {
-		return "CpDepot [depotId=" + depotId + ", depotName=" + depotName + ", remarkMessage=" + remarkMessage
-				+ ", companyId=" + companyId + ", lastModifiedTime=" + lastModifiedTime + "]";
-	}
-    
 }
