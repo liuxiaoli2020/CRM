@@ -1,6 +1,11 @@
 package com.sc.controller;
 
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.shiro.SecurityUtils;
@@ -10,6 +15,7 @@ import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sc.entity.XtUserAccount;
@@ -23,7 +29,7 @@ public class LoginController {
 	
 	//登录认证失败
 	@RequestMapping("/login.do")//完整url地址是：loginctrl/login.do
-	public ModelAndView login(ModelAndView mav,HttpServletRequest req){//如果请求的参数名称和u对象中的属性名称一致的情况，就会自动赋值
+	public ModelAndView login(ModelAndView mav,HttpServletRequest req,String cpacha){//如果请求的参数名称和u对象中的属性名称一致的情况，就会自动赋值
 		System.out.println("用户登录认证失败");
 		
 		//通过认证失败属性名称获取对应值
@@ -58,6 +64,7 @@ public class LoginController {
 		mav.setViewName("redirect:../index.jsp");
 		return mav;
 	}
-	//检测用户
+	
+	//验证码
 	
 }

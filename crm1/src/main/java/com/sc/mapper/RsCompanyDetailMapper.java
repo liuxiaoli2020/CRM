@@ -1,10 +1,13 @@
 package com.sc.mapper;
 
-import com.sc.entity.RsCompanyDetail;
-import com.sc.entity.RsCompanyDetailExample;
 import java.math.BigDecimal;
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
+
+import com.sc.entity.RsCompanyDetail;
+import com.sc.entity.RsCompanyDetailExample;
+import com.sc.entity.RsJobDetail;
 
 public interface RsCompanyDetailMapper {
     int countByExample(RsCompanyDetailExample example);
@@ -20,7 +23,11 @@ public interface RsCompanyDetailMapper {
     List<RsCompanyDetail> selectByExample(RsCompanyDetailExample example);
 
     RsCompanyDetail selectByPrimaryKey(BigDecimal companyId);
-
+    
+  //根据姓名查询
+    //List<RsCompanyDetail> selectByName(String companyName,String companyCode);
+    List<RsCompanyDetail> selectByName(String companyName);
+    
     int updateByExampleSelective(@Param("record") RsCompanyDetail record, @Param("example") RsCompanyDetailExample example);
 
     int updateByExample(@Param("record") RsCompanyDetail record, @Param("example") RsCompanyDetailExample example);

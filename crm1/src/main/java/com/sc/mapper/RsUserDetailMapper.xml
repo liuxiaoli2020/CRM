@@ -108,6 +108,23 @@
     from RS_USER_DETAIL
     where STAFF_ID = #{staffId,jdbcType=DECIMAL}
   </select>
+  <!-- 按名称查询 -->
+ <!--  <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from RS_USER_DETAIL
+    where STAFF_NAME = #{staffName,jdbcType=DECIMAL}
+  </select> -->
+  
+  <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from RS_USER_DETAIL
+    <if test="STAFF_NAME != null">
+      where STAFF_NAME like '%${staffName}%'
+    </if>
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from RS_USER_DETAIL
     where STAFF_ID = #{staffId,jdbcType=DECIMAL}

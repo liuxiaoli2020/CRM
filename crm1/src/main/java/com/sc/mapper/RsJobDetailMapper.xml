@@ -93,6 +93,23 @@
     from RS_JOB_DETAIL
     where JOB_ID = #{jobId,jdbcType=DECIMAL}
   </select>
+  
+ <!--  <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from RS_JOB_DETAIL
+    where JOB_NAME = #{jobName,jdbcType=DECIMAL}
+  </select> -->
+  
+   <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from RS_JOB_DETAIL
+    <if test="JOB_NAME != null">
+    where JOB_NAME like '%${jobName}%'
+    </if>
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from RS_JOB_DETAIL
     where JOB_ID = #{jobId,jdbcType=DECIMAL}

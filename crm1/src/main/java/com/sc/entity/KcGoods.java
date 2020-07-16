@@ -6,7 +6,17 @@ import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class KcGoods implements Serializable {
-    private Long goodsId;
+	
+    @Override
+	public String toString() {
+		return "KcGoods [goodsId=" + goodsId + ", goodsName=" + goodsName + ", goodsKind=" + goodsKind
+				+ ", goodsExplain=" + goodsExplain + ", goodsUnit=" + goodsUnit + ", depotId=" + depotId
+				+ ", stockNumber=" + stockNumber + ", goodsCost=" + goodsCost + ", goodsSale=" + goodsSale
+				+ ", goodsMiddle=" + goodsMiddle + ", remarkMessage=" + remarkMessage + ", companyId=" + companyId
+				+ ", lastModifiedTime=" + lastModifiedTime + "]";
+	}
+
+	private Long goodsId;
 
     private String goodsName;
 
@@ -29,6 +39,7 @@ public class KcGoods implements Serializable {
     private String remarkMessage;
 
     private String companyId;
+
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date lastModifiedTime;
 
@@ -157,14 +168,4 @@ public class KcGoods implements Serializable {
     public void setLastModifiedTime(Date lastModifiedTime) {
         this.lastModifiedTime = lastModifiedTime;
     }
-
-	@Override
-	public String toString() {
-		return "KcGoods [goodsId=" + goodsId + ", goodsName=" + goodsName + ", goodsKind=" + goodsKind
-				+ ", goodsExplain=" + goodsExplain + ", goodsUnit=" + goodsUnit + ", depotId=" + depotId
-				+ ", stockNumber=" + stockNumber + ", goodsCost=" + goodsCost + ", goodsSale=" + goodsSale
-				+ ", goodsMiddle=" + goodsMiddle + ", remarkMessage=" + remarkMessage + ", companyId=" + companyId
-				+ ", lastModifiedTime=" + lastModifiedTime + "]";
-	}
-    
 }

@@ -3,7 +3,7 @@
 <mapper namespace="com.sc.mapper.CpDepotMapper" >
   <resultMap id="BaseResultMap" type="com.sc.entity.CpDepot" >
     <constructor >
-      <arg column="DEPOT_ID" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <idArg column="DEPOT_ID" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
       <arg column="DEPOT_NAME" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="REMARK_MESSAGE" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="COMPANY_ID" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -86,6 +86,16 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from CP_DEPOT
+    where DEPOT_ID = #{depotId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from CP_DEPOT
+    where DEPOT_ID = #{depotId,jdbcType=DECIMAL}
+  </delete>
   <delete id="deleteByExample" parameterType="com.sc.entity.CpDepotExample" >
     delete from CP_DEPOT
     <if test="_parameter != null" >
@@ -174,5 +184,31 @@
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sc.entity.CpDepot" >
+    update CP_DEPOT
+    <set >
+      <if test="depotName != null" >
+        DEPOT_NAME = #{depotName,jdbcType=VARCHAR},
+      </if>
+      <if test="remarkMessage != null" >
+        REMARK_MESSAGE = #{remarkMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        COMPANY_ID = #{companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifiedTime != null" >
+        LAST_MODIFIED_TIME = #{lastModifiedTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where DEPOT_ID = #{depotId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sc.entity.CpDepot" >
+    update CP_DEPOT
+    set DEPOT_NAME = #{depotName,jdbcType=VARCHAR},
+      REMARK_MESSAGE = #{remarkMessage,jdbcType=VARCHAR},
+      COMPANY_ID = #{companyId,jdbcType=VARCHAR},
+      LAST_MODIFIED_TIME = #{lastModifiedTime,jdbcType=TIMESTAMP}
+    where DEPOT_ID = #{depotId,jdbcType=DECIMAL}
   </update>
 </mapper>
