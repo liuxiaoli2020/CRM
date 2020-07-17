@@ -57,6 +57,7 @@
 		    <version>12.1.0.1-atlassian-hosted</version>
 		</dependency>
 		
+		<!-- 导入导出 -->
 		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
 		<dependency>
 		    <groupId>org.apache.poi</groupId>
@@ -75,6 +76,30 @@
 		    <artifactId>poi-ooxml-schemas</artifactId>
 		    <version>3.17</version>
 		</dependency>
+		
+		<!-- aop -->
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-web</artifactId>
+		    <version>2.2.5.RELEASE</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-aop -->
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-aop</artifactId>
+		    <version>2.2.5.RELEASE</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-core</artifactId>
+		    <version>5.2.1.RELEASE</version>
+		</dependency>
+				
+		
+		
 		
 		<!-- 分页插件依赖配置 -->
 		<dependency>

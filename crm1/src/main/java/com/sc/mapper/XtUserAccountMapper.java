@@ -14,7 +14,7 @@ public interface XtUserAccountMapper {
 
     
     //删除
-    int deleteByPrimaryKey(BigDecimal userId);
+    int deleteByPrimaryKey(Long userId);
 
     //添加
     int insert(XtUserAccount record);
@@ -24,7 +24,7 @@ public interface XtUserAccountMapper {
     List<XtUserAccount> selectByExample(XtUserAccountExample example);
 
     //通过id做查询
-    XtUserAccount selectByPrimaryKey(BigDecimal userId);
+    XtUserAccount selectByPrimaryKey(Long userId);
 
     int updateByExampleSelective(@Param("record") XtUserAccount record, @Param("example") XtUserAccountExample example);
 

@@ -40,7 +40,7 @@ public class XtUserAccountServiceImpl implements XtUserAccountService
 	}
 
 	@Override
-	public void deleteXtUserAccount(BigDecimal userId)
+	public void deleteXtUserAccount(Long userId)
 	{
 		if(userId!=null)
 		{
@@ -50,7 +50,7 @@ public class XtUserAccountServiceImpl implements XtUserAccountService
 	}
 
 	@Override
-	public XtUserAccount getXtUserAccount(BigDecimal userId)
+	public XtUserAccount getXtUserAccount(Long userId)
 	{
 		if(userId!=null)
 		{

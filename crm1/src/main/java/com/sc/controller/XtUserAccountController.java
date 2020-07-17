@@ -60,11 +60,11 @@ public class XtUserAccountController
 	//删除所有账户
 		@RequestMapping("/deletextuseraccountall.do")
 
-		public String deletextuseraccountall(BigDecimal[] ids){
+		public String deletextuseraccountall(Long[] ids){
 			System.out.println("进入批量删除:"+ids);
 			if(ids!=null&&ids.length>0)
 			{
-				for (BigDecimal id : ids)
+				for (Long id : ids)
 				{
 					xtUserAccountService.deleteXtUserAccount(id);
 				}

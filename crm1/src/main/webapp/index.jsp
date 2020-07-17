@@ -128,9 +128,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<dt><i class="Hui-iconfont">&#xe620;</i> 销售管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a data-href="customerdetailctrl/selectcustomerdetail.do" data-title="用户信息管理" href="javascript:void(0)">用户管理</a></li>
-					<li><a data-href="product-category.html" data-title="分类管理" href="javascript:void(0)">分类管理</a></li>
-					<li><a data-href="product-list.html" data-title="产品管理" href="javascript:void(0)">产品管理</a></li>
+					<li><a data-href="customerdetailctrl/selectcustomerdetail.do" data-title="用户信息管理" href="javascript:void(0)">客户信息管理</a></li>
+					<li><a data-href="customerctrl/customerlist.do" data-title="客户联系管理" href="javascript:void(0)">客户联系管理</a></li>
+					<li><a data-href="product-list.html" data-title="产品管理" href="javascript:void(0)">客户流失管理</a></li>
 				</ul>
 			</dd>
 		</dl>
