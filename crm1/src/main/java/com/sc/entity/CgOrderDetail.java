@@ -27,8 +27,44 @@ public class CgOrderDetail implements Serializable {
 
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date lastModifyDate;
+    
+    //拓展属性，用于查询-start
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date codDatemax;
+    
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date codDatemin;
 
-    private static final long serialVersionUID = 1L;
+	public Date getCodDatemax() {
+		return codDatemax;
+	}
+
+	public void setCodDatemax(Date codDatemax) {
+		this.codDatemax = codDatemax;
+	}
+
+	public Date getCodDatemin() {
+		return codDatemin;
+	}
+
+	public void setCodDatemin(Date codDatemin) {
+		this.codDatemin = codDatemin;
+	}
+	//拓展属性，用于查询-end
+
+	//拓展属性，批量删除-start
+    private Long[] orderDetailIds;
+
+    public Long[] getOrderDetailIds() {
+		return orderDetailIds;
+	}
+
+	public void setOrderDetailIds(Long[] orderDetailIds) {
+		this.orderDetailIds = orderDetailIds;
+	}
+	//拓展属性，批量删除-end
+
+	private static final long serialVersionUID = 1L;
 
     public CgOrderDetail(Long orderDetailId, Long orderId, Long productId, BigDecimal productPrice, Long productNum, String productWarehousing, Long staffId, String orderaterRemark, Long companyId, Date lastModifyDate) {
         this.orderDetailId = orderDetailId;

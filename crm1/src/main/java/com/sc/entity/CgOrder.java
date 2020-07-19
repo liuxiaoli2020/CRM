@@ -26,8 +26,45 @@ public class CgOrder implements Serializable {
 
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date orderDeliveryDate;
+    
+    //拓展属性，用于查询-start
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date orderDatemin;
+    
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date orderDatemax;
+    
 
-    private String orderDeliveryPalce;
+    public Date getOrderDatemin() {
+		return orderDatemin;
+	}
+
+	public void setOrderDatemin(Date orderDatemin) {
+		this.orderDatemin = orderDatemin;
+	}
+
+	public Date getOrderDatemax() {
+		return orderDatemax;
+	}
+
+	public void setOrderDatemax(Date orderDatemax) {
+		this.orderDatemax = orderDatemax;
+	}
+	//拓展属性，用于查询-end
+	
+	//拓展属性，用于批量删除-start
+	private Long[] orderIds;
+	
+	public Long[] getOrderIds() {
+		return orderIds;
+	}
+
+	public void setOrderIds(Long[] orderIds) {
+		this.orderIds = orderIds;
+	}
+	//拓展属性，用于批量删除-end
+	
+	private String orderDeliveryPalce;
 
     private String orderDeliveryMode;
 

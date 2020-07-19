@@ -23,8 +23,45 @@ public class CgPurchase implements Serializable {
 
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date lastModifyDate;
+    
+    //拓展属性，用于查询-Start
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date cpDatemin;
+    
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date cpDatemax;
 
-    private static final long serialVersionUID = 1L;
+    public Date getCpDatemin() {
+		return cpDatemin;
+	}
+
+	public void setCpDatemin(Date cpDatemin) {
+		this.cpDatemin = cpDatemin;
+	}
+
+	public Date getCpDatemax() {
+		return cpDatemax;
+	}
+
+	public void setCpDatemax(Date cpDatemax) {
+		this.cpDatemax = cpDatemax;
+	}
+	//拓展属性，用于查询-end
+
+	//拓展属性，用于批量删除-start
+    private Long[] purchaseIds;
+    
+	public Long[] getPurchaseIds() {
+		return purchaseIds;
+	}
+
+	public void setPurchaseIds(Long[] purchaseIds) {
+		this.purchaseIds = purchaseIds;
+	}
+
+	
+	//拓展属性，用于批量删除-end
+	private static final long serialVersionUID = 1L;
 
     public CgPurchase(Long purchaseId, Long productId, Date orderDeliveryDate, String purchaseState, Long staffId, String purchaseRemark, Long companyId, Date lastModifyDate) {
         this.purchaseId = purchaseId;

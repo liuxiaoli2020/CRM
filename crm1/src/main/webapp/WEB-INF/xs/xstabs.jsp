@@ -57,7 +57,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> 
 				<a title="添加"  onclick="member_edit('添加','../customerctrl/customeradd.do?customerId=${xccr.customerId}','4','','510')"  class="btn btn-primary radius">
 				<i class="Hui-iconfont">&#xe600;</i> 添加客户联系记录</a></span> <span class="r">共有数据：<strong>${pi.total }</strong> 条</span> </div>
-				<div class="mt-20">
+				<div class="mt-20"> 
 				<table class="table table-border table-bordered table-hover table-bg table-sort">
 					<thead>
 						<tr class="text-c">

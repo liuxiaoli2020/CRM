@@ -42,8 +42,45 @@ public class CgSupplier implements Serializable {
 
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date lastModifyDate;
+    
+    //拓展方法，用于查询-start
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date csDatemax;
+    
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date csDatemin;
+	
+	public Date getCsDatemax() {
+		return csDatemax;
+	}
 
-    private static final long serialVersionUID = 1L;
+	public void setCsDatemax(Date csDatemax) {
+		this.csDatemax = csDatemax;
+	}
+
+	public Date getCsDatemin() {
+		return csDatemin;
+	}
+
+	public void setCsDatemin(Date csDatemin) {
+		this.csDatemin = csDatemin;
+	}
+	//拓展方法，用于查询-end
+
+	//拓展方法，用于批量删除-start
+	private Long[] supplierIds;
+	
+    
+    public Long[] getSupplierIds() {
+		return supplierIds;
+	}
+
+	public void setSupplierIds(Long[] supplierIds) {
+		this.supplierIds = supplierIds;
+	}
+	//拓展方法，用于批量删除-end
+
+	private static final long serialVersionUID = 1L;
 
     public CgSupplier(Long supplierId, String supplierName, String supplierFname, String supplierContacts, String supplierFixed, String supplierMobile, String supplierFax, String supplierAddress, String supplierPostcode, String supplierEmail, String supplierBank, String supplierBankNum, String supplierCompanyHomepage, String supplierEffective, Long staffId, String supplierRemark, Long companyId, Date lastModifyDate) {
         this.supplierId = supplierId;
