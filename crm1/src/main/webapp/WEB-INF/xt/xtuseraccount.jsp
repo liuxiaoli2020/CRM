@@ -555,7 +555,7 @@ function datadel()
 		layer.msg('请至少选择一条数据！',{icon:5,time:1000});
 	}
 
-
+ 
 	 
 	
 }

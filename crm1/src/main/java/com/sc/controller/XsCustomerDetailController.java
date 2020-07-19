@@ -1,5 +1,7 @@
 package com.sc.controller;
 
+import java.util.Arrays;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +14,12 @@ import org.springframework.web.servlet.ModelAndView;
 import com.github.pagehelper.PageInfo;
 import com.sc.entity.Message;
 import com.sc.entity.RsUserDetail;
+import com.sc.entity.XsCustomerContact;
 import com.sc.entity.XsCustomerContactRecord;
 import com.sc.entity.XsCustomerDetail;
 import com.sc.entity.XsCustomerFeedback;
 import com.sc.service.XsCustomerContactRecordService;
+import com.sc.service.XsCustomerContactService;
 import com.sc.service.XsCustomerDetailService;
 import com.sc.service.XsCustomerFeedbackService;
 
@@ -28,6 +32,8 @@ public class XsCustomerDetailController {
 	XsCustomerContactRecordService xsCCRService;
     @Autowired
     XsCustomerFeedbackService xsCFService;
+    @Autowired
+    XsCustomerContactService xsCustomerContactService;
     
 	@RequestMapping("selectcustomerdetail.do")
     public ModelAndView selectCustomer(ModelAndView mav,
@@ -53,6 +59,20 @@ public class XsCustomerDetailController {
     	mav.addObject("customerdetail", customerdetail);
     	return mav;
     }
+	@RequestMapping("/goaddcustomer1.do")
+	public ModelAndView goAddCustomer1(ModelAndView mav,XsCustomerDetail customerdetail){
+    	System.out.println("进入添加页面了"+customerdetail);
+    	//修改
+    	if(customerdetail.getCustomerId()!=null){
+    		customerdetail=xsCustomerDetailService.getCustomer(customerdetail.getCustomerId());
+    	    
+    	}
+    	mav.setViewName("xs/customer-list-xiangxi");
+    	mav.addObject("customerdetail", customerdetail);
+    	return mav;
+    }
+	
+	
 	
 	@RequestMapping("/addcustomer.do")
 	@ResponseBody
@@ -74,6 +94,18 @@ public class XsCustomerDetailController {
     	return new Message("1", "success", "成功");
     }
 	
+	@RequestMapping("/deletecustomerall.do")
+	@ResponseBody
+	public String deleteCustomerAll(ModelAndView mav,Long[] ids){
+    	System.out.println("进入批量删除用户"+Arrays.toString(ids));
+    	if(ids!=null&&ids.length>0){
+    		for (Long id : ids) {
+    			xsCustomerDetailService.deleteCustomerDetail(id);
+			}
+    		
+    	}
+    	return "redirect:selectcustomerdetail.do";
+    }
 	@RequestMapping("/gocustomer.do")
 	public ModelAndView gocustomer(ModelAndView mav,XsCustomerDetail customerdetail,HttpSession session,@RequestParam(defaultValue="1") int pageNum,
 			@RequestParam(defaultValue="5") int pageSize){
@@ -93,7 +125,11 @@ public class XsCustomerDetailController {
 		
 		mav.addObject("p", page);
 		mav.addObject("connect", connect);*/
-		
+    	 XsCustomerContact xsCustomerContact=new XsCustomerContact();
+    	 xsCustomerContact.setCustomerId(customerdetail.getCustomerId());
+    	PageInfo<XsCustomerContact> page = xsCustomerContactService.selectCustomerContact(pageNum, pageSize, xsCustomerContact);
+     	mav.addObject("p", page);
+     	mav.addObject("customercontact", xsCustomerContact);
 		
 		//客户联系记录
     	 XsCustomerContactRecord xccr=new XsCustomerContactRecord();

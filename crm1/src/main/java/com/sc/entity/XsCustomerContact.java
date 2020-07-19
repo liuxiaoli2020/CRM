@@ -31,6 +31,41 @@ public class XsCustomerContact implements Serializable {
     private Long companyId;
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date lastModifyDate;
+    
+  //扩展属性,用于查询-start
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date datemin;
+    
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date datemax;
+
+    public Date getDatemin() {
+		return datemin;
+	}
+
+	public void setDatemin(Date datemin) {
+		this.datemin = datemin;
+	}
+
+	public Date getDatemax() {
+		return datemax;
+	}
+
+	public void setDatemax(Date datemax) {
+		this.datemax = datemax;
+	}
+	//扩展属性-end
+    //扩展属性，用于批量删除-start
+	private Long[] ids;
+	
+	public Long[] getIds() {
+		return ids;
+	}
+
+	public void setIds(Long[] ids) {
+		this.ids = ids;
+	}
+	////扩展属性，用于批量删除-end
 
     private static final long serialVersionUID = 1L;
 

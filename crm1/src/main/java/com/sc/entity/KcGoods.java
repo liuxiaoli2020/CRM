@@ -1,20 +1,44 @@
 package com.sc.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-public class KcGoods implements Serializable {
-	
+public class KcGoods implements Serializable {    
+
     @Override
 	public String toString() {
-		return "KcGoods [goodsId=" + goodsId + ", goodsName=" + goodsName + ", goodsKind=" + goodsKind
-				+ ", goodsExplain=" + goodsExplain + ", goodsUnit=" + goodsUnit + ", depotId=" + depotId
-				+ ", stockNumber=" + stockNumber + ", goodsCost=" + goodsCost + ", goodsSale=" + goodsSale
-				+ ", goodsMiddle=" + goodsMiddle + ", remarkMessage=" + remarkMessage + ", companyId=" + companyId
-				+ ", lastModifiedTime=" + lastModifiedTime + "]";
+		return "KcGoods [datemin=" + datemin + ", datemax=" + datemax + ", goodsId=" + goodsId + ", goodsName="
+				+ goodsName + ", goodsKind=" + goodsKind + ", goodsExplain=" + goodsExplain + ", goodsUnit=" + goodsUnit
+				+ ", depotId=" + depotId + ", stockNumber=" + stockNumber + ", goodsCost=" + goodsCost + ", goodsSale="
+				+ goodsSale + ", goodsMiddle=" + goodsMiddle + ", remarkMessage=" + remarkMessage + ", companyId="
+				+ companyId + ", lastModifiedTime=" + lastModifiedTime + "]";
 	}
+
+	//扩展属性，用于查询——start
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date datemin;    
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date datemax;    
+    
+	public Date getDatemin() {
+		return datemin;
+	}
+
+	public void setDatemin(Date datemin) {
+		this.datemin = datemin;
+	}
+
+	public Date getDatemax() {
+		return datemax;
+	}
+
+	public void setDatemax(Date datemax) {
+		this.datemax = datemax;
+	}
+	//扩展属性，用于查询——end
 
 	private Long goodsId;
 

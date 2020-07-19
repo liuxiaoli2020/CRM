@@ -17,7 +17,8 @@ spring:
     view:
       prefix: /WEB-INF/
       suffix: .jsp
-      
+  aop:
+    auto: true
 #数据源oracle数据库
   datasource:
     driver-class-name: oracle.jdbc.driver.OracleDriver

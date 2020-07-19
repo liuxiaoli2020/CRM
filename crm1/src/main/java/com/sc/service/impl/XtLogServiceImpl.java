@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.sc.entity.RsUserDetail;
 import com.sc.entity.XtLog;
 import com.sc.mapper.XtLogMapper;
 import com.sc.service.XtLogService;
@@ -37,6 +36,19 @@ public class XtLogServiceImpl implements XtLogService {
 		List<XtLog> list=this.xtLogMapper.selectByExample(null);
 		PageInfo<XtLog> pageInfo=new PageInfo<XtLog>(list);
 		return pageInfo;
+	}
+
+
+	@Override
+	public void deletextlog(Long logId) {
+		this.xtLogMapper.deleteByPrimaryKey(logId);
+		
+	}
+
+
+	@Override
+	public XtLog getXtLog(Long logId) {
+		return this.xtLogMapper.selectByPrimaryKey(logId);
 	}
 	
 

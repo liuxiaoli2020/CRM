@@ -30,85 +30,48 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 销售中心 <span class="c-gray en">&gt;</span> 用户管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
+	 <form action="customerdetailctrl/selectcustomerdetail.do" method="post" id="myform">
 	<div class="text-c"> 日期范围：
-		<input type="text" onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}' })" id="datemin" class="input-text Wdate" style="width:120px;">
+		<input type="text" value="<fmt:formatDate value="${customerdetail.datemin }" pattern="yyyy-MM-dd"/>" onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}' })" id="datemin" name="datemin" class="input-text Wdate" style="width:120px;">
 		-
-		<input type="text" onfocus="WdatePicker({ minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d' })" id="datemax" class="input-text Wdate" style="width:120px;">
-		<input type="text" class="input-text" style="width:250px" placeholder="输入会员名称、电话、邮箱" id="" name="">
-		<button type="submit" class="btn btn-success radius" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜用户</button>
+		<input type="text" value="<fmt:formatDate value="${customerdetail.datemax }" pattern="yyyy-MM-dd"/>" onfocus="WdatePicker({ minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d' })" id="datemax" name="datemax" class="input-text Wdate" style="width:120px;">
+		<input type="text" value="${customerdetail.customerName }" class="input-text" style="width:250px" placeholder="输入用户名称" id="customerName" name="customerName">
+		<input type="hidden" name="pageNum" id="pageNum" value="${p.pageNum }">
+		<button type="submit" class="btn btn-success radius" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+		<button type="reset" class="btn btn-success radius" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 重置</button>
 	</div>
-	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a href="javascript:;" onclick="member_add('添加用户','member-add.html','','510')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加用户</a></span> <span class="r">共有数据：<strong>88</strong> 条</span> </div>
+	</form>
+	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
+	 <a href="javascript:;" onclick="member_add('添加客户','customerdetailctrl/goaddcustomer.do','','510')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加客户</a></span>
+	  <span class="r">共有数据：<strong>${p.total}</strong> 条</span> </div>
 	<div class="mt-20">
 	<table class="table table-border table-bordered table-hover table-bg table-sort">
 		<thead>
 			<tr class="text-c">
 				<th width="25"><input type="checkbox" name="" value=""></th>
 				    <th width="70">ID</th>
-					<th width="80">名称</th>
-					<th width="200">属性</th>
-					<th width="120">网站</th>
-					<th>股票代码</th>
-					<th>上级单位</th>
-					<th>所有者</th>
-					<th>员工数</th>
-					<th>行业编号</th>
-					<th>客户类型</th>
-					<th>客户状态</th>
-					<th>客户来源</th>
-					<th>负责人编号</th>
-					<th>固定电话</th>
-					<th>移动电话</th>
-					<th>客户传真</th>
-					<th>开户银行</th>
-					<th>下次联系时间</th>
-					<th>电子编码</th>
-					<th>SIC编码</th>
-					<th>支付方式</th>
-					<th>是否有效</th>
-					<th>详细地址</th>
-					<th>备注信息</th>
-					<th>公司编号</th>
-					<th>最后修改时间</th>
+					<th width="80">客户名称</th>
+                    <th width="120">网站</th>
+                    <th width="160">客户详细</th>
+					<th width="150">最后修改时间</th>
 				    <th width="100">操作</th>
 			</tr>
-			
 		</thead>
 		<tbody>
 		 <c:forEach items="${p.list }" var="customerdetail">
 			<tr class="text-c">
-				<td><input type="checkbox" value="${customerdetail.customerId }" name=""></td>
-				<td>${customerdetail.customerId }</td>
-				<td><u style="cursor:pointer" class="text-primary" onclick="member_show('张三','member-show.html','10001','360','400')">${customerdetail.customerName }</u></td>
-				<td>${customerdetail.customerAttr }</td>
+				<td><input type="checkbox" value="${customerdetail.customerId }" name="ids"></td>
+				<td>${customerdetail.customerId }</td>>
+				<td><u style="cursor:pointer" class="text-primary" >${customerdetail.customerName }</u></td>
 				<td>${customerdetail.website }</td>
-				<td>${customerdetail.stockCode }</td>
-				<td>${customerdetail.unitHigher }</td>
-				<td>${customerdetail.owner }</td>
-				<td>${customerdetail.numberEmployee }</td>
-				<td>${customerdetail.industryId }</td>
-				<td>${customerdetail.customerType }</td>
-				<td>${customerdetail.customerState }</td>
-				<td>${customerdetail.customerSource }</td>
-				<td>${customerdetail.headId }</td>
-				<td>${customerdetail.phoneFixed }</td>
-				<td>${customerdetail.phoneMove }</td>
-				<td>${customerdetail.customerFaxs }</td>
-				<td>${customerdetail.bank }</td>
-				<td>${customerdetail.bankAccount }</td>
-				<td>${customerdetail.nextContactDate }</td>
-				<td>${customerdetail.email }</td>
-				<td>${customerdetail.sicCode }</td>
-				<td>${customerdetail.payWay }</td>
-				<td>${customerdetail.isEffective }</td>
-				<td class="text-l">${customerdetail.addressDetail }</td>
-				<td>${customerdetail.companyId }</td>
-				<td>${customerdetail.lastModifyDate }</td>
+				<td><a title="详细信息" href="javascript:;" onclick="member_detail('客户详细','customerdetailctrl/goaddcustomer1.do','${customerdetail.customerId }','','350')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe616;</i></a> 
+				
+				<td><fmt:formatDate value="${customerdetail.lastModifyDate }" pattern="yyyy-MM-dd HH:mm:ss"/></td>>
 				<td class="td-manage">
-				<a title="详细信息" href="gocustomer.do?customerId=${customerdetail.customerId }" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> 
+				<a title="详细信息" href="gocustomer.do?customerId=${customerdetail.customerId }" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6c6;</i></a> 
 				<a style="text-decoration:none" onClick="member_stop(this,'10001')" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a> 
-				<a title="编辑" href="javascript:;" onclick="member_edit('编辑','member-add.html','4','','510')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> 
-				<a style="text-decoration:none" class="ml-5" onClick="change_password('修改密码','change-password.html','10001','600','270')" href="javascript:;" title="修改密码"><i class="Hui-iconfont">&#xe63f;</i></a> 
-				<a title="删除" href="javascript:;" onclick="member_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+				<a title="编辑" href="javascript:;" onclick="member_edit('编辑用户','customerdetailctrl/goaddcustomer.do','${customerdetail.customerId }','','350')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>  
+				<a title="删除" href="javascript:;" onclick="member_del(this,'${customerdetail.customerId }')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
 			</tr>
 			</c:forEach>
 		</tbody>
@@ -145,59 +108,44 @@ function member_add(title,url,w,h){
 function member_show(title,url,id,w,h){
 	layer_show(title,url,w,h);
 }
-/*用户-停用*/
-function member_stop(obj,id){
-	layer.confirm('确认要停用吗？',function(index){
-		$.ajax({
-			type: 'POST',
-			url: '',
-			dataType: 'json',
-			success: function(data){
-				$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_start(this,id)" href="javascript:;" title="启用"><i class="Hui-iconfont">&#xe6e1;</i></a>');
-				$(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">已停用</span>');
-				$(obj).remove();
-				layer.msg('已停用!',{icon: 5,time:1000});
-			},
-			error:function(data) {
-				console.log(data.msg);
-			},
-		});		
-	});
-}
 
-/*用户-启用*/
-function member_start(obj,id){
-	layer.confirm('确认要启用吗？',function(index){
-		$.ajax({
-			type: 'POST',
-			url: '',
-			dataType: 'json',
-			success: function(data){
-				$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_stop(this,id)" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a>');
-				$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
-				$(obj).remove();
-				layer.msg('已启用!',{icon: 6,time:1000});
-			},
-			error:function(data) {
-				console.log(data.msg);
-			},
-		});
-	});
-}
 /*用户-编辑*/
 function member_edit(title,url,id,w,h){
 	layer_show(title,url,w,h);
 }
-/*密码-修改*/
-function change_password(title,url,id,w,h){
-	layer_show(title,url,w,h);	
+/*客户-详细*/
+function member_detail(title,url,id,w,h){
+	url=url+"?customerId="+id;
+	layer_show(title,url,w,h);
 }
-/*用户-删除*/
+
+//分页
+function gopage(pageNum){
+   $("#pageNum").val(pageNum);
+   $("#myform").submit();
+}
+
+//批量删除
+function datadel(){
+   
+   $("input[name='ids']")
+   
+   if($("input[name='ids']:checked").length>=1){
+   
+	   layer.confirm('确认要删除这些数据吗？',function(index){
+	      $("#myform1").submit();
+	   });
+   }else{
+       layer.msg('请至少选择一条数据!',{icon:5,time:1000});
+   }
+}
+/*客户-删除*/
 function member_del(obj,id){
 	layer.confirm('确认要删除吗？',function(index){
 		$.ajax({
 			type: 'POST',
-			url: '',
+			url: 'customerdetailctrl/deletecustomer.do',
+			data: "customerId="+id,
 			dataType: 'json',
 			success: function(data){
 				$(obj).parents("tr").remove();

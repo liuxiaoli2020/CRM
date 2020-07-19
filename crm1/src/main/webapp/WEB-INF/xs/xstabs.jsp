@@ -43,85 +43,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<form class="form form-horizontal" id="form-article-add">
 		<div id="tab-system" class="HuiTab">
 			<div class="tabBar cl">
-				<span>客户联系人</span>
+				
 				<span>客户联系记录</span>
 				<span>客户反馈</span>
-			</div>
-			<!-- 客户联系人 -->
-			<div class="tabCon">
-				<div class="row cl">
-					<label class="form-label col-xs-4 col-sm-2">
-						<span class="c-red">*</span>
-						网站名称：</label>
-					<div class="formControls col-xs-8 col-sm-9">
-						<input type="text" id="website-title" placeholder="控制在25个字、50个字节以内" value="" class="input-text">
-					</div>
-				</div>
-				<div class="row cl">
-					<label class="form-label col-xs-4 col-sm-2">
-						<span class="c-red">*</span>
-						关键词：</label>
-					<div class="formControls col-xs-8 col-sm-9">
-						<input type="text" id="website-Keywords" placeholder="5个左右,8汉字以内,用英文,隔开" value="" class="input-text">
-					</div>
-				</div>
-				<div class="row cl">
-					<label class="form-label col-xs-4 col-sm-2">
-						<span class="c-red">*</span>
-						描述：</label>
-					<div class="formControls col-xs-8 col-sm-9">
-						<input type="text" id="website-description" placeholder="空制在80个汉字，160个字符以内" value="" class="input-text">
-					</div>
-				</div>
-				<div class="row cl">
-					<label class="form-label col-xs-4 col-sm-2">
-						<span class="c-red">*</span>
-						css、js、images路径配置：</label>
-					<div class="formControls col-xs-8 col-sm-9">
-						<input type="text" id="website-static" placeholder="默认为空，为相对路径" value="" class="input-text">
-					</div>
-				</div>
-				<div class="row cl">
-					<label class="form-label col-xs-4 col-sm-2">
-						<span class="c-red">*</span>
-						上传目录配置：</label>
-					<div class="formControls col-xs-8 col-sm-9">
-						<input type="text" id="website-uploadfile" placeholder="默认为uploadfile" value="" class="input-text">
-					</div>
-				</div>
-				<div class="row cl">
-					<label class="form-label col-xs-4 col-sm-2">
-						<span class="c-red">*</span>
-						底部版权信息：</label>
-					<div class="formControls col-xs-8 col-sm-9">
-						<input type="text" id="website-copyright" placeholder="&copy; 2016 H-ui.net" value="" class="input-text">
-					</div>
-				</div>
-				<div class="row cl">
-					<label class="form-label col-xs-4 col-sm-2">备案号：</label>
-					<div class="formControls col-xs-8 col-sm-9">
-						<input type="text" id="website-icp" placeholder="京ICP备00000000号" value="" class="input-text">
-					</div>
-				</div>
-				<div class="row cl">
-					<label class="form-label col-xs-4 col-sm-2">统计代码：</label>
-					<div class="formControls col-xs-8 col-sm-9">
-						<textarea class="textarea"></textarea>
-					</div>
-				</div>
 			</div>
 			
             <!-- 客户联系记录 -->
 			<div class="tabCon">
 				<div class="page-container">
-				<form action="likeselect.do" method="post" >
-				<div class="text-c"> 联系标题：
-					<input type="text" class="input-text" style="width:250px" placeholder="输入联系标题" id="contactHeading" name="contactHeading">
-					
-					<button type="submit" class="btn btn-success radius" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
-					
-				</div>
-				</form>
+				
 				<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l">
 				<a href="javascript:;" id="del_model" class="btn btn-danger radius">
 				<i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> 
@@ -261,6 +191,23 @@ $(function(){
 });
 </script>
 <script type="text/javascript">
+	function member_del(obj,id){
+	layer.confirm('确认要删除吗？',function(index){
+		$.ajax({
+			type: 'POST',
+			url: '../customercontactctrl/deletecustomercontact.do',
+			data: "contactId="+id,
+			dataType: 'json',
+			success: function(data){
+				$(obj).parents("tr").remove();
+				layer.msg('已删除!',{icon:1,time:1000});
+			},
+			error:function(data) {
+				console.log(data.msg);
+			},
+		});		
+	});
+}
 	
 	/*批量删除*/
 	$("#del_model").click(function() {

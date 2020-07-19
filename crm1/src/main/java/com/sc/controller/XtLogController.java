@@ -1,4 +1,4 @@
-/*package com.sc.controller;
+package com.sc.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,18 +13,25 @@ import com.sc.service.XtLogService;
 @Controller
 @RequestMapping("/logctrl")
 public class XtLogController {
-   @Autowired
+
+	@Autowired
 	XtLogService xtLogService;
-	
-   @RequestMapping("/findall.do")
-   public ModelAndView findAll(ModelAndView mav,
+	@RequestMapping("/selectpage.do")
+	public ModelAndView selectpage(ModelAndView mav,
 			@RequestParam(defaultValue="1") int pageNum,
-			@RequestParam(defaultValue="5") int pageSize) {
-	
-	   PageInfo<XtLog> pageInfo=this.xtLogService.findall(pageNum, pageSize);
-	   	mav.addObject("pi", pageInfo);
-	   	mav.setViewName("log/log");
+			@RequestParam(defaultValue="5") int pageSize){
+		System.out.println("1111111");
+    	PageInfo<XtLog> pageInfo=this.xtLogService.findall(pageNum, pageSize);
+    	mav.addObject("pi", pageInfo);
+    	mav.setViewName("xt/xtlog");
 		return mav;
+	}
+	
+	 @RequestMapping("/xtlogdelete.do")
+	   	public ModelAndView staffdelete(ModelAndView mav,Long logId){
+	       	this.xtLogService.deletextlog(logId);
+	       	mav.setViewName("redirect:selectpage.do");
+	   		return mav;
+	   	}
+	
 }
-}
-*/

@@ -130,7 +130,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<dd>
 				<ul>
 					<li><a data-href="customerdetailctrl/selectcustomerdetail.do" data-title="用户信息管理" href="javascript:void(0)">客户信息管理</a></li>
-					<li><a data-href="xsuserlossctrl/selectpage.do" data-title="产品管理" href="javascript:void(0)">客户流失管理</a></li>
+					<li><a data-href="customercontactctrl/selectcustomercontact.do" data-title="客户联系人信息管理" href="javascript:void(0)">客户联系人信息管理</a></li>
+					<li><a data-href="salesdetailctrl/selectsalesdetail.do" data-title="销售单详情管理" href="javascript:void(0)">销售单详情信息管理</a></li>
+					<li><a data-href="salesoutctrl/selectsalesout.do" data-title="销售单管理" href="javascript:void(0)">销售单信息管理</a></li>
+					<li><a data-href="customerctrl/customerlist.do" data-title="客户联系管理" href="javascript:void(0)">客户联系管理</a></li>
+					<li><a data-href="xsuserlossctrl/selectpage.do" data-title="客户流失管理" href="javascript:void(0)">客户流失管理</a></li>
+				
 				</ul>
 			</dd>
 		</dl>
@@ -148,7 +153,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<dt><i class="Hui-iconfont">&#xe620;</i> 系统管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 				<dd>
 					<ul>
-						<li><a data-href="logctrl/findall.do" data-title="日志管理" href="javascript:void(0)">日志管理</a></li>
+						<li><a data-href="logctrl/selectpage.do" data-title="日志管理" href="javascript:void(0)">日志管理</a></li>
 						
 				</ul>
 			</dd>

@@ -28,6 +28,7 @@ public class LoginController {
 	
 	
 	//登录认证失败
+	
 	@RequestMapping("/login.do")//完整url地址是：loginctrl/login.do
 	public ModelAndView login(ModelAndView mav,HttpServletRequest req){//如果请求的参数名称和u对象中的属性名称一致的情况，就会自动赋值
 		System.out.println("用户登录认证失败");
@@ -52,8 +53,7 @@ public class LoginController {
 		mav.setViewName("redirect:../login.jsp?isfail="+fail);
 		
 		return mav;
-	}
-	
+	}  
 	@RequestMapping("/main.do")
     public ModelAndView main(ModelAndView mav,HttpSession session) {
 		System.out.println("用户登录成功");

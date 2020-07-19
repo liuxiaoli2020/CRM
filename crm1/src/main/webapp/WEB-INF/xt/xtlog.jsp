@@ -24,58 +24,39 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
 	<script>DD_belatedPNG.fix('*');</script>
 	<![endif]-->
-	<title>客户流失管理</title>
+	<title>系统日志管理</title>
 	</head>
 	<body>
-	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 销售管理 <span class="c-gray en">&gt;</span> 客户流失管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 系统管理 <span class="c-gray en">&gt;</span> 日志管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 	<div class="page-container">
-		 <form action="likeselect.do" method="post" >
-		<div class="text-c"> 客户名称：
-			<input type="text" class="input-text" style="width:250px" placeholder="输入职务名称" id="jobName" name="jobName">
-			
-			<button type="submit" class="btn btn-success radius" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
-			
-		</div>
-		</form>
-		
-		<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l">
-		<a href="javascript:;" id="del_model" class="btn btn-danger radius">
-		<i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> 
-		<a title="添加"  onclick="member_edit('添加','jobupdate.do','','','510')"  class="btn btn-primary radius">
-		<i class="Hui-iconfont">&#xe600;</i> 添加职务</a></span> <span class="r">共有数据：<strong>${pi.total }</strong> 条</span> </div>
 		<div class="mt-20">
 		<table class="table table-border table-bordered table-hover table-bg table-sort">
 			<thead>
 				<tr class="text-c">
 					<th width="25"><input type="checkbox" name="" value=""></th>
-					<th >客户流失编号</th>
-					<th >客户编号</th>
-					<th >操作人员编号</th>
-					<th >处理方式</th>
-					<th >处理措施</th>
-					<th >是否流失</th>
+					<th >日志编号</th>
+					<th >用户编号</th>
+					<th >访问ip</th>
+					<th >权限</th>
+					<th >访问时间</th>
 					<th >公司编号</th>
-					<th >最后修改时间</th>
 					<th>操作</th>
 				</tr>
 			</thead>
 			<tbody>
-			    <c:forEach items="${pi.list }" var="u">
+			    <c:forEach items="${pi.list }" var="c">
 			   
 				<tr class="text-c">
-					<td><input type="checkbox" value="${u.customerLossId}" name="subChk"></td>
-					<td>${u.customerLossId}</td>
-					<td>${u.customerId}</td>
-					<td>${u.operatorId}</td>
-					<td>${u.treatmentMode}</td>
-					<td>${u.treatmentMeasures}</td>
-					<td>${u.isLoss}</td>
-					<td>${u.company}</td>
-					<td>${u.lastModifyData}</td>
+					<td><input type="checkbox" value="${c.logId}" name="subChk"></td>
+					<td>${c.logId}</td>
+					<td>${c.userId}</td>
+					<td>${c.accessIp}</td>
+					<td>${c.power}</td>
+					<td>${c.accessDate}</td>
+					<td>${c.companyId}</td>
 					<td class="td-manage">
-					 <a title="编辑"  href="gouser.do?customerLossId=${u.customerLossId}" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
-					 <a title="删除" href="jobdelete.do?jobId=${j.jobId}" onclick="return confirm('确定删除？')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
-					 &#xe728;</td>
+					 
+					 <a title="删除" href="xtlogdelete.do?logId=${c.logId}" onclick="return confirm('确定删除？')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
 				</tr>
 				</c:forEach>
 			</tbody>
@@ -95,6 +76,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript" src="../lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
 	<script type="text/javascript" src="../lib/laypage/1.2/laypage.js"></script>
 	<script type="text/javascript">
+	
 	/*批量删除*/
 	$("#del_model").click(function() {
 		if(confirm("确定要删除所选项目？")) {
@@ -113,7 +95,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			});
 		}
 	});
-	
 	
 	
 	/*用户-编辑*/
