@@ -12,10 +12,10 @@ public class BgPrivateCalender implements Serializable {
 
     private String calendarTitle;
 
-    @DateTimeFormat(pattern="yyyy-mm-dd")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date calendarStart;
 
-    @DateTimeFormat(pattern="hh:mm:ss")
+    @DateTimeFormat(pattern="HH:mm:ss")
     private Date calendarTime;
 
     private String personNumber;
@@ -24,9 +24,34 @@ public class BgPrivateCalender implements Serializable {
 
     private Long companyId;
 
-    @DateTimeFormat(pattern="yyyy-mm-dd hh:mm:ss")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date lastModifyDate;
 
+    //扩展属性,用于查询-start
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date datemin;
+    
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date datemax; 
+    
+    public Date getDatemin() {
+		return datemin;
+	}
+
+	public void setDatemin(Date datemin) {
+		this.datemin = datemin;
+	}
+
+	public Date getDatemax() {
+		return datemax;
+	}
+
+	public void setDatemax(Date datemax) {
+		this.datemax = datemax;
+	}
+    //扩展属性,用于查询-end
+
+    
     private static final long serialVersionUID = 1L;
 
     public BgPrivateCalender(Long calendarId, String calendarCategory, String calendarTitle, Date calendarStart, Date calendarTime, String personNumber, String calendarDetail, Long companyId, Date lastModifyDate) {

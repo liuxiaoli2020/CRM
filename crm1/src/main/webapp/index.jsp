@@ -143,8 +143,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			      <dt><i class="Hui-iconfont">&#xe62e;</i> 办公管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			      <dd>
 			        <ul>
-			          <li><a data-href="msgctrl/selectpage.do" data-title="短消息管理" href="javascript:;">短消息管理</a></li>
-			          <li><a data-href="taskctrl/selectpage.do" data-title="考核任务管理" href="javascript:;">考核任务管理</a></li>
+			           <li><a data-href="bgCheckTaskctrl/selecttask.do" data-title="考核任务管理" href="javascript:;">考核任务管理</a></li>
+			          <li><a data-href="bgMsgctrl/selectmsg.do" data-title="短消息管理" href="javascript:;">短消息管理</a></li>
+			          <li><a data-href="bgMsgDetailctrl/selectmdetail.do" data-title="短消息详情管理" href="javascript:;">短消息详情管理</a></li>
+			          <li><a data-href="bgPrivateCalenderctrl/selectpc.do" data-title="个人日程管理" href="javascript:;">个人日程管理</a></li>
+			          <li><a data-href="bgTaskTargetctrl/selecttarget.do" data-title="考核指标管理" href="javascript:;">考核指标管理</a></li>
+			          <li><a data-href="bgTaskDetailctrl/selecttdetail.do" data-title="任务详情管理" href="javascript:;">任务详情管理</a></li>
 			      </ul>
 			    </dd>
 			  </dl>

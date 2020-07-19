@@ -8,7 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class BgCheckTask implements Serializable {
     private Long taskId;
 
-    private Long taskTitle;
+    private String taskTitle;
 
     private String taskDetail;
 
@@ -22,12 +22,48 @@ public class BgCheckTask implements Serializable {
 
     private Long companyId;
 
-    @DateTimeFormat(pattern="yyyy-mm-dd hh:mm:ss")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date lastModifyDate;
 
-    private static final long serialVersionUID = 1L;
+    //扩展属性,用于查询-start
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date datemin;
+    
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date datemax; 
+    
+    public Date getDatemin() {
+		return datemin;
+	}
 
-    public BgCheckTask(Long taskId, Long taskTitle, String taskDetail, String taskPublisher, String taskTarget, String taskStatr, String taskFinish, Long companyId, Date lastModifyDate) {
+	public void setDatemin(Date datemin) {
+		this.datemin = datemin;
+	}
+
+	public Date getDatemax() {
+		return datemax;
+	}
+
+	public void setDatemax(Date datemax) {
+		this.datemax = datemax;
+	}
+    //扩展属性,用于查询-end
+	
+/*    //扩展属性,用于批量删除-start
+    private Long[] ids;
+    
+    public Long[] getIds() {
+		return ids;
+	}
+
+	public void setIds(Long[] ids) {
+		this.ids = ids;
+	}
+    //扩展属性,用于批量删除-end
+*/
+	private static final long serialVersionUID = 1L;
+
+    public BgCheckTask(Long taskId, String taskTitle, String taskDetail, String taskPublisher, String taskTarget, String taskStatr, String taskFinish, Long companyId, Date lastModifyDate) {
         this.taskId = taskId;
         this.taskTitle = taskTitle;
         this.taskDetail = taskDetail;
@@ -51,12 +87,12 @@ public class BgCheckTask implements Serializable {
         this.taskId = taskId;
     }
 
-    public Long getTaskTitle() {
+    public String getTaskTitle() {
         return taskTitle;
     }
 
-    public void setTaskTitle(Long taskTitle) {
-        this.taskTitle = taskTitle;
+    public void setTaskTitle(String taskTitle) {
+        this.taskTitle = taskTitle == null ? null : taskTitle.trim();
     }
 
     public String getTaskDetail() {
@@ -114,13 +150,4 @@ public class BgCheckTask implements Serializable {
     public void setLastModifyDate(Date lastModifyDate) {
         this.lastModifyDate = lastModifyDate;
     }
-
-	@Override
-	public String toString() {
-		return "BgCheckTask [taskId=" + taskId + ", taskTitle=" + taskTitle + ", taskDetail=" + taskDetail
-				+ ", taskPublisher=" + taskPublisher + ", taskTarget=" + taskTarget + ", taskStatr=" + taskStatr
-				+ ", taskFinish=" + taskFinish + ", companyId=" + companyId + ", lastModifyDate=" + lastModifyDate
-				+ "]";
-	}
-    
 }

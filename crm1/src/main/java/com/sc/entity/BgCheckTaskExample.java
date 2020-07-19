@@ -175,52 +175,62 @@ public class BgCheckTaskExample {
             return (Criteria) this;
         }
 
-        public Criteria andTaskTitleEqualTo(Long value) {
+        public Criteria andTaskTitleEqualTo(String value) {
             addCriterion("TASK_TITLE =", value, "taskTitle");
             return (Criteria) this;
         }
 
-        public Criteria andTaskTitleNotEqualTo(Long value) {
+        public Criteria andTaskTitleNotEqualTo(String value) {
             addCriterion("TASK_TITLE <>", value, "taskTitle");
             return (Criteria) this;
         }
 
-        public Criteria andTaskTitleGreaterThan(Long value) {
+        public Criteria andTaskTitleGreaterThan(String value) {
             addCriterion("TASK_TITLE >", value, "taskTitle");
             return (Criteria) this;
         }
 
-        public Criteria andTaskTitleGreaterThanOrEqualTo(Long value) {
+        public Criteria andTaskTitleGreaterThanOrEqualTo(String value) {
             addCriterion("TASK_TITLE >=", value, "taskTitle");
             return (Criteria) this;
         }
 
-        public Criteria andTaskTitleLessThan(Long value) {
+        public Criteria andTaskTitleLessThan(String value) {
             addCriterion("TASK_TITLE <", value, "taskTitle");
             return (Criteria) this;
         }
 
-        public Criteria andTaskTitleLessThanOrEqualTo(Long value) {
+        public Criteria andTaskTitleLessThanOrEqualTo(String value) {
             addCriterion("TASK_TITLE <=", value, "taskTitle");
             return (Criteria) this;
         }
 
-        public Criteria andTaskTitleIn(List<Long> values) {
+        public Criteria andTaskTitleLike(String value) {
+            addCriterion("TASK_TITLE like", value, "taskTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskTitleNotLike(String value) {
+            addCriterion("TASK_TITLE not like", value, "taskTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskTitleIn(List<String> values) {
             addCriterion("TASK_TITLE in", values, "taskTitle");
             return (Criteria) this;
         }
 
-        public Criteria andTaskTitleNotIn(List<Long> values) {
+        public Criteria andTaskTitleNotIn(List<String> values) {
             addCriterion("TASK_TITLE not in", values, "taskTitle");
             return (Criteria) this;
         }
 
-        public Criteria andTaskTitleBetween(Long value1, Long value2) {
+        public Criteria andTaskTitleBetween(String value1, String value2) {
             addCriterion("TASK_TITLE between", value1, value2, "taskTitle");
             return (Criteria) this;
         }
 
-        public Criteria andTaskTitleNotBetween(Long value1, Long value2) {
+        public Criteria andTaskTitleNotBetween(String value1, String value2) {
             addCriterion("TASK_TITLE not between", value1, value2, "taskTitle");
             return (Criteria) this;
         }

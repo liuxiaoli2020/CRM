@@ -14,9 +14,33 @@ public class BgTaskTarget implements Serializable {
 
     private Long companyId;
 
-    @DateTimeFormat(pattern="yyyy-mm-dd hh:mm:ss")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date lastModifyDate;
 
+    //扩展属性,用于查询-start
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date datemin;
+    
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date datemax; 
+    
+    public Date getDatemin() {
+		return datemin;
+	}
+
+	public void setDatemin(Date datemin) {
+		this.datemin = datemin;
+	}
+
+	public Date getDatemax() {
+		return datemax;
+	}
+
+	public void setDatemax(Date datemax) {
+		this.datemax = datemax;
+	}
+    //扩展属性,用于查询-end
+    
     private static final long serialVersionUID = 1L;
 
     public BgTaskTarget(Long targetId, String taskTarget, String targetRemark, Long companyId, Date lastModifyDate) {
