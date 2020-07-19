@@ -7,7 +7,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-   <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 	<meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -24,49 +24,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
 	<script>DD_belatedPNG.fix('*');</script>
 	<![endif]-->
-	<title>员工信息管理</title>
+	<title>客户联系管理</title>
 	</head>
 	<body>
-	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 人事管理 <span class="c-gray en">&gt;</span> 公司信息管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 人事管理 <span class="c-gray en">&gt;</span> 员工信息管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 	<div class="page-container">
 		<form action="likeselect.do" method="post" >
-		<div class="text-c"> 公司名称：
-			<input type="text" class="input-text" style="width:250px" placeholder="输入公司名称" id="companyName" name="companyName">
-			<!-- 公司代码：
-			<input type="text" class="input-text" style="width:250px" placeholder="输入公司代码" id="companyCode" name="companyCode"> -->
-			<button type="submit" class="btn btn-success radius" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜公司</button>
+		<div class="text-c"> 部门名称：
+			<input type="text" class="input-text" style="width:250px" placeholder="输入部门名称" id="branchName" name="branchName">
 			
-			<a title="导入公司信息"  onclick="member_edit('导入公司信息','importstaff.do','','','200')"  class="btn btn-primary radius">
-	    	<i class="Hui-iconfont">&#xe645;</i> 导入公司信息</a>
-	    	<c:if test="${not empty isback }">
-               <a title="返回所有查询"  href="selectpage.do" class="btn btn-primary radius"> 返回所有查询</a>
-            </c:if>
-	    	
+			<button type="submit" class="btn btn-success radius" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜部门</button>
+			
 		</div>
 		</form>
 		<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l">
 		<a href="javascript:;" id="del_model" class="btn btn-danger radius">
-		<i class="Hui-iconfont">&#xe6e2;</i> 批量注销公司</a> 
-		<a title="注册"  onclick="member_edit('注册','companyupdate.do','4','','510')"  class="btn btn-primary radius">
-		<i class="Hui-iconfont">&#xe600;</i> 注册公司</a></span> <span class="r">共有数据：<strong>${pi.total }</strong> 条</span> </div>
+		<i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> 
+		<a title="添加"  onclick="member_edit('添加','customeradd.do','4','','510')"  class="btn btn-primary radius">
+		<i class="Hui-iconfont">&#xe600;</i> 添加客户联系记录</a></span> <span class="r">共有数据：<strong>${pi.total }</strong> 条</span> </div>
 		<div class="mt-20">
 		<table class="table table-border table-bordered table-hover table-bg table-sort">
 			<thead>
 				<tr class="text-c">
 					<th width="25"><input type="checkbox" name="" value=""></th>
+					<th >进货记录编号</th>
+					<th >联系标题</th>
+					<th >联系时间</th>
+					<th >客户编号</th>
+					<th >联系内容</th>
 					<th >公司编号</th>
-					<th >公司名称</th>
-					<th>公司代码</th>
-					<th >邮箱</th>
-					<th >联系人</th>
-					<th >公司地址</th>
-					<th >固定电话</th>
-					<th >移动电话</th>
-					<th>传真</th>
-					<th >开户银行</th>
-					<th >银行账户</th>
-					<th >是否有效</th>
-					<th >备注信息</th>
 					<th >最后修改时间</th>
 					<th>操作</th>
 				</tr>
@@ -75,27 +61,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    <c:forEach items="${pi.list }" var="c">
 			   
 				<tr class="text-c">
-					<td><input type="checkbox" value="${c.companyId}" name="subChk"></td>
+					<td><input type="checkbox" value="${c.contactRecordId}" name="subChk"></td>
+					<td>${c.contactRecordId}</td>
+					<td>${c.contactHeading}</td>
+					<td>${c.contactDate}</td>
+					<td>${c.customerId}</td>
+					<td>${c.contactContent}</td>
 					<td>${c.companyId}</td>
-					<td>${c.companyName}</td>
-					<td>${c.companyCode}</td>
-					<td>${c.email}</td>
-					<td>${c.contacts}</td>
-					<td>${c.companyAddress}</td>
-					<td>${c.fixedTel}</td>
-					<td>${c.mobileTel}</td>
-					<td>${c.fax}</td>
-					<td>${c.bank}</td>
-					<td>${c.bankAccount}</td>
-					<td>${c.effect}</td>
-					<td>${c.notes}</td>
 					<td>${c.lastModifyDate}</td>
 					<td class="td-manage">
-					 <a title="编辑"  onclick="member_edit('编辑','companyupdate.do?companyId=${c.companyId}','4','','510')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
 					 
-					  <!-- <a title="编辑"  id="update" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> 
-					 -->
-					 <a title="注销" href="companydelete.do?companyId=${c.companyId}" onclick="return confirm('确定注销？')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+					 <a title="删除" href="customerdelete.do?contactRecordId=${c.contactRecordId}" onclick="return confirm('确定删除？')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
 				</tr>
 				</c:forEach>
 			</tbody>
@@ -115,6 +91,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript" src="../lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
 	<script type="text/javascript" src="../lib/laypage/1.2/laypage.js"></script>
 	<script type="text/javascript">
+	
 	/*批量删除*/
 	$("#del_model").click(function() {
 		if(confirm("确定要删除所选项目？")) {
@@ -133,7 +110,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			});
 		}
 	});
-	
 	
 	
 	/*用户-编辑*/

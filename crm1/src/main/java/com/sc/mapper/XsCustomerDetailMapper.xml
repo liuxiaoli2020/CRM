@@ -117,6 +117,10 @@
     from XS_CUSTOMER_DETAIL
     where CUSTOMER_ID = #{customerId,jdbcType=DECIMAL}
   </select>
+  
+  
+  
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from XS_CUSTOMER_DETAIL
     where CUSTOMER_ID = #{customerId,jdbcType=DECIMAL}

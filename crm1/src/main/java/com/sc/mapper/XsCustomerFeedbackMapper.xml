@@ -103,6 +103,15 @@
     from XS_CUSTOMER_FEEDBACK
     where FEEDBACK_RECORD_ID = #{feedbackRecordId,jdbcType=DECIMAL}
   </select>
+  
+  <select id="selectcustomerId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from XS_CUSTOMER_FEEDBACK
+    where CUSTOMER_ID = #{customerId,jdbcType=DECIMAL}
+  </select>
+  
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from XS_CUSTOMER_FEEDBACK
     where FEEDBACK_RECORD_ID = #{feedbackRecordId,jdbcType=DECIMAL}

@@ -94,6 +94,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		        <dd>
 		          <ul>
 		            <li><a data-href="cpdepotctrl/selectdepot.do" data-title="仓库管理" href="javascript:void(0)">仓库管理</a></li>
+		            <li><a data-href="kcgoodsctrl/selectgoods.do" data-title="商品管理" href="javascript:void(0)">商品管理</a></li>
 		           <!--  <li><a data-href="cgctrl/selectOrderDetail.do" data-title="采购单详情" href="javascript:void(0)">采购单详情</a></li>
 		            <li><a data-href="cgctrl/selectPurchase.do" data-title="需补货产品" href="javascript:void(0)">需补货产品</a></li>
 		            <li><a data-href="cgctrl/selectSupplier.do" data-title="供应商详情表" href="javascript:void(0)">供应商详情表</a></li> -->
@@ -129,8 +130,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<dd>
 				<ul>
 					<li><a data-href="customerdetailctrl/selectcustomerdetail.do" data-title="用户信息管理" href="javascript:void(0)">客户信息管理</a></li>
-					<li><a data-href="customerctrl/customerlist.do" data-title="客户联系管理" href="javascript:void(0)">客户联系管理</a></li>
-					<li><a data-href="product-list.html" data-title="产品管理" href="javascript:void(0)">客户流失管理</a></li>
+					<li><a data-href="xsuserlossctrl/selectpage.do" data-title="产品管理" href="javascript:void(0)">客户流失管理</a></li>
 				</ul>
 			</dd>
 		</dl>

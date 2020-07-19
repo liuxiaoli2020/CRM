@@ -19,7 +19,9 @@ public interface XsCustomerContactRecordMapper {
     List<XsCustomerContactRecord> selectByExample(XsCustomerContactRecordExample example);
 
     XsCustomerContactRecord selectByPrimaryKey(Long contactRecordId);
-
+    //
+    List<XsCustomerContactRecord> selectcustomerId(Long customerId);
+    
     int updateByExampleSelective(@Param("record") XsCustomerContactRecord record, @Param("example") XsCustomerContactRecordExample example);
 
     int updateByExample(@Param("record") XsCustomerContactRecord record, @Param("example") XsCustomerContactRecordExample example);

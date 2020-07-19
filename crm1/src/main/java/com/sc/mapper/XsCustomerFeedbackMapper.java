@@ -18,6 +18,9 @@ public interface XsCustomerFeedbackMapper {
 
     List<XsCustomerFeedback> selectByExample(XsCustomerFeedbackExample example);
 
+    //
+    List<XsCustomerFeedback>  selectcustomerId(Long customerId);
+    
     XsCustomerFeedback selectByPrimaryKey(Long feedbackRecordId);
 
     int updateByExampleSelective(@Param("record") XsCustomerFeedback record, @Param("example") XsCustomerFeedbackExample example);
