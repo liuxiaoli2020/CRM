@@ -1,5 +1,7 @@
 package com.sc.controller;
 
+import java.math.BigDecimal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,13 +39,14 @@ public class XtUserAccountController
 	
 	//添加用户账号
 	@RequestMapping("/addxtuseraccount.do")
-	
-	public void addXtUserAccount(XtUserAccount UserAccount)
+	@ResponseBody
+	public int addXtUserAccount(XtUserAccount UserAccount)
 	{
+		int i=1;
 		System.out.println("进入添加方法:"+UserAccount);
 		
 		xtUserAccountService.addXtUserAccount(UserAccount);
-		
+		return i;
 	}
 	
 	//删除账户
@@ -58,17 +61,17 @@ public class XtUserAccountController
 	//删除所有账户
 		@RequestMapping("/deletextuseraccountall.do")
 
-		public String deletextuseraccountall(Long[] ids){
+		public String deletextuseraccountall(BigDecimal[] ids){
 			System.out.println("进入批量删除:"+ids);
 			if(ids!=null&&ids.length>0)
 			{
-				for (Long id : ids)
+				for (BigDecimal id : ids)
 				{
-					xtUserAccountService.deleteXtUserAccount(id);
+					
+					xtUserAccountService.deleteXtUserAccount(id.longValue());  
+					
 				}
 			}
-			
-			
 			
 			return "redirect:seletextuseraccountctrl.do";
 		}
@@ -77,6 +80,7 @@ public class XtUserAccountController
 	@RequestMapping("/goupdatextuseraccount.do")
 	@ResponseBody
 	public XtUserAccount goupdatextuseraccount(XtUserAccount UserAccount){
+		/*BigDecimal b=new BigDecimal(UserAccount.getUserId());*/
 		XtUserAccount data = xtUserAccountService.getXtUserAccount(UserAccount.getUserId());
 		System.out.println(data);
 		return data;
@@ -98,6 +102,7 @@ public class XtUserAccountController
 	public int updatextuseraccountpass(XtUserAccount UserAccount){
 		int i=1;
 		System.out.println("进入修改密码:"+UserAccount);
+		/*BigDecimal b=new BigDecimal(UserAccount.getUserId());*/
 		XtUserAccount a = xtUserAccountService.getXtUserAccount(UserAccount.getUserId());
 		a.setUserPass(UserAccount.getUserPass());
 		System.out.println(a);

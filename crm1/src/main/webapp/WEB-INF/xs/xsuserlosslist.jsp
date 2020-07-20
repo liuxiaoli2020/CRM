@@ -30,7 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 销售管理 <span class="c-gray en">&gt;</span> 客户流失管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 	<div class="page-container">
 		 <form action="likeselect.do" method="post" >
-		<div class="text-c"> 客户名称：
+		<div class="text-c"> 客户流失：
 			<input type="text" class="input-text" style="width:250px" placeholder="输入职务名称" id="jobName" name="jobName">
 			
 			<button type="submit" class="btn btn-success radius" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
@@ -42,7 +42,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<a href="javascript:;" id="del_model" class="btn btn-danger radius">
 		<i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> 
 		<a title="添加"  onclick="member_edit('添加','jobupdate.do','','','510')"  class="btn btn-primary radius">
-		<i class="Hui-iconfont">&#xe600;</i> 添加职务</a></span> <span class="r">共有数据：<strong>${pi.total }</strong> 条</span> </div>
+		<i class="Hui-iconfont">&#xe600;</i> 添加客户流失</a></span> <span class="r">共有数据：<strong>${pi.total }</strong> 条</span> </div>
 		<div class="mt-20">
 		<table class="table table-border table-bordered table-hover table-bg table-sort">
 			<thead>

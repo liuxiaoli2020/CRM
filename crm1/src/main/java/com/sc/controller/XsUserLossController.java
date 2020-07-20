@@ -73,24 +73,16 @@ public class XsUserLossController {
 	public ModelAndView gocustomer(ModelAndView mav,XsUserLoss userLoss,HttpSession session,@RequestParam(defaultValue="1") int pageNum,
 			@RequestParam(defaultValue="5") int pageSize){
     	
-    	//客户流失管理
+    	
     	
     	 session.setAttribute("userLossid", userLoss.getCustomerLossId());
     	
     	
 		//暂缓流失
-    	 
+    	 //确认流失
     	 XsUserLoss loss = this.xsUserLossService.getXsUserLoss(userLoss.getCustomerLossId());
     	 mav.addObject("u", loss);
 		      
-    	 //确认流失
-		/*Connect con=new Connect();
-    	con.setCustomerid(customer.getCustomerid());
-    	PageInfo<CpDepot> page2 = connectService.selectConnect(pageNum, pageSize, con);
-		mav.addObject("p2", page2);
-		mav.addObject("connect", connect);*/
-    	 
-    	 
     	mav.setViewName("xs/xsuserlosstabs");
     	return mav;
     }

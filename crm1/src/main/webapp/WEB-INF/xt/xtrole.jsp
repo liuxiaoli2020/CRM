@@ -49,7 +49,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             角色名：
                         </td>
                         <td>
-                        <input type="hidden" name="roleId" id="roleId">
+                        <input type="hidden" name="roleId" id="roleId" >
                             <input type="text" name="roleName" id="roleName">
                         </td>
                     </tr>
@@ -97,57 +97,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </form>
         </div>
         
-        <!-- 点击姓名，查看成员 -->
-        <%-- <div id="#window-div-member" class="vv">
-		        <div class="cl pd-5 bg-1 bk-gray"> 
-				<span class="l"> 
-					<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius">
-						<i class="Hui-iconfont">&#xe6e2;</i> 
-						批量删除
-					</a> 
-						<a class="btn btn-primary radius" href="javascript:;" id="lay_add" onclick="admin_role_add('添加角色','admin-role-add.html','800')">
-						<i class="Hui-iconfont">&#xe600;</i>
-						 添加成员
-				 	</a> 
-				 </span> 
-			 	<span class="r">共有数据：<strong>54</strong> 条</span> 
-			 </div>
-        	<table class="table table-border table-bordered table-hover table-bg">
-				<thead>
-					<tr>
-						<th scope="col" colspan="6">成员</th>
-					</tr>
-					<tr class="text-c">
-						<th width="25"><input type="checkbox" value="" name=""></th>
-						<th width="40">成员</th>
-						
-						<th width="200">最后修改时间</th>
-						<th width="70">操作</th>
-					</tr>
-				</thead>
-		<tbody>
-		 <c:forEach items="${r.list }" var="XtRole">
-		
-			<tr class="text-c">
-				<td><input type="checkbox" value="" name=""></td>
-				<td>${成员姓名 }</td>
-				
-				
-				
-				
-				<td class="f-14">
-					
-					<a title="删除" href="javascript:;" onclick="admin_role_del(this,'${XtRole.roleId }')" class="ml-5" style="text-decoration:none">
-						<i class="Hui-iconfont">&#xe6e2;</i>
-					</a>
-				</td>
-			</tr>
-		</c:forEach>
-			
-		</tbody>
-	</table>
-        
-        </div> --%>
+       
 <div class="page-container">
 	<div class="cl pd-5 bg-1 bk-gray"> 
 		<span class="l"> 
@@ -160,7 +110,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				 添加角色
 		 	</a> 
 		 </span> 
-	 	<span class="r">共有数据：<strong>54</strong> 条</span> 
+	 	<span class="r">共有数据：<strong>${r.total }</strong> 条</span> 
 	 </div>
 	<table class="table table-border table-bordered table-hover table-bg">
 		<thead>
@@ -184,11 +134,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<tr class="text-c">
 				<td><input type="checkbox" value="" name=""></td>
 				<td>${XtRole.roleId }</td>
-				<td><a href="xtrolectrl/selectmumber.do?roleId="+${XtRole.roleId } id="member">${XtRole.roleName }</a></td>
+				<td><a onclick="member_info('xtrolememberctrl/goselectmumber.do?roleId=${XtRole.roleId }&roleName=${XtRole.roleName }')" >${XtRole.roleName }</a></td>
 				<td>${XtRole.roleDetail }</td>
 				<td>${XtRole.superiorRoleId }</td>
 				<td>${XtRole.operatorId }</td>
-				<td>${XtRole.lastModifyDate }</td>
+				<td><fmt:formatDate value="${XtRole.lastModifyDate }"
+								pattern="yyyy-MM-dd HH:mm:ss" /></td>
+				
 				<td class="f-14">
 					<a title="编辑" href="javascript:;" onclick="admin_role_edit(${XtRole.roleId })" style="text-decoration:none">
 						<i class="Hui-iconfont">&#xe6df;</i>
@@ -202,6 +154,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			
 		</tbody>
 	</table>
+	<div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite" style="float: left; margin-top: 10px;margin-bottom: 10px">
+		当前 ${r.pageNum } / ${r.pages} 页 ，共 ${r.total } 条</div>
+	<div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate" style="float: right; margin-top: 10px;margin-bottom: 10px">
+			<span> 
+				<a class="paginate_button current" aria-controls="DataTables_Table_0" data-dt-idx="1" tabindex="0" 
+				href="javascript:void(0)" onclick="gopage(${r.navigateFirstPage  }) ">首页</a>
+			</span>
+			<a class="paginate_button previous disabled" aria-controls="DataTables_Table_0" data-dt-idx="0" tabindex="0" id="DataTables_Table_0_previous" 
+			href="javascript:void(0)" onclick="gopage(${r.prePage  }) ">
+				上一页
+			</a>
+			<span>
+				<a class="paginate_button current" aria-controls="DataTables_Table_0" data-dt-idx="1" tabindex="0"> ${r.pageNum }</a>
+			</span>
+			<a class="paginate_button next disabled" aria-controls="DataTables_Table_0" data-dt-idx="2" tabindex="0" id="DataTables_Table_0_next"
+			href="javascript:void(0)" onclick="gopage(${r.nextPage  }) ">
+				下一页
+			</a>
+			<span>
+				<a class="paginate_button current" aria-controls="DataTables_Table_0" data-dt-idx="1" tabindex="0"
+				href="javascript:void(0)" onclick="gopage(${r.navigateLastPage  }) ">尾页</a>
+			</span>
+		</div>
 </div>
 <!--_footer 作为公共模版分离出去-->
 <script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script> 
@@ -218,12 +193,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 function admin_role_edit(roleId){
 	$.ajax({
+	
 			type:'post',
-			url:'xtuseraccountctrl/goupdatextrole.do?roleId='+roleId,
+			url:'xtrolectrl/goupdatextrole.do?roleId='+roleId,
 			/* data:"userId="+userId, */
 			dataType: "json",
 			success:function(data)
 			{
+			
 			    
 			    $("#roleId").val(data.roleId);
 				$("#roleName").val(data.roleName);
@@ -258,10 +235,10 @@ function admin_role_edit(roleId){
 					$.ajax(
 					{
 						type:"post",
-						url:"xtuseraccountctrl/updatextrole.do",
+						url:"xtrolectrl/updatextrole.do",
 						data:$('#from').serialize(),
 						dataType:"json",
-						success:function(d)/* 控制器里面massage为什么要有，这里为什么显示不出来？？？？？？？？？？？？？？？ */
+						success:function(d)
 						{
 							layer.msg('修改成功！',{icon:6,time:1000});
 						},
@@ -272,17 +249,16 @@ function admin_role_edit(roleId){
 					});
 					layer.close(index);
 				},
-				btn2:function()
-				{
-					layer.close(index);
-				},
+				
 				cancel:function()
 				{
 					layer.close(index);
 				},
 				end:function()
 				{
-					window.location.reload();//关闭窗口时刷新页面
+					setTimeout(function() {
+									window.location.reload(); //关闭窗口时刷新页面
+								}, 1000)
 				}
 			})
 }
@@ -367,62 +343,32 @@ function admin_role_del(obj,id){
 }
 
 //点击姓名，查看成员
-$('#member').on('click', function() {
-		var index="";
-		layui.use(['layer'],function()
-		{
-			var layer=layui.layer,
-			index=layer.open(
+function member_info(url)
+{
+	window.location.href=url;
+}
+
+
+	//分页
+	function gopage(pageNum)
+{
+	$.ajax(
 			{
-				skin:"layui-layer-molv",
-				type:1,
-				title:"成员",
-				content:$('#window-div-member'),
-				area:'auto',
-				fix:false,
-				offset: ['300px','600px'],
-				btn:['关闭'],
-				shade:[0.5,'white'],
-				anim:1,
-				resize:true,
+				type:"post",
+				url:"xtrolectrl/selectxtrole.do",
+				data:"pageNum="+pageNum,
 				
-				yes:function()
+				dataType:"json",
+				success:function(d)
 				{
-					/* $.ajax(
-					{
-						type:"post",
-						url:"xtrolectrl/addxtrole.do",
-						data:$('#from').serialize(),
-						
-						dataType:"json",
-						success:function(d)
-						{
-							layer.msg('添加成功！',{icon:6,time:1000});
-						},
-						error:function(e)
-						{
-							layer.msg('添加失败！',{icon:5,time:1000});
-						}
-					}); */
-					layer.close(index);
 				},
-				/* btn2:function()
+				error:function(e)
 				{
-					layer.close(index);
-				}, */
-				cancel:function()
-				{
-					layer.close(index);
-				},
-				end:function()
-				{
-					window.location.reload();//关闭窗口时刷新页面
+					
 				}
-			})
-		})
-		
-		
-	})
+			});
+	
+}
 </script>
 </body>
 </html>

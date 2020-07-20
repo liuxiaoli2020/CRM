@@ -61,7 +61,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<th width="50">发送人</th>
 				<th width="10">公司编号</th>
 				<th width="50">最后修改时间</th>
-				<th width="70">状态</th>
+				
 				<th width="100">操作</th>
 			</tr>
 		</thead>
@@ -75,7 +75,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<td>${msg.msgSender }</td>
 					<td>${msg.companyId }</td>
 					<td><fmt:formatDate value="${msg.lastModifyDate }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-
+                    
 					<td><a title="编辑" href="javascript:;" onclick="member_edit('编辑短消息','bgMsgctrl/goaddmsg.do','${msg.msgId }','','600')" class="ml-5" style="text-decoration:none">
 					<i class="Hui-iconfont">&#xe6df;</i></a> 
 					<a title="删除" href="javascript:;" onclick="member_del(this,'${msg.msgId }')" class="ml-5" style="text-decoration:none">

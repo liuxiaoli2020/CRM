@@ -120,8 +120,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<ul>
 						<li><a data-href="xtuseraccountctrl/seletextuseraccountctrl.do" data-title="用户账户管理" href="javascript:void(0)">用户账户管理</a></li>
 						<li><a data-href="xtrolectrl/selectxtrole.do" data-title="角色管理" href="javascript:void(0)">角色管理</a></li>
-						<li><a data-href="admin-permission.html" data-title="权限管理" href="javascript:void(0)">权限管理</a></li>
-						<li><a data-href="admin-list.html" data-title="管理员列表" href="javascript:void(0)">管理员列表</a></li>
+						<li><a data-href="xtpowerctrl/seletextpower.do" data-title="权限管理" href="javascript:void(0)">权限管理</a></li>
+						
 				</ul>
 			</dd>
 		</dl>

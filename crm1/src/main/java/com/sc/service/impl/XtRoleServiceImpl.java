@@ -56,7 +56,8 @@ public  class XtRoleServiceImpl implements XtRoleService
 	{
 		if(roleId!=null)
 		{
-			xtRoleMapper.selectByPrimaryKey(roleId);
+			
+			return xtRoleMapper.selectByPrimaryKey(roleId);
 		}
 		return null;
 	}

@@ -20,7 +20,6 @@ public interface XtRoleService
 	
 	public PageInfo<XtRole> seleteXtRole(Integer pageNum,Integer pageSize,XtRole Role);
 	
-	/*public List<XtUserAccount> getUserId(Long roleId);*/
 	
 	
 }

@@ -63,7 +63,7 @@ public class XtRoleController
 	@ResponseBody
 	public XtRole goupdatextrole(XtRole Role){
 		XtRole data = xtRoleService.getXtRole(Role.getRoleId());
-		
+		System.out.println(data);
 		return data;/*可不可以用mav,mav是用来跳转到别的页面，然后可以带参数，这里不用跳到别的页面*/
 	}
 	
@@ -78,19 +78,6 @@ public class XtRoleController
 		return i;
 	}
 	
-	//查看成员
 	
-	/*@RequestMapping("/selectmumber.do")
-	@ResponseBody
-	public List<XtUserAccount> selectmumber(Long roleId){
-		 System.out.println("进入查询成员的方法了");
-		 List<XtUserAccount> list =(List<XtUserAccount>)XtRoleService.getUserId(roleId);
-		 List<XtUserAccount> list = xtRoleService.getUserId(roleId);
-		 for (XtUserAccount cs : list)
-		{
-			System.out.println("@@@@@"+cs);
-		}
-		return list;
-	}*/
 	
 }

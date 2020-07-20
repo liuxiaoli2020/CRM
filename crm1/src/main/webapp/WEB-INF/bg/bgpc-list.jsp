@@ -69,18 +69,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${p.list }" var="pc">
+			<c:forEach items="${p.list }" var="pc1">
 				<tr class="text-c">
-					<td><input type="checkbox" value="${pc.calendarId }" name="ids"></td>
-					<td>${pc.pcId }</td>
-					<td>${pc.calendarCategory }</td>
-					<td>${pc.calendarTitle }</td>
-					<td>${pc.calendarStart }</td>
-					<td>${pc.calendarTime }</td>
-					<td>${pc.personNumber }</td>
-					<td>${pc.calendarDetail }</td>
-					<td>${pc.companyId }</td>
-					<td><fmt:formatDate value="${pc.lastModifyDate }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+					<td><input type="checkbox" value="${pc1.calendarId }" name="ids"></td>
+					<td>${pc1.calendarId }</td>
+					<td>${pc1.calendarCategory }</td>
+					<td>${pc1.calendarTitle }</td>
+					<td>${pc1.calendarStart }</td>
+					<td>${pc1.calendarTime }</td>
+					<td>${pc1.personNumber }</td>
+					<td>${pc1.calendarDetail }</td>
+					<td>${pc1.companyId }</td>
+					<td><fmt:formatDate value="${pc1.lastModifyDate }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 
 					<td><a title="编辑" href="javascript:;" onclick="member_edit('编辑个人日程','bgPrivateCalenderctrl/goaddpc.do','${pc.calendarId }','','600')" class="ml-5" style="text-decoration:none">
 					<i class="Hui-iconfont">&#xe6df;</i></a> 

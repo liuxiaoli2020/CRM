@@ -24,11 +24,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
    <center>
-     <h1 style="color: red">您无权限，请联系管理员</h1>
-     <h2>
+   		<a>
+	   		
+	   		<img src="images/refuse.png"
+			style="width: 100%;height: 500px;">
+   		</a>
+     
+     <!-- <h2>
        <a href="javascript:void(0)" onclick="window.history.back()">返回</a>
-     </h2>
-   
+     </h2> -->
+   <script type="text/javascript">
+		function back() {
+			window.history.back();
+	
+		}
+	</script>
    </center>
   </body>
 </html>
