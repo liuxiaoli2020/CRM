@@ -21,18 +21,18 @@ public class BgCheckTaskController {
 	@Autowired
 	BgCheckTaskService bgCheckTaskService;
 	
-	//²éÑ¯
+	//æŸ¥è¯¢
 	@RequestMapping("/selecttask.do")
 	public ModelAndView selectTask(ModelAndView mav,
 			@RequestParam(defaultValue="1") Integer pageNum,
 			@RequestParam(defaultValue="10") Integer pageSize,
 			BgCheckTask task){
 		
-		System.out.println("½øÈë²éÑ¯¿¼ºËÈÎÎñ·ÖÒ³·½·¨ÁË:"+task);
-/*		System.out.println("-------Ğ¡----------:"+task.getDatemin());
-		System.out.println("-------´ó----------:"+task.getDatemax());*/
+		System.out.println("è¿›å…¥æŸ¥è¯¢è€ƒæ ¸ä»»åŠ¡åˆ†é¡µæ–¹æ³•äº†:"+task);
+/*		System.out.println("-------å°----------:"+task.getDatemin());
+		System.out.println("-------å¤§----------:"+task.getDatemax());*/
 		
-		//Îª¶àÌõ¼ş²éÑ¯×ö×¼±¸
+		//ä¸ºå¤šæ¡ä»¶æŸ¥è¯¢åšå‡†å¤‡
 		PageInfo<BgCheckTask> page = bgCheckTaskService.selectTask(pageNum, pageSize, task);
 		
 		mav.addObject("p", page);
@@ -44,8 +44,8 @@ public class BgCheckTaskController {
 
 	@RequestMapping("/goaddtask.do")
 	public ModelAndView goAddTask(ModelAndView mav,BgCheckTask task){
-		System.out.println("½øÈëÌí¼ÓÒ³Ãæ"+task);
-		//ĞŞ¸Ä
+		System.out.println("è¿›å…¥æ·»åŠ é¡µé¢"+task);
+		//ä¿®æ”¹
 		if(task.getTaskId()!=null){
 			task=bgCheckTaskService.getTask(task.getTaskId());
 		}
@@ -58,32 +58,32 @@ public class BgCheckTaskController {
 	@RequestMapping("/addtask.do")
 	@ResponseBody
 	public Message addTask(ModelAndView mav,BgCheckTask task){
-		System.out.println("½øÈëÌí¼Ó¿¼ºËÈÎÎñ:"+task);
-		if(task.getTaskId()!=null){//ĞŞ¸Ä
+		System.out.println("è¿›å…¥æ·»åŠ è€ƒæ ¸ä»»åŠ¡:"+task);
+		if(task.getTaskId()!=null){//ä¿®æ”¹
 			bgCheckTaskService.updateTask(task);
-		}else{//Ìí¼Ó
+		}else{//æ·»åŠ 
 			bgCheckTaskService.addTask(task);
 		}
-		return new Message("1","success","³É¹¦");
+		return new Message("1","success","æˆåŠŸ");
 	}
 	
 	@RequestMapping("/deletetask.do")
 	@ResponseBody
 	public Message deleteTask(ModelAndView mav,BgCheckTask task){
-		System.out.println("½øÈëÉ¾³ı¿¼ºËÈÎÎñ:"+task);
+		System.out.println("è¿›å…¥åˆ é™¤è€ƒæ ¸ä»»åŠ¡:"+task);
 		bgCheckTaskService.deleteTask(task.getTaskId());
-		return new Message("1","success","³É¹¦");
+		return new Message("1","success","æˆåŠŸ");
 	}
 	
 	@RequestMapping("/deletetaskall.do")
 	public String deleteTaskAll(ModelAndView mav,Long[] ids){
-		System.out.println("½øÈëÅúÁ¿É¾³ı¿¼ºËÈÎÎñ:"+Arrays.toString(ids));
+		System.out.println("è¿›å…¥æ‰¹é‡åˆ é™¤è€ƒæ ¸ä»»åŠ¡:"+Arrays.toString(ids));
 		if(ids!=null&&ids.length>0){
 			for (Long id : ids) {
 				bgCheckTaskService.deleteTask(id);
 			}
 		}
-		//ÖØ¶¨Ïòµ½²éÑ¯·½·¨
+		//é‡å®šå‘åˆ°æŸ¥è¯¢æ–¹æ³•
 		return "redirect:selecttask.do";
 	}
 }

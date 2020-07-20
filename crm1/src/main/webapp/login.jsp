@@ -45,11 +45,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	          <input id="userPass" name="userPass" type="password" placeholder="密码" class="input-text size-L">
 	        </div>
 	      </div>
-	      <div class="row cl">
+	     <!--  <div class="row cl">
 	        <div class="formControls col-xs-8 col-xs-offset-3">
 	          <input class="input-text size-L" type="text" placeholder="验证码" onblur="if(this.value==''){this.value='验证码:'}" onclick="if(this.value=='验证码:'){this.value='';}" value="验证码:" style="width:150px;">
 	          <img src=""> <a id="kanbuq" href="javascript:;">看不清，换一张</a> </div>
-	      </div>
+	      </div> -->
 	      <div class="row cl">
 	        <div class="formControls col-xs-8 col-xs-offset-3">
 	          <label for="online">
@@ -66,7 +66,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    </form>
 	  </div>
 	</div>
-	<div class="footer">Copyright 你的公司名称 by H-ui.admin v3.1</div>
+	<div class="footer">后台登录 - 客户关系管理系统</div>
 	<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script> 
 	<script type="text/javascript" src="static/h-ui/js/H-ui.min.js"></script>
 

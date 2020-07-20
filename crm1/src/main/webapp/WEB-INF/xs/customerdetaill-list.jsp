@@ -53,6 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<th width="80">客户名称</th>
                     <th width="120">网站</th>
                     <th width="160">客户详细</th>
+                    <th width="150">下一次联系时间</th>
 					<th width="150">最后修改时间</th>
 				    <th width="100">操作</th>
 			</tr>
@@ -65,7 +66,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<td><u style="cursor:pointer" class="text-primary" >${customerdetail.customerName }</u></td>
 				<td>${customerdetail.website }</td>
 				<td><a title="详细信息" href="javascript:;" onclick="member_detail('客户详细','customerdetailctrl/goaddcustomer1.do','${customerdetail.customerId }','','350')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe616;</i></a> 
-				
+				<td>${customerdetail.nextContactDate }</td>
 				<td><fmt:formatDate value="${customerdetail.lastModifyDate }" pattern="yyyy-MM-dd HH:mm:ss"/></td>>
 				<td class="td-manage">
 				<a title="详细信息" href="gocustomer.do?customerId=${customerdetail.customerId }" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6c6;</i></a> 
