@@ -96,15 +96,15 @@ public class XsCustomerDetailController {
 	
 	@RequestMapping("/deletecustomerall.do")
 	@ResponseBody
-	public String deleteCustomerAll(ModelAndView mav,Long[] ids){
+	public ModelAndView deleteCustomerAll(ModelAndView mav,Long[] ids){
     	System.out.println("进入批量删除用户"+Arrays.toString(ids));
     	if(ids!=null&&ids.length>0){
     		for (Long id : ids) {
     			xsCustomerDetailService.deleteCustomerDetail(id);
 			}
-    		
     	}
-    	return "redirect:selectcustomerdetail.do";
+    	mav.setViewName("redirect:selectcustomerdetail.do");
+    	return mav;
     }
 	@RequestMapping("/gocustomer.do")
 	public ModelAndView gocustomer(ModelAndView mav,XsCustomerDetail customerdetail,HttpSession session,@RequestParam(defaultValue="1") int pageNum,

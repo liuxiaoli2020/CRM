@@ -4,6 +4,7 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
@@ -79,11 +80,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<td><input type="checkbox" value="${c.contactRecordId}" name="subChk"></td>
 							<td>${c.contactRecordId}</td>
 							<td>${c.contactHeading}</td>
-							<td>${c.contactDate}</td>
+							<td><fmt:formatDate value="${c.contactDate}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
 							<td>${c.customerId}</td>
 							<td>${c.contactContent}</td>
 							<td>${c.companyId}</td>
-							<td>${c.lastModifyDate}</td>
+							<td><fmt:formatDate value="${c.lastModifyDate}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
 							<td class="td-manage">
 							 
 							 <a title="删除" href="../customerctrl/customerdelete.do?contactRecordId=${c.contactRecordId}" onclick="return confirm('确定删除？')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
@@ -135,7 +136,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<td>${c.customerId}</td>
 								<td>${c.state}</td>
 								<td>${c.feedbackType}</td>
-								<td>${c.feedbackDate}</td>
+								<td><fmt:formatDate value="${c.feedbackDate}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
 								<td>${c.feedbackReason}</td>
 								<td>${c.head}</td>
 								<td>${c.feedbackResource}</td>
@@ -143,7 +144,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<td>${c.feedbackDescribe}</td>
 								<td>${c.analysis}</td>
 								<td>${c.companyId}</td>
-								<td>${c.lastModifyDate}</td>
+								<td><fmt:formatDate value="${c.lastModifyDate}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
 								<td class="td-manage">
 								 <a title="详情"  onclick="member_edit('详情','xscFeedback.do?feedbackRecordId=${c.feedbackRecordId}','4','','510')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
 								 <a title="删除" href="xscFeedbackdel.do?feedbackRecordId=${c.feedbackRecordId}" onclick="return confirm('确定删除？')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>

@@ -50,7 +50,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           </tr>
           <tr>
             <th class="text-r"><span class="c-red">*</span> 产品编号：</th>
-            <td> <input type="text" style="width:300px" class="input-text" value="${cod.productId }"  id="productId" name="productId">
+            <td> 
+            <%-- <input type="text" style="width:300px" class="input-text" value="${cod.productId }"  id="productId" name="productId"> --%>
+           <input type="hidden" id="state" name="productId" value="${cod.productId }">
+            <select id="statenums" style="width: 150px;height: 100%">
+             <option>选择产品编号</option>
+            <c:forEach items="${cop.list }" var="cop">
+            	<option value="${cop.productId }">${cop.productId }</option>
+            	</c:forEach>
+            </select>
+           
             </td>
           </tr>
           <tr>
@@ -142,5 +151,19 @@ $(function(){
 });
 </script> 
 <!--/请在上方写此页面业务相关的脚本-->
+<script type="text/javascript">
+$("#statenums").change(function(){
+
+    	state = $('#statenums option:selected').val();
+
+    	$("#state").val(state)
+
+    });
+    
+    var staval = $("#state").val(); //hidden 隐藏框的数据
+
+	$("#statenums option[value = '"+staval+"']").attr("selected",true);
+
+</script>
 </body>
 </html>

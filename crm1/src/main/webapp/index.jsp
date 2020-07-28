@@ -133,7 +133,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<li><a data-href="customercontactctrl/selectcustomercontact.do" data-title="客户联系人信息管理" href="javascript:void(0)">客户联系人信息管理</a></li>
 					<li><a data-href="salesdetailctrl/selectsalesdetail.do" data-title="销售单详情管理" href="javascript:void(0)">销售单详情信息管理</a></li>
 					<li><a data-href="salesoutctrl/selectsalesout.do" data-title="销售单管理" href="javascript:void(0)">销售单信息管理</a></li>
-					<li><a data-href="customerctrl/customerlist.do" data-title="客户联系管理" href="javascript:void(0)">客户联系管理</a></li>
+					
 					<li><a data-href="xsuserlossctrl/selectpage.do" data-title="客户流失管理" href="javascript:void(0)">客户流失管理</a></li>
 				
 				</ul>

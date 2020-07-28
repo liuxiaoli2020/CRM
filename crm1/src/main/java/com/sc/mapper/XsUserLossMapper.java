@@ -1,5 +1,6 @@
 package com.sc.mapper;
 
+import com.sc.entity.RsUserDetail;
 import com.sc.entity.XsUserLoss;
 import com.sc.entity.XsUserLossExample;
 import java.util.List;
@@ -16,6 +17,9 @@ public interface XsUserLossMapper {
 
     int insertSelective(XsUserLoss record);
 
+  //根据姓名查询
+    List<XsUserLoss> likeselect(String isLoss);
+    
     List<XsUserLoss> selectByExample(XsUserLossExample example);
 
     XsUserLoss selectByPrimaryKey(Long customerLossId);

@@ -1,8 +1,7 @@
 package com.sc.service;
 
-import java.math.BigDecimal;
-
 import com.github.pagehelper.PageInfo;
+import com.sc.entity.XtPowerDetail;
 import com.sc.entity.XtUserAccount;
 
 public interface XtUserAccountService
@@ -17,7 +16,7 @@ public interface XtUserAccountService
 	
 	public PageInfo<XtUserAccount> seleteXtUserAccount(Integer pageNum,Integer pageSize,XtUserAccount UserAccount);
 
-
+	public PageInfo<XtPowerDetail> seleteXtUserPower(Integer pageNum,Integer pageSize,XtUserAccount UserAccount);
 
 	
 	

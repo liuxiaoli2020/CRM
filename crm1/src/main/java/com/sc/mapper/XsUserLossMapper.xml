@@ -96,6 +96,17 @@
     from XS_USER_LOSS
     where CUSTOMER_LOSS_ID = #{customerLossId,jdbcType=DECIMAL}
   </select>
+  
+  <select id="likeselect" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from XS_USER_LOSS
+    <if test="IS_LOSS != null">
+      where IS_LOSS = #{isLoss,jdbcType=VARCHAR}
+    </if>
+  </select>
+  
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from XS_USER_LOSS
     where CUSTOMER_LOSS_ID = #{customerLossId,jdbcType=DECIMAL}

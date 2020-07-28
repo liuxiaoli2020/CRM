@@ -83,7 +83,7 @@ public class XsCustomerContactServiceImpl implements XsCustomerContactService {
 	}
 	//分页查询
 	 PageHelper.startPage(pageNum, pageSize);
-	 List<XsCustomerContact> list = xsCustomerContactMapper.selectByExample(example);
+	 List<XsCustomerContact> list = xsCustomerContactMapper.selectcustomerId(customercontact.getCustomerId());
      PageInfo<XsCustomerContact> page=new PageInfo<XsCustomerContact>(list);
       return page;
     }

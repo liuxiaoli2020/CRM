@@ -1,5 +1,6 @@
 package com.sc.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import com.sc.entity.XtPowerRole;
 import com.sc.entity.XtPowerRoleExample;
 import com.sc.entity.XtPowerSubfield;
 import com.sc.entity.XtUserRole;
+import com.sc.entity.XtUserRoleExample;
 import com.sc.mapper.XtPowerDetailMapper;
 import com.sc.mapper.XtPowerRoleMapper;
 import com.sc.mapper.XtPowerSubfieldMapper;
@@ -32,7 +34,6 @@ public class XtPowerServiceImpl implements XtPowerService
 	XtUserRoleMapper xtUserRoleMapper;
 	@Autowired
 	XtPowerRoleMapper xtPowerRoleMapper;
-	
 
 	//添加权限
 	@Override
@@ -98,44 +99,47 @@ public class XtPowerServiceImpl implements XtPowerService
 	@Override
 	public List<XtPowerDetail> selectpowerall()
 	{
-		xtPowerDetailMapper.selectByExample(null);
-		return null;
+		List<XtPowerDetail> list = xtPowerDetailMapper.selectByExample(null);
+		return list;
+		
 	}
 
 	@Override
 	public List<XtPowerDetail> selectpowerallbyuserid(Long userId)
 	{
-		//这个类里面对应有角色编号
-		XtUserRole xtUserRole = xtUserRoleMapper.selectByPrimaryKey(userId);
-		XtPowerRoleExample example=new XtPowerRoleExample();
-		com.sc.entity.XtPowerRoleExample.Criteria criteria = example.createCriteria();
-		if (!StringUtils.isEmpty(xtUserRole.getRoleId()))
-		{
-			
-			criteria.andPowerIdEqualTo(xtUserRole.getRoleId());
-		}
-		//里面有权限编号
-		List<XtPowerRole> list = xtPowerRoleMapper.selectByExample(example);
 		
-		//循环权限编号
-		for (XtPowerRole xtPowerRole : list)
+		ArrayList<XtPowerDetail> list2=new ArrayList<XtPowerDetail>();
+		System.out.println("1.userid是"+userId);
+		XtUserRoleExample example=new XtUserRoleExample();
+		System.out.println("2.");
+		com.sc.entity.XtUserRoleExample.Criteria createCriteria = example.createCriteria();
+		System.out.println("3.");
+		createCriteria.andUserIdEqualTo(userId);
+		System.out.println("4.");
+		List<XtUserRole> selectByExample = xtUserRoleMapper.selectByExample(example);
+		System.out.println("5.得到的用户角色类是"+selectByExample);
+		for (XtUserRole xtUserRole : selectByExample)
 		{
-			XtPowerDetailExample  example1= new XtPowerDetailExample();
-			Criteria criteria1 = example1.createCriteria();
-			if (!StringUtils.isEmpty(xtPowerRole.getPowerId()))
+			System.out.println("进去了");
+			XtPowerRoleExample examples=new XtPowerRoleExample();
+			com.sc.entity.XtPowerRoleExample.Criteria criteria = examples.createCriteria();
+			criteria.andRoleIdEqualTo(xtUserRole.getRoleId());
+			
+			//问题所在？？？？？？？
+			List<XtPowerRole> list = xtPowerRoleMapper.selectByExample(examples);
+			//循环权限编号
+			for (XtPowerRole xtPowerRole : list)
 			{
-				criteria1.andPowerIdEqualTo(xtPowerRole.getPowerId());
+				System.out.println("$$$$$$$$$$$$$$$"+xtPowerRole.getPowerId());
+				XtPowerDetail detail = xtPowerDetailMapper.selectByPrimaryKey(xtPowerRole.getPowerId());
+				list2.add(detail);
+				System.out.println("*@@@@@@@@@@@@@@@@@@@@@@"+detail);
+				
 			}
-			//里面有权限路径
-			List<XtPowerDetail> list2 = xtPowerDetailMapper.selectByExample(example1);
-			
-			System.out.println(list2);
-			return list2;
 			
 		}
 		
-		
-		return null;
+		return list2;
 	}
 	
 	

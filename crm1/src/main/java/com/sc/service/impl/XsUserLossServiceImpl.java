@@ -43,6 +43,20 @@ public class XsUserLossServiceImpl implements XsUserLossService {
 		return this.xsUserLossMapper.selectByPrimaryKey(customerLossId);
 	}
 
+	@Override
+	public void deleteXsUserLoss(Long customerLossId) {
+		this.xsUserLossMapper.deleteByPrimaryKey(customerLossId);
+		
+	}
+
+	@Override
+	public PageInfo<XsUserLoss> likeselect(int pageNum, int pageSize, String isLoss) {
+		PageHelper.startPage(pageNum, pageSize);
+		List<XsUserLoss> list = this.xsUserLossMapper.likeselect(isLoss);
+		PageInfo<XsUserLoss> pageInfo=new PageInfo<XsUserLoss>(list);
+		return pageInfo;
+	}
+
 	
 
 }

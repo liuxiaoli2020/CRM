@@ -71,7 +71,7 @@ public class XsCustomerContactController {
 	
 	@RequestMapping("/deletecustomercontactall.do")
 	@ResponseBody
-	public String deleteCustomerContactAll(ModelAndView mav,Long[] ids){
+	public ModelAndView deleteCustomerContactAll(ModelAndView mav,Long[] ids){
     	System.out.println("进入批量删除用户"+Arrays.toString(ids));
     	if(ids!=null&&ids.length>0){
     		for (Long id : ids) {
@@ -79,8 +79,8 @@ public class XsCustomerContactController {
 			}
     		
     	}
-    	
-    	 return "redirect:selectcustomercontact.do";
+    	mav.setViewName("redirect:selectcustomercontact.do");
+    	 return mav;
     }
 }
 

@@ -32,15 +32,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script> 
 
-<title>成员管理</title>
-<style type="text/css">
+<title>权限</title>
+<!-- <style type="text/css">
 .vv {
          display: none;
      }
-</style>
+</style> -->
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> （${sessionScope.nowRole.roleName }） <span class="c-gray en">&gt;</span> 成员管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
  
  
 
@@ -51,12 +50,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<span class="l"> 
 			<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius">
 				<i class="Hui-iconfont">&#xe6e2;</i> 
-				批量删除
+				批量删除权限
 			</a> 
 				<a class="btn btn-primary radius" href="javascript:;" id="lay_add" 
-				onclick="admin_role_add('成员添加','xtrolememberctrl/goaddmumber.do',${sessionScope.nowRole.roleId })">
+				onclick="admin_role_add('权限','xtrolememberctrl/goaddmumber.do',${sessionScope.nowRole.roleId })">
 				<i class="Hui-iconfont">&#xe600;</i>
-				 添加成员
+				 给此用户添加权限
 		 	</a> 
 		 </span> 
 	 	<span class="r">共有数据：<strong>${p0.total }</strong> 条</span> 
@@ -69,30 +68,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				
 				<tr class="text-c">
 					<th width="25"><input type="checkbox" value="" name=""></th>
-					<th width="40">用户编号</th>
-					<th width="200">用户名称</th>
-					<th width="300">员工编号</th>
-					<th width="40">公司编号</th>
+					<th width="40">权限编号</th>
+					<th width="200">权限名称</th>
+					<th width="300">权限</th>
+					<th width="40">权限分栏编号</th>
+					<th width="40">备注信息</th>
 					<th width="200">最后修改时间</th>
 					<th width="70">操作</th>
 				</tr>
 			</thead>
 			<tbody>
-			 <c:forEach items="${p0.list }" var="mem">
+			 <c:forEach items="${p2.list }" var="mem">
 				
 				<tr class="text-c">
-					<td><input type="checkbox" value="${mem.userId }" name="ids"></td>
-					<td>${mem.userId }</td>
-				
-					<td>${mem.userName }</td>
-					<td>${mem.staffId }</td>
-					<td>${mem.companyId }</td>
+					<td><input type="checkbox" value="${mem.powerId }" name="ids"></td>
+					<td>${mem.powerId }</td>
+					<td>${mem.powerName }</td>
+					<td>${mem.power }</td>
+					<td>${mem.subfieldId }</td>
+					<td>${mem.remark }</td>
 					<td><fmt:formatDate value="${mem.lastModifyDate }"
 									pattern="yyyy-MM-dd HH:mm:ss" /></td>
 					
 					<td class="f-14">
 						
-						<a title="删除" href="javascript:;" onclick="admin_role_del(this,'${mem.userId }')" class="ml-5" style="text-decoration:none">
+						<a title="删除" href="javascript:;" onclick="admin_role_del(this,'${mem.powerId }')" class="ml-5" style="text-decoration:none">
 							<i class="Hui-iconfont">&#xe6e2;</i>
 						</a>
 					</td>
@@ -103,26 +103,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</table>
 	</form>
 	<div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite" style="float: left; margin-top: 10px;margin-bottom: 10px">
-		当前 ${p0.pageNum } / ${p0.pages} 页 ，共 ${p0.total } 条</div>
+		当前 ${p2.pageNum } / ${p2.pages} 页 ，共 ${p2.total } 条</div>
 	<div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate" style="float: right; margin-top: 10px;margin-bottom: 10px">
 			<span> 
 				<a class="paginate_button current" aria-controls="DataTables_Table_0" data-dt-idx="1" tabindex="0" 
-				href="javascript:void(0)" onclick="gopage(${p0.navigateFirstPage  }) ">首页</a>
+				href="javascript:void(0)" onclick="gopage(${p2.navigateFirstPage  }) ">首页</a>
 			</span>
 			<a class="paginate_button previous disabled" aria-controls="DataTables_Table_0" data-dt-idx="0" tabindex="0" id="DataTables_Table_0_previous" 
-			href="javascript:void(0)" onclick="gopage(${p0.prePage  }) ">
+			href="javascript:void(0)" onclick="gopage(${p2.prePage  }) ">
 				上一页
 			</a>
 			<span>
-				<a class="paginate_button current" aria-controls="DataTables_Table_0" data-dt-idx="1" tabindex="0"> ${p0.pageNum }</a>
+				<a class="paginate_button current" aria-controls="DataTables_Table_0" data-dt-idx="1" tabindex="0"> ${p2.pageNum }</a>
 			</span>
 			<a class="paginate_button next disabled" aria-controls="DataTables_Table_0" data-dt-idx="2" tabindex="0" id="DataTables_Table_0_next"
-			href="javascript:void(0)" onclick="gopage(${p0.nextPage  }) ">
+			href="javascript:void(0)" onclick="gopage(${p2.nextPage  }) ">
 				下一页
 			</a>
 			<span>
 				<a class="paginate_button current" aria-controls="DataTables_Table_0" data-dt-idx="1" tabindex="0"
-				href="javascript:void(0)" onclick="gopage(${p0.navigateLastPage  }) ">尾页</a>
+				href="javascript:void(0)" onclick="gopage(${p2.navigateLastPage  }) ">尾页</a>
 			</span>
 	</div>
 </div>
@@ -140,45 +140,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!--请在下方写此页面业务相关的脚本-->
 <script type="text/javascript" src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
-/*管理员-成员-删除*/
-function admin_role_del(obj,id){
-	layer.confirm('成员删除须谨慎，确认要删除吗？',function(index){
-		$.ajax({
-			type: 'POST',
-			url: 'xtrolememberctrl/deletemumber.do',
-			dataType: 'json',
-			success: function(data){
-				$(obj).parents("tr").remove();
-				layer.msg('已删除!',{icon:1,time:1000});
-			},
-			error:function(data) {            /* ??????data */
-				
-				layer.msg('删除失败!',{icon:5,time:1000});
-			},
-		});		
-	});
-}
-	 
-	//分页
-function gopage(pageNum)
-{
-	$.ajax(
-			{
-				type:"post",
-				url:"xtrolememberctrl/goselectmumber.do",
-				data:"pageNum="+pageNum,
-				
-				dataType:"json",
-				success:function(d)
-				{
-				},
-				error:function(e)
-				{
-					
-				}
-			});
-	
-}
 //批量删除
 function datadel()
 {
@@ -194,14 +155,14 @@ function datadel()
 	}
 	
 }
-//添加成员，跳转页面
+//查看权限，跳转页面
 function admin_role_add(title,url,id){
 	url=url+"?roleId="+id;
 	layer_show(title,url);
 	
 	
 	
-}
+} 
  
 </script>
 </body>

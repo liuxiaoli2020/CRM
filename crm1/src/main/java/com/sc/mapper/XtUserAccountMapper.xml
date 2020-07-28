@@ -105,6 +105,9 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.sc.entity.XtUserAccount" >
+  
+  <selectKey order="AFTER" resultType="java.lang.Long" keyProperty="userId">select SEQ_USERA_USER_ID.CURRVAL from DUAL</selectKey>
+  
     insert into XT_USER_ACCOUNT (USER_ID, USER_NAME, USER_PASS, 
       STAFF_ID, COMPANY_ID, ACCOUNT_STATUS, 
       LAST_MODIFY_DATE)

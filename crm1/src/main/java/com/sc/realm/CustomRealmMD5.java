@@ -14,33 +14,41 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.sc.entity.XtPowerDetail;
 import com.sc.entity.XtUserAccount;
+import com.sc.service.XtPowerService;
 import com.sc.service.XtUserAccountLoginService;
 
 public class CustomRealmMD5 extends AuthorizingRealm {
 
 	@Autowired
 	XtUserAccountLoginService xtUserAccountService;
+	@Autowired
+	XtPowerService xtPowerService;
+	
 	
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection arg0) {
 		XtUserAccount userAccount = (XtUserAccount)arg0.getPrimaryPrincipal();
-		System.out.println("当前需要被认证的用户是："+userAccount.getUserName());
+		System.out.println("当前需要被授权的用户是："+userAccount.getUserName());
 		//1、从数据库查询该用户权限
 		List<String> list=new ArrayList<String>();
-		/*List<SysPermission> perms = sysPermissionService.getPermissionByUsercode(sysUser.getUsercode());
-		if (perms!=null&&perms.size()>0) {
-			System.out.println("该用户拥有权限：");
-			for (SysPermission perm:perms) {
-				String code=perm.getPercode();
-				if (code!=null&&!code.equals("")) {
-					System.out.println("------------------"+code);
-					list.add(code);
-					
+		List<XtPowerDetail> powers = xtPowerService.selectpowerallbyuserid(userAccount.getUserId());
+		if(powers!=null&&powers.size()>0)
+		{
+			System.out.println("************该用户拥有权限：");
+			for (XtPowerDetail xtPowerDetail : powers)
+			{
+				String Remark=xtPowerDetail.getRemark();
+				if(Remark!=null&&!Remark.equals(""))
+				{
+					System.out.println("------------------"+Remark);
+					list.add(Remark);
 				}
 			}
-		}*/
+		}
 		
+		//这里就知道用户拥有哪些权限（通过权限限定名）
 		SimpleAuthorizationInfo info=new SimpleAuthorizationInfo();
 		info.addStringPermissions(list);
 		

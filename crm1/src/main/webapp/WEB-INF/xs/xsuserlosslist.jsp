@@ -30,8 +30,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 销售管理 <span class="c-gray en">&gt;</span> 客户流失管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 	<div class="page-container">
 		 <form action="likeselect.do" method="post" >
-		<div class="text-c"> 客户流失：
-			<input type="text" class="input-text" style="width:250px" placeholder="输入职务名称" id="jobName" name="jobName">
+		<div class="text-c"> 是否流失：
+			<input type="text" class="input-text" style="width:250px" placeholder="输入是否流失" id="isLoss" name="isLoss">
 			
 			<button type="submit" class="btn btn-success radius" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
 			
@@ -41,8 +41,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l">
 		<a href="javascript:;" id="del_model" class="btn btn-danger radius">
 		<i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> 
-		<a title="添加"  onclick="member_edit('添加','jobupdate.do','','','510')"  class="btn btn-primary radius">
-		<i class="Hui-iconfont">&#xe600;</i> 添加客户流失</a></span> <span class="r">共有数据：<strong>${pi.total }</strong> 条</span> </div>
+		</span> <span class="r">共有数据：<strong>${pi.total }</strong> 条</span> </div>
 		<div class="mt-20">
 		<table class="table table-border table-bordered table-hover table-bg table-sort">
 			<thead>
@@ -74,7 +73,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<td>${u.lastModifyData}</td>
 					<td class="td-manage">
 					 <a title="编辑"  href="gouser.do?customerLossId=${u.customerLossId}" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
-					 <a title="删除" href="jobdelete.do?jobId=${j.jobId}" onclick="return confirm('确定删除？')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
+					 <a title="删除" href="userlossdelete.do?customerLossId=${u.customerLossId}" onclick="return confirm('确定删除？')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
 					 &#xe728;</td>
 				</tr>
 				</c:forEach>

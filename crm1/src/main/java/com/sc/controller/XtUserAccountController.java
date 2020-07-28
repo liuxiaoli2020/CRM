@@ -110,4 +110,19 @@ public class XtUserAccountController
 		return i;
 	}
 	
+	//查看权限
+
+	@RequestMapping("/seletextuserpower.do")
+	public ModelAndView seleteXtUserPower(ModelAndView mav,
+			@RequestParam(defaultValue="1") Integer pageNum,
+			@RequestParam(defaultValue="10") Integer pageSize,
+			XtUserAccount UserAccount)
+	{
+		 System.out.println("进入查询用户账户权限方法了");
+		 PageInfo<XtUserAccount> page = xtUserAccountService.seleteXtUserAccount(pageNum, pageSize, UserAccount);
+		 mav.addObject("p2",page);
+		 mav.addObject("UA",UserAccount);
+		 mav.setViewName("xt/xtuserpower");//找xt目录下的xtuseraccount.jsp
+		return mav;
+	}
 }

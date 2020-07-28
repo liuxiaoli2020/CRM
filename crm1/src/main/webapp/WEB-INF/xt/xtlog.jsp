@@ -4,6 +4,7 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
@@ -52,7 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<td>${c.userId}</td>
 					<td>${c.accessIp}</td>
 					<td>${c.power}</td>
-					<td>${c.accessDate}</td>
+					<td><fmt:formatDate value="${c.accessDate}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
 					<td>${c.companyId}</td>
 					<td class="td-manage">
 					 
@@ -62,7 +63,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</tbody>
 		</table>
 		
+		</div>
 		
+		<div class="dataTables_info" role="status" aria-live="polite" style="float: left;margin-top: 10px;margin-bottom: 10px">当前第 ${pi.pageNum }/${pi.pages }页，共 ${pi.total }条</div>
+		<div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_paginate" style="float: right;margin-top: 10px;margin-bottom: 10px">
+		<a class="paginate_button" aria-controls="DataTables_Table" id="DataTables_Table_previous" href="selectpage.do?pageNum=${pi.navigateFirstPage }">首页</a>
+		<a class="paginate_button previous" aria-controls="DataTables_Table" id="DataTables_Table_previous" href="selectpage.do?pageNum=${pi.prePage }" >上一页</a>
+		<a class="paginate_button next" aria-controls="DataTables_Table" id="DataTables_Table_next" href="selectpage.do?pageNum=${pi.nextPage }">下一页</a>
+		<a class="paginate_button" aria-controls="DataTables_Table" id="DataTables_Table_previous" href="selectpage.do?pageNum=${pi.navigateLastPage }">尾页</a>
 		</div>
 	</div>
 	<!--_footer 作为公共模版分离出去-->

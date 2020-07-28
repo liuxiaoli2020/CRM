@@ -4,6 +4,7 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
@@ -99,7 +100,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<td>${s.staffState}</td>
 					<td>${s.notes}</td>
 					<td>${s.companyId}</td>
-					<td>${s.lastModifyDate}</td>
+					<td><fmt:formatDate value="${s.lastModifyDate}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
 					<td class="td-manage">
 					 <a title="编辑"  onclick="member_edit('编辑','staffupdate.do?staffId=${s.staffId}','4','','510')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
 					 

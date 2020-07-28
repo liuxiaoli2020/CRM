@@ -70,7 +70,7 @@ public class XsSalesOutController {
 	
 	@RequestMapping("/deletesalesoutall.do")
 	@ResponseBody
-	public String deleteSalesOutAll(ModelAndView mav,Long[] ids){
+	public ModelAndView deleteSalesOutAll(ModelAndView mav,Long[] ids){
     	System.out.println("进入批量删除用户"+Arrays.toString(ids));
     	if(ids!=null&&ids.length>0){
     		for (Long id : ids) {
@@ -78,8 +78,8 @@ public class XsSalesOutController {
 			}
     		
     	}
-    	
-    	 return "redirect:selectsalesout.do";
+    	mav.setViewName("redirect:selectsalesout.do");
+    	 return mav;
     }
 }
 

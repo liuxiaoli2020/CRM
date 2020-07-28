@@ -264,6 +264,10 @@
 							</a> <a title="修改密码" href="javascript:;"
 								onclick="admin_updatepass(${useraccount.userId })" class="ml-5"
 								style="text-decoration:none"> <i class="Hui-iconfont">&#xe63f;</i>
+							</a>
+							 <a title="查看权限" href="javascript:;"
+								onclick="admin_selectpower('权限','',${useraccount.userId })" class="ml-5"
+								style="text-decoration:none"> <i class="Hui-iconfont">&#xe65a;</i>
 							</a> <a title="删除" href="javascript:;"
 								onclick="admin_del(this,'${useraccount.userId }')" class="ml-5"
 								style="text-decoration:none"> <i class="Hui-iconfont">&#xe6e2;</i>
@@ -441,7 +445,7 @@
 								url : "xtuseraccountctrl/updatextuseraccount.do",
 								data : $('#from1').serialize(),
 								dataType : "json",
-								success : function(d) /*，这里为什么显示不出来？？？？？？？？？？？？？？？ */
+								success : function(d) 
 								{
 									layer.msg('修改成功！', {
 										icon : 6,
@@ -493,7 +497,7 @@
 								data : $('#from2').serialize(),
 								dataType : "json",
 								success : function(d) {
-									/* 显示不出来！！！？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？ */
+									
 									layer.msg('修改成功！', {
 										icon : 6,
 										time : 1000
@@ -541,15 +545,15 @@
 	
 		}
 	
-		/*  window.onload = (function(){
-		    // optional set
-		    pageNav.pre="&lt;上一页";
-		    pageNav.next="下一页&gt;";
-		    // p,当前页码,pn,总页面
-		    pageNav.fn = function(p,pn){$("#pageinfo").text("当前页:"+p+" 总页: "+pn);};
-		    //重写分页状态,跳到第三页,总页33页
-		    pageNav.go(1,13);
-		}); */
+	//查看权限
+		function admin_selectpower(title,url,id){
+			url=url+"?userId="+id;
+			layer_show(title,url);
+			
+			
+		}
+		
+		
 		$('.table-sort').dataTable({
 			"lengthMenu" : false, //显示数量选择 
 			"bFilter" : false, //过滤功能

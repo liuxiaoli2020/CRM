@@ -39,34 +39,43 @@ public class XtRoleMemberController
 	}
 	//去成员添加
 		@RequestMapping("/goaddmumber.do")
+		
 		public ModelAndView addXtRole(ModelAndView mav,XtRole xtRole,
 				@RequestParam(defaultValue="1") Integer pageNum,
-				@RequestParam(defaultValue="10") Integer pageSize){
-			
+				@RequestParam(defaultValue="10") Integer pageSize,
+				HttpSession session){
+			session.setAttribute("nowRole1", xtRole);
 			
 			PageInfo<XtUserAccount> page = xtRoleMemberService.xtAddRoleMemberService(pageNum, pageSize, xtRole);
-			System.out.println("去成员添加********"+page.getList());
-			mav.addObject("p1",page);
-			mav.addObject("xRo",xtRole);
-			
+			System.out.println("去成员添加********");
+			System.out.println("****************************"+xtRole.getRoleId());
+			mav.addObject("p2",page);
+			for (XtUserAccount s : page.getList())
+			{
+				System.out.println("****$$$$$"+s);
+			}
+		
+			mav.setViewName("xt/xtrolemember_son");
 			return mav;
 		}
 	//批量成员添加
 		@RequestMapping("/addmumberall.do")
 
 		public String addmumberall(BigDecimal[] idss,XtUserRole xtUserRole){
-			System.out.println("进入批量添加:"+idss);
+			System.out.println("进入批量添加:"+xtUserRole);
 			if(idss!=null&&idss.length>0)
 			{
 				for (BigDecimal id : idss)
 				{
+					xtUserRole.setRoleId(xtUserRole.getRoleId());
 					xtUserRole.setUserId(id.longValue());
+					System.out.println("0000....."+id.longValue());
 					xtRoleMemberService.addmember(xtUserRole);
 					
 				}
 			}
-			
 			return "redirect:goselectmumber.do";
+			
 		}
 	
 	//删除角色

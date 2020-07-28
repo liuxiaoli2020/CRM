@@ -16,6 +16,9 @@ public interface XsCustomerContactMapper {
 
     int insertSelective(XsCustomerContact record);
 
+    //
+    List<XsCustomerContact> selectcustomerId(Long customerId);
+    
     List<XsCustomerContact> selectByExample(XsCustomerContactExample example);
 
     XsCustomerContact selectByPrimaryKey(Long contactId);

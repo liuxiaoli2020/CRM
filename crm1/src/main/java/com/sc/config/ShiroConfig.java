@@ -1,9 +1,7 @@
 package com.sc.config;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.Filter;
 
@@ -12,7 +10,6 @@ import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.apache.shiro.web.filter.authc.LogoutFilter;
-import org.apache.shiro.web.filter.authz.PermissionsAuthorizationFilter;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -74,7 +71,7 @@ public class ShiroConfig {
 		logout.setRedirectUrl("/login.jsp");
 		
 		//里面放所有过滤器
-		Map<String, Filter> filters=new HashMap<String, Filter>();
+		LinkedHashMap<String, Filter> filters=new LinkedHashMap<String, Filter>();
 		//用这个过滤器做认证
 	    filters.put("authc", form);
 	    //用这个过滤器做退出
@@ -103,13 +100,13 @@ public class ShiroConfig {
 		//配置哪些路径需要哪些权限（通过权限别名来识别）
 		List<XtPowerDetail> list = xtPowerService.selectpowerall();
 		if (list!=null&&list.size()>0) {
-			System.out.println("********所有权限：");
+			System.out.println("****************所有权限：");
 			for (XtPowerDetail perm:list) {
 				String url=perm.getPower();
 				String permss=perm.getRemark();
 				if (url!=null&&!url.equals("")&&permss!=null&&!permss.equals("")) {
 					System.out.println("-------------url:"+url);
-					Map.put(url, "perms[" + permss + "]");
+					Map.put(url, "perms[" + permss + "]"); //Map.put("/xtpowerctrl/addxtpower.do", "perms[xtpower:add]");
 					
 				}
 			}

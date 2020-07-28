@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -38,11 +39,29 @@ public class CgController {
 			return mav;
 	}
 	
-	@RequestMapping("/istrue.do")
-	public boolean istrue(CgOrder co){
 
-		return false;
-	}
+@RequestMapping("/istrue.do")
+  public ModelAndView istrue(ModelAndView mav,CgOrder co,CgOrderDetail cd,CgPurchase cp){
+    System.out.println("进入添加至详情单方法");
+    if(co!=null&&co.getOrderId()!=null){
+      cd.setOrderId(co.getOrderId());
+      List<CgOrderDetail> cdd = cgService.selectOrderDetail(co.getOrderId());
+      System.out.println(cdd);
+      if(!CollectionUtils.isEmpty(cdd)){
+        System.out.println("已添加详情单");
+        mav.setViewName("Cg/false");
+      }else{
+        PageInfo<CgPurchase> purchasePage = cgService.selectPurchasePage(0, 0, cp);
+        co=cgService.selectByPrimaryKey(co.getOrderId());
+        mav.addObject("cop", purchasePage);
+        mav.addObject("co", co);
+        mav.setViewName("Cg/Cg-Order-Detail-add");
+      }
+    }
+    
+    return mav;
+  }
+
 	
 	@RequestMapping("/goaddOrder.do")
 	public ModelAndView goAddOrder(ModelAndView mav,CgOrder co,CgSupplier cs){

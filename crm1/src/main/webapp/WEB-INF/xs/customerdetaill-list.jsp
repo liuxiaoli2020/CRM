@@ -30,7 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 销售中心 <span class="c-gray en">&gt;</span> 用户管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
-	 <form action="customerdetailctrl/selectcustomerdetail.do" method="post" id="myform">
+	 <form action="selectcustomerdetail.do" method="post" id="myform">
 	<div class="text-c"> 日期范围：
 		<input type="text" value="<fmt:formatDate value="${customerdetail.datemin }" pattern="yyyy-MM-dd"/>" onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}' })" id="datemin" name="datemin" class="input-text Wdate" style="width:120px;">
 		-
@@ -42,7 +42,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
 	</form>
 	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
-	 <a href="javascript:;" onclick="member_add('添加客户','customerdetailctrl/goaddcustomer.do','','510')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加客户</a></span>
+	 <a href="javascript:;" onclick="member_add('添加客户','goaddcustomer.do','','510')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加客户</a></span>
 	  <span class="r">共有数据：<strong>${p.total}</strong> 条</span> </div>
 	<div class="mt-20">
 	<table class="table table-border table-bordered table-hover table-bg table-sort">
@@ -53,7 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<th width="80">客户名称</th>
                     <th width="120">网站</th>
                     <th width="160">客户详细</th>
-                    <th width="150">下一次联系时间</th>
+                    <!-- <th width="150">下一次联系时间</th> -->
 					<th width="150">最后修改时间</th>
 				    <th width="100">操作</th>
 			</tr>
@@ -65,16 +65,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<td>${customerdetail.customerId }</td>>
 				<td><u style="cursor:pointer" class="text-primary" >${customerdetail.customerName }</u></td>
 				<td>${customerdetail.website }</td>
-				<td><a title="详细信息" href="javascript:;" onclick="member_detail('客户详细','customerdetailctrl/goaddcustomer1.do','${customerdetail.customerId }','','350')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe616;</i></a> 
-				<td>${customerdetail.nextContactDate }</td>
-				<td><fmt:formatDate value="${customerdetail.lastModifyDate }" pattern="yyyy-MM-dd HH:mm:ss"/></td>>
+				<td><a title="详细信息" href="javascript:;" onclick="member_detail('客户详细','goaddcustomer1.do','${customerdetail.customerId }','','350')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe616;</i></a> 
+				<%-- <td><fmt:formatDate value="${customerdetail.nextContactDate }" pattern="yyyy-MM-dd HH:mm:ss"/></td> --%>
+				<td><fmt:formatDate value="${customerdetail.lastModifyDate }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 				<td class="td-manage">
 				<a title="详细信息" href="gocustomer.do?customerId=${customerdetail.customerId }" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6c6;</i></a> 
 				<a style="text-decoration:none" onClick="member_stop(this,'10001')" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a> 
-				<a title="编辑" href="javascript:;" onclick="member_edit('编辑用户','customerdetailctrl/goaddcustomer.do','${customerdetail.customerId }','','350')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>  
+				<a title="编辑" href="javascript:;" onclick="member_edit('编辑用户','goaddcustomer.do','${customerdetail.customerId }','','350')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>  
 				<a title="删除" href="javascript:;" onclick="member_del(this,'${customerdetail.customerId }')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
 			</tr>
-			</c:forEach>
+			</c:forEach>  
 		</tbody>
 	</table>
 	</div>
@@ -145,7 +145,7 @@ function member_del(obj,id){
 	layer.confirm('确认要删除吗？',function(index){
 		$.ajax({
 			type: 'POST',
-			url: 'customerdetailctrl/deletecustomer.do',
+			url: 'deletecustomer.do',
 			data: "customerId="+id,
 			dataType: 'json',
 			success: function(data){
